@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+.main {
+    background-color: #e2e2e2;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+header {
+    width: 100%;
+    position: sticky;
+    top: 3rem;
+    height: 5rem;
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    
+}
+.searchBar
+{
+    position: absolute;
+    width: 60%;
+}
+.menu
+{
+   margin-right: 86vw;
+}
+
+.section-container {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: "Your font", sans-serif;
+    width: 100%;
+    padding-top: 3rem;
+    position: relative;
+
+    margin-top: 6vh;
+    padding-left: 3vw;
+    padding-right: 3vw;
+    height: 30%;
+    max-height: calc(100vh - 10rem);
+    overflow-y: auto; 
+    scrollbar-width: inherit; 
+    scrollbar-color: black transparent;
+}
+
+.section-container::-webkit-scrollbar-track {
+    background: transparent; 
+}
+
+/* Contenedor de la cuadrícula */
+.card-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 50rem;
+    gap: 4rem;
+    width: 100%;
+    padding: 2rem;
+    justify-items: center;
+}
+
+/* Ajuste de pantalla para dispositivos más pequeños */
+@media (max-width: 768px) {
+    .card-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 480px) {
+    .card-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+

@@ -1,0 +1,184 @@
+/* Menú Contenedor */
+.cart-container {
+    position: relative;
+    z-index: 1000;
+}
+
+/* Ocultar el checkbox por defecto */
+#toggleCheckerCart {
+    display: none;
+}
+
+/* Botón del Carrito */
+.btn-cart {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 4em;
+    height: 4em;
+    border-radius: 10px;
+    background-color: transparent;
+    position: relative;
+    cursor: pointer;
+}
+
+.btn-cart::after {
+    content: attr(data-quantity);
+    width: fit-content;
+    height: fit-content;
+    position: absolute;
+    font-size: 15px;
+    color: white;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    opacity: 0;
+    visibility: hidden;
+    transition: .2s linear;
+    top: 115%;
+}
+
+.icon-cart {
+    width: 2.3vw; /* Ancho relativo al viewport (15% mayor que 24.38px) */
+    height: 3.3vw; /* Alto relativo al viewport (15% mayor que 30.52px) */
+    transition: .2s linear;
+}
+
+
+.icon-cart path {
+    fill: rgb(240, 8, 8);
+    transition: .2s linear;
+}
+
+.btn-cart:hover>.icon-cart {
+    transform: scale(1.2);
+}
+
+.btn-cart:hover>.icon-cart path {
+    fill: rgb(186, 34, 233);
+}
+
+.btn-cart:hover::after {
+    visibility: visible;
+    opacity: 1;
+    top: 105%;
+}
+
+.quantity {
+    display: none;
+}
+
+/* Menú Lateral del Carrito */
+.side_bar_right {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    /* El menú comienza oculto a la derecha */
+    width: 300px;
+    height: 100vh;
+    background: #ecf0f3;
+    padding: 12px;
+    box-shadow:
+        -3px -3px 7px #ffffff,
+        3px 3px 5px #ceced1,
+        inset -3px -3px 7px #ffffff,
+        inset 3px 3px 5px #ceced1;
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+/* Mostrar el menú del carrito cuando se marca el checkbox */
+#toggleCheckerCart:checked~.side_bar_right {
+    right: 0;
+}
+
+/* Contenido del Menú Lateral del Carrito */
+.side_bar_right .title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.side_bar_right .title .logo {
+    font-size: 27px;
+    font-weight: 600;
+    color: #31344b;
+}
+
+.side_bar_right .title .cancel {
+    font-size: 24px;
+    color: #31344b;
+    cursor: pointer;
+}
+
+.side_bar_right ul {
+    margin-top: 35px;
+    list-style: none;
+}
+
+.side_bar_right ul li {
+    margin-top: 12px;
+}
+
+.side_bar_right ul a {
+    color: #31344b;
+    text-decoration: none;
+    display: block;
+    font-size: 18px;
+    font-weight: 400;
+    padding: 10px 25px;
+    border-radius: 6px;
+    box-shadow:
+        -3px -3px 7px #ffffff,
+        3px 3px 5px #ceced1;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.side_bar_right ul a i {
+    margin-right: 10px;
+}
+
+.side_bar_right ul a:hover {
+    color: #3498db;
+}
+
+.side_bar_right ul a:hover::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow:
+        inset -3px -3px 7px #ffffff,
+        inset 3px -3px 5px #ceced1;
+    border-radius: 6px;
+}
+.payment-button-container {
+    display: flex;
+    justify-content: center; /* Centra horizontalmente */
+    padding: 20px 0; /* Espaciado superior e inferior */
+}
+
+/* Estilos Generales para el Botón de Cerrar */
+label.button {
+    font-size: 17px;
+    color: #31344b;
+    box-shadow:
+        -3px -3px 7px #ffffff,
+        3px 3px 5px #ceced1;
+    height: 37px;
+    width: 37px;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 37px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+label.button:hover {
+    box-shadow:
+        inset -3px -3px 7px #ffffff,
+        inset 3px 3px 5px #ceced1;
+    color: #3498db;
+}
+
