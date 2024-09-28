@@ -1,0 +1,12 @@
+<div class="search">
+    <form class="search-form">
+        <div class="search-input-container">
+            <input type="text" class="search-input" [(ngModel)]="searchText" name="searchInput"
+                (input)="onInputChange()" />
+            <div class="loader" [class.hidden]="searchText.length > 0">
+                <span class="loader-text">Buscar...</span>
+            </div>
+        </div>
+        <i class="fas fa-search search-icon" (click)="onSearch()"></i>
+    </form>
+</div>

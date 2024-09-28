@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos para el scrollbar */
+.section-container {
+    scrollbar-width: inherit;
+    scrollbar-color: black transparent;
+}
+
+.section-container::-webkit-scrollbar-track {
+    background: transparent;
+}
