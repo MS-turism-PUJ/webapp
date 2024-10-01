@@ -19,25 +19,26 @@
                     <input type="file" id="file-upload" accept="image/*" (change)="onFileSelected($event)" hidden>
                 </div>
             </div>
+
             <!-- Paso 1 -->
             <div *ngIf="currentStep === 1" class="step">
                 <div class="field">
-                    <input type="text" formControlName="nombre" required>
+                    <input type="text" formControlName="nombre" placeholder=" ">
                     <span class="fas fa-user"></span>
                     <label>Nombre</label>
                 </div>
                 <div class="field">
-                    <input type="text" formControlName="username" required>
+                    <input type="text" formControlName="username" placeholder=" ">
                     <span class="fas fa-user-circle"></span>
                     <label>Username</label>
                 </div>
                 <div class="field">
-                    <input type="text" formControlName="email" required>
+                    <input type="text" formControlName="email" placeholder=" ">
                     <span class="fas fa-envelope"></span>
                     <label>Email</label>
                 </div>
                 <div class="field">
-                    <input type="password" formControlName="password" required>
+                    <input type="password" formControlName="password" placeholder=" ">
                     <span class="fas fa-lock"></span>
                     <label>Contraseña</label>
                 </div>
@@ -46,25 +47,45 @@
             <!-- Paso 2 -->
             <div *ngIf="currentStep === 2" class="step">
                 <div class="field">
-                    <input type="number" formControlName="edad" required min="1" (input)="validatePositiveValue($event)">
+                    <input type="number" formControlName="edad" required min="1"
+                        (input)="validatePositiveValue($event)" placeholder=" ">
                     <span class="fas fa-birthday-cake"></span>
                     <label>Edad</label>
                 </div>
+
                 <div class="field">
-                    <input type="number" formControlName="telefono" required min="1" (input)="validatePositiveValue($event)">
+                    <select formControlName="tipoUsuario" (change)="onTipoUsuarioChange()">
+                        <option value="" disabled>Selecciona una opción</option> 
+                        <option value="cliente">Cliente</option>
+                        <option value="proveedor">Proveedor</option>
+                    </select>
+                    <label>Tipo de Usuario</label>
+                    <span class="fas fa-user-tag"></span>
+                </div>
+
+
+                <div class="field">
+                    <textarea formControlName="descripcion" maxlength="300" placeholder=" " ></textarea>
+                    <label>Descripción (máx. 300 caracteres)</label>
+                </div>
+            </div>
+
+            <!-- Solo para proveedores -->
+            <div *ngIf="isProveedor()">
+                <div class="field">
+                    <input type="number" formControlName="telefono" min="1" (input)="validatePositiveValue($event)" placeholder=" ">
                     <span class="fas fa-phone"></span>
                     <label>Número de Teléfono</label>
                 </div>
                 <div class="field">
-                    <select formControlName="tipoUsuario" required>
-                        <option *ngFor="let tipo of userTypes" [value]="tipo.value">{{ tipo.viewValue }}</option>
-                    </select>
-                    <span class="fas fa-user-tag"></span>
-                    <label>Tipo de Usuario</label>
+                    <input type="text" formControlName="web_page" placeholder=" ">
+                    <span class="fas fa-globe"></span>
+                    <label>Página web</label>
                 </div>
                 <div class="field">
-                    <textarea formControlName="descripcion" maxlength="300"
-                        placeholder="Descripción (máx. 300 caracteres)"></textarea>
+                    <input type="text" formControlName="redes_sociales" placeholder=" ">
+                    <span class="fas fa-share-alt"></span>
+                    <label>Redes sociales</label>
                 </div>
             </div>
 
@@ -76,9 +97,8 @@
                 <button type="button" (click)="nextStep()" *ngIf="currentStep < 2" class="nav-button">
                     <i class="fas fa-arrow-right"></i>
                 </button>
-    
-                <button type="submit" *ngIf="currentStep === 2 || (currentStep === 2     && !isProveedor())"
-                    class="submit-button">
+
+                <button type="submit" *ngIf="currentStep === 2" class="submit-button">
                     Registrarse
                 </button>
                 <div class="forgot-pass" *ngIf="currentStep < 2">

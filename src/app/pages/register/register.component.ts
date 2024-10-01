@@ -8,45 +8,42 @@ import { CommonModule } from '@angular/common';
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule], 
+  imports: [ReactiveFormsModule, CommonModule],
 })
 export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
   currentStep: number = 1;
   imageUrl: string = 'assets/miAmor.jpg';
-  userTypes = [
-    { value: 'cliente', viewValue: 'Cliente' },
-    { value: 'proveedor', viewValue: 'Proveedor' }
-  ];
+
 
   constructor(private fb: FormBuilder) {
     this.registerForm = this.fb.group({
-      // Paso 1
+
       nombre: ['', Validators.required],
       username: ['', Validators.required],
       email: ['', [Validators.required, Validators.email]],
       password: ['', Validators.required],
-      
-      // Paso 2
-      edad: ['', [Validators.required,, Validators.min(0)]],
-      telefono: ['', Validators.required],
+
+
+      edad: ['', [Validators.required, , Validators.min(0)]],
       tipoUsuario: ['', Validators.required],
-      
-      // Paso 3 (solo para proveedores)
       descripcion: ['', Validators.maxLength(300)],
+
+      //(solo para proveedores)
+      telefono: ['', Validators.required],
       web_page: [''],
       redes_sociales: ['']
     });
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];
     if (file) {
       const reader = new FileReader();
       reader.onload = (e: any) => {
-        this.imageUrl = e.target.result; 
+        this.imageUrl = e.target.result;
       };
       reader.readAsDataURL(file);
     }
@@ -69,8 +66,12 @@ export class RegisterComponent implements OnInit {
   prevStep() {
     if (this.currentStep > 1) {
       this.currentStep--;
+      if (this.currentStep === 1) {
+        this.registerForm.get('tipoUsuario')?.setValue('');
+      }
     }
   }
+
 
   onSubmit() {
     if (this.registerForm.valid) {
@@ -82,4 +83,19 @@ export class RegisterComponent implements OnInit {
   isProveedor(): boolean {
     return this.registerForm.get('tipoUsuario')?.value === 'proveedor';
   }
+
+
+
+
+  onTipoUsuarioChange(): void {
+    const tipoUsuario = this.registerForm.get('tipoUsuario')?.value;
+    if (tipoUsuario === 'proveedor') {
+      this.registerForm.get('telefono')?.setValidators([Validators.required, Validators.min(1)]);
+    } else {
+      this.registerForm.get('telefono')?.clearValidators();
+    }
+    this.registerForm.get('telefono')?.updateValueAndValidity();
+  }
+
 }
+

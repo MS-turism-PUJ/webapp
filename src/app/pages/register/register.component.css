@@ -40,7 +40,7 @@ body {
 
 
 .content .text {
-    font-size: 28px;
+    font-size: 33px;
     font-weight: 600;
     margin-bottom: 30px;
     color: #595959;
@@ -126,6 +126,9 @@ body {
         inset -1px -1px 2px #ffffff73;
 }
 
+
+
+
 /* Iconos dentro de los campos */
 .field span {
     position: absolute;
@@ -151,12 +154,21 @@ body {
 }
 
 /* Ocultar label cuando el input tiene contenido */
-.field input:valid~label,
-.field select:valid~label,
-.field textarea:valid~label {
+.field input:focus~label,
+.field select:focus~label,
+.field textarea:focus~label {
     opacity: 0;
     transform: translateY(-150%);
 }
+
+/* Mover el label cuando el campo tiene un valor */
+.field input:not(:placeholder-shown) ~ label,
+.field select:not([value=""]) ~ label,
+.field textarea:not(:placeholder-shown) ~ label {
+    opacity: 0;
+    transform: translateY(-150%);
+}
+
 
 /* Fotografía */
 .fotografia {
