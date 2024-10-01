@@ -1,0 +1,90 @@
+<body>
+    <div class="content">
+        <div class="text">
+            Registro
+        </div>
+        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+            <!-- Fotografía (se muestra en el paso 1) -->
+            <div *ngIf="currentStep === 1" class="photo-upload">
+                <div class="wrapper">
+                    <div class="img-area">
+                        <div class="inner-area">
+                            <img [src]="imageUrl" alt="Fotografía" class="fotografia" id="profileImage">
+                        </div>
+                    </div>
+                    <!-- Botón circular pequeño con el ícono de + para subir imagen -->
+                    <label for="file-upload" class="upload-icon">
+                        <i class="fas fa-plus"></i>
+                    </label>
+                    <input type="file" id="file-upload" accept="image/*" (change)="onFileSelected($event)" hidden>
+                </div>
+            </div>
+            <!-- Paso 1 -->
+            <div *ngIf="currentStep === 1" class="step">
+                <div class="field">
+                    <input type="text" formControlName="nombre" required>
+                    <span class="fas fa-user"></span>
+                    <label>Nombre</label>
+                </div>
+                <div class="field">
+                    <input type="text" formControlName="username" required>
+                    <span class="fas fa-user-circle"></span>
+                    <label>Username</label>
+                </div>
+                <div class="field">
+                    <input type="text" formControlName="email" required>
+                    <span class="fas fa-envelope"></span>
+                    <label>Email</label>
+                </div>
+                <div class="field">
+                    <input type="password" formControlName="password" required>
+                    <span class="fas fa-lock"></span>
+                    <label>Contraseña</label>
+                </div>
+            </div>
+
+            <!-- Paso 2 -->
+            <div *ngIf="currentStep === 2" class="step">
+                <div class="field">
+                    <input type="number" formControlName="edad" required min="1" (input)="validatePositiveValue($event)">
+                    <span class="fas fa-birthday-cake"></span>
+                    <label>Edad</label>
+                </div>
+                <div class="field">
+                    <input type="number" formControlName="telefono" required min="1" (input)="validatePositiveValue($event)">
+                    <span class="fas fa-phone"></span>
+                    <label>Número de Teléfono</label>
+                </div>
+                <div class="field">
+                    <select formControlName="tipoUsuario" required>
+                        <option *ngFor="let tipo of userTypes" [value]="tipo.value">{{ tipo.viewValue }}</option>
+                    </select>
+                    <span class="fas fa-user-tag"></span>
+                    <label>Tipo de Usuario</label>
+                </div>
+                <div class="field">
+                    <textarea formControlName="descripcion" maxlength="300"
+                        placeholder="Descripción (máx. 300 caracteres)"></textarea>
+                </div>
+            </div>
+
+            <!-- Navegación -->
+            <div class="navigation">
+                <button type="button" (click)="prevStep()" *ngIf="currentStep > 1" class="nav-button">
+                    <i class="fas fa-arrow-left"></i>
+                </button>
+                <button type="button" (click)="nextStep()" *ngIf="currentStep < 2" class="nav-button">
+                    <i class="fas fa-arrow-right"></i>
+                </button>
+    
+                <button type="submit" *ngIf="currentStep === 2 || (currentStep === 2     && !isProveedor())"
+                    class="submit-button">
+                    Registrarse
+                </button>
+                <div class="forgot-pass" *ngIf="currentStep < 2">
+                    <a href="/login">Ya tienes cuenta?</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
