@@ -5,12 +5,12 @@ import { RegisterComponent } from './pages/register/register.component';
 import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
-    {path: '', component: DashboardComponent},
-    {path: 'login', component: LoginComponent},
+    { path: '', component: DashboardComponent },
+    { path: 'login', component: LoginComponent },
     { path: 'register', component: RegisterComponent }
 ];
 @NgModule({
     imports: [RouterModule.forRoot(routes)],
     exports: [RouterModule]
-  })
-  export class AppRoutingModule { }
+})
+export class AppRoutingModule { }

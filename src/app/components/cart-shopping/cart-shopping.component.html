@@ -3,7 +3,7 @@
     <input id="toggleCheckerCart" type="checkbox">
 
     <!-- Botón del Carrito -->
-    <label id="togglerLabel" for="toggleCheckerCart" class="btn-cart" data-quantity="0">
+    <label id="togglerLabel" for="toggleCheckerCart" class="btn-cart" [attr.data-quantity]="dataQuantity">
         <svg class="icon-cart" viewBox="0 0 24.38 30.52" height="30.52" width="24.38"
             xmlns="http://www.w3.org/2000/svg">
             <title>icon-cart</title>
@@ -11,28 +11,39 @@
                 d="M28,27.3,26.24,7.51a.75.75,0,0,0-.76-.69h-3.7a6,6,0,0,0-12,0H6.13a.76.76,0,0,0-.76.69L3.62,27.3v.07a4.29,4.29,0,0,0,4.52,4H23.48a4.29,4.29,0,0,0,4.52-4ZM15.81,2.37a4.47,4.47,0,0,1,4.46,4.45H11.35a4.47,4.47,0,0,1,4.46-4.45Zm7.67,27.48H8.13a2.79,2.79,0,0,1-3-2.45L6.83,8.34h3V11a.76.76,0,0,0,1.52,0V8.34h8.92V11a.76.76,0,0,0,1.52,0V8.34h3L26.48,27.4a2.79,2.79,0,0,1-3,2.44Zm0,0">
             </path>
         </svg>
-        <span class="quantity"></span>
+
     </label>
 
     <!-- Menú Lateral -->
     <div class="side_bar_right">
         <div class="title">
-            <div class="logo">Ejemplo</div>
+            <div class="logo">Carrito compras</div>
             <label class="button cancel" for="toggleCheckerCart"><i class="fas fa-times"></i></label>
         </div>
+
         <!-- Contenedor del Contenido -->
         <div class="side_bar_content">
-            <ul>
-                <li><a href="#"><i class="fas fa-qrcode"></i>Dashboard</a></li>
-                <li><a href="#"><i class="fas fa-link"></i>Shortcuts</a></li>
-                <li><a href="#"><i class="fas fa-stream"></i>Overview</a></li>
-                <li><a href="#"><i class="fas fa-calendar-week"></i>Events</a></li>
-                <li><a href="#"><i class="fas fa-question-circle"></i>About</a></li>
-                <li><a href="#"><i class="fas fa-sliders-h"></i>Services</a></li>
-                <li><a href="#"><i class="fas fa-phone-volume"></i>Contact</a></li>
-                <li><a href="#"><i class="fas fa-comments"></i>Feedback</a></li>
-            </ul>
+
+            <div class="cart-items-container">
+
+                <tbody class="cart-items-container">
+                    <app-cart-item *ngFor="let item of cartItems;"
+                        [nombre]="item.nombre"
+                        [proveedor]="item.proveedor"
+                        [precio]="item.precio">
+                        (eliminar)="onEliminarItem(item)"
+                    </app-cart-item>
+        
+                </tbody>
+            </div>
+
+            <div class="total-container">
+                <span>Total a pagar:</span>
+                <span class="total-amount">{{ totalAmount | currency }}</span>
+            </div>
             
+
+            <!-- Botón de Pago -->
             <div class="payment-button-container">
                 <app-button-pay></app-button-pay>
             </div>

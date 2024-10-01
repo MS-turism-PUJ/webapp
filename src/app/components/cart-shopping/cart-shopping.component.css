@@ -22,13 +22,15 @@
     cursor: pointer;
 }
 
+
+
 .btn-cart::after {
     content: attr(data-quantity);
     width: fit-content;
     height: fit-content;
     position: absolute;
-    font-size: 15px;
-    color: white;
+    font-size: 20px;
+    color: rgb(58, 58, 58);
     font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     opacity: 0;
     visibility: hidden;
@@ -62,16 +64,14 @@
     top: 105%;
 }
 
-.quantity {
-    display: none;
-}
+
 
 /* Menú Lateral del Carrito */
 .side_bar_right {
     position: fixed;
     top: 0;
     right: -100%;
-    /* El menú comienza oculto a la derecha */
+    
     width: 300px;
     height: 100vh;
     background: #ecf0f3;
@@ -109,57 +109,15 @@
     cursor: pointer;
 }
 
-.side_bar_right ul {
-    margin-top: 35px;
-    list-style: none;
-}
 
-.side_bar_right ul li {
-    margin-top: 12px;
-}
 
-.side_bar_right ul a {
-    color: #31344b;
-    text-decoration: none;
-    display: block;
-    font-size: 18px;
-    font-weight: 400;
-    padding: 10px 25px;
-    border-radius: 6px;
-    box-shadow:
-        -3px -3px 7px #ffffff,
-        3px 3px 5px #ceced1;
-    position: relative;
-    transition: all 0.2s ease;
-}
-
-.side_bar_right ul a i {
-    margin-right: 10px;
-}
-
-.side_bar_right ul a:hover {
-    color: #3498db;
-}
-
-.side_bar_right ul a:hover::before {
-    position: absolute;
-    content: '';
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    box-shadow:
-        inset -3px -3px 7px #ffffff,
-        inset 3px -3px 5px #ceced1;
-    border-radius: 6px;
-}
 .payment-button-container {
     display: flex;
-    justify-content: center; /* Centra horizontalmente */
-    padding: 20px 0; /* Espaciado superior e inferior */
+    justify-content: center; 
+    padding: 0 0; /* Espaciado superior e inferior */
 }
 
-/* Estilos Generales para el Botón de Cerrar */
+
 label.button {
     font-size: 17px;
     color: #31344b;
@@ -182,3 +140,29 @@ label.button:hover {
     color: #3498db;
 }
 
+
+.cart-items-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 500px;
+    max-height: 65vh;
+    overflow-y: auto;
+    
+}
+
+
+.total-container {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    font-size: 18px;
+    font-weight: bold;
+    color: #31344b;
+    border-top: 1px solid #ddd;
+    margin-top: 10px;
+}
+
+.total-amount {
+    color: #e74c3c; 
+}
