@@ -17,10 +17,10 @@ export class AuthService {
     return this.token !== null
   }
 
-  public async login(user: string, password: string): Promise<void> {
+  public async login(username: string, password: string): Promise<void> {
     const response = await this.axiosInstance.post('/login', {
-      username: 'santico',
-      password: 'santico',
+      username,
+      password,
     })
 
     this.token = response.data.access_token
