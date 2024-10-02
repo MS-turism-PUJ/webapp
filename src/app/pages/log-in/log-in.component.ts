@@ -2,6 +2,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { AuthService } from '../../services/auth.service';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
@@ -13,7 +16,7 @@ import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angula
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
       emailOrPhone: ['', Validators.required],
       password: ['', Validators.required],
@@ -22,14 +25,23 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  onSubmit() {
+  async onSubmit() {
     if (this.loginForm.valid) {
       const formData = this.loginForm.value;
-      console.log('Formulario Enviado:', formData);
-      // Aquí puedes agregar la lógica para enviar los datos al backend
+      const emailOrPhone = formData.emailOrPhone;
+      const password = formData.password
+      try {
+        
+        await this.authService.login(emailOrPhone, password);
+        console.log('Login exitoso!');
+        this.router.navigate(['/dashboard']);
+      } catch (error) {
+        console.error('Error en el login:', error);
+        
+      }
     } else {
       console.log('Formulario Inválido');
-      // Opcional: Mostrar mensajes de error o resaltar campos inválidos
+    
     }
   }
 }
