@@ -1,8 +1,7 @@
-// cart-item.component.ts
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { CartService } from '../../services/cart.service';
-import { SweetAlertService } from '../../services/sweetAlertService/sweet-alert-service.service';
+import { SweetAlertService } from '../../services/sweet-alert.service';
 
 @Component({
   selector: 'app-cart-item',
