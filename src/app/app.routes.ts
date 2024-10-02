@@ -6,8 +6,7 @@ import { RegisterComponent } from './pages/register/register.component';
 import { NgModule } from '@angular/core';
 
 export const routes: Routes = [
-    { path: '', component: DashboardComponent },
-    { path: 'login', component: LoginComponent },
+    { path: '', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
     { path: 'dashboard', component: DashboardComponent},
     { path: 'payment', component: PaymentComponent }

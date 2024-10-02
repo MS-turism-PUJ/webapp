@@ -18,9 +18,17 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
-      emailOrPhone: ['', Validators.required],
+      emailOrUsername: ['', Validators.required],
       password: ['', Validators.required],
     });
+  }
+
+  goToDashboard() {
+    this.router.navigate(['/dashboard']);
+  }
+
+  goToRegistry() {
+    this.router.navigate(['/register']);
   }
 
   ngOnInit(): void {}
@@ -28,11 +36,11 @@ export class LoginComponent implements OnInit {
   async onSubmit() {
     if (this.loginForm.valid) {
       const formData = this.loginForm.value;
-      const emailOrPhone = formData.emailOrPhone;
+      const emailOrUsername = formData.emailOrUsername;
       const password = formData.password
       try {
         
-        await this.authService.login(emailOrPhone, password);
+        await this.authService.login(emailOrUsername, password);
         console.log('Login exitoso!');
         this.router.navigate(['/dashboard']);
       } catch (error) {

@@ -2,6 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-register',
@@ -16,7 +17,7 @@ export class RegisterComponent implements OnInit {
   imageUrl: string = 'assets/miAmor.jpg';
 
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.registerForm = this.fb.group({
 
       nombre: ['', Validators.required],
@@ -37,6 +38,10 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void { }
+
+  goToLogin() {
+    this.router.navigate(['/']);
+  }
 
   onFileSelected(event: any): void {
     const file = event.target.files[0];

@@ -102,7 +102,7 @@
                     Registrarse
                 </button>
                 <div class="forgot-pass" *ngIf="currentStep < 2">
-                    <a href="/login">Ya tienes cuenta?</a>
+                    <a (click)="goToLogin()">Ya tienes cuenta?</a>
                 </div>
             </div>
         </form>

@@ -17,11 +17,11 @@
             <div class="forgot-pass">
                 <a href="/registry">Olvidaste tu  contraseña?</a>
             </div>
-            <button>Ingresar</button>
+            <button (click)="goToDashboard()">Ingresar</button>
             
-            <div class="sign-up">
+            <div class="sign-up" (click)="goToRegistry()">
                 ¿No eres miembro?
-                <a href="/registry">Regístrate ahora</a>
+                <a>Regístrate ahora</a>
             </div>
 
         </form>
