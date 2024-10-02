@@ -1,13 +1,64 @@
-<section id="card1" class="group relative w-[400px] h-[400px] text-[#333333] rounded-[10px] flex items-center justify-center overflow-hidden [perspective:1000px] transition-all duration-[700ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] shadow-[5px_5px_10px_rgba(0,0,0,0.1),_-5px_-5px_10px_rgba(255,255,255,0.7)] hover:scale-105 hover:shadow-[0_8px_16px_rgba(0,0,0,0.3)] hover:bg-[#f2f2f2] hover:text-white">
-  <img src="./assets/miAmor.jpg" alt="Descripción de la imagen" class="w-full h-auto rounded-[3px] transition-all duration-[600ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)]">
-  <div class="text-black absolute top-0 left-0 w-full h-full p-5 bg-[#f2f2f2] [transform:rotateX(-90deg)] origin-bottom transition-all duration-[600ms] [transition-timing-function:cubic-bezier(0.175,0.885,0.32,1.275)] flex flex-col justify-start items-center group-hover:[transform:rotateX(0deg)]">
-    <p class="m-0 pl-[5px] text-[24px] text-black font-bold text-center">Lorem Ipsum</p>
-    <p class="my-[10px] mx-0 text-[14px] text-black leading-[1.4] text-center">
-      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae
+<section id="card1" class="card">
+  <div class="card-content-front">
+    <h1 class="card-title">nombre contenido</h1>
+    <h2 >categoria contenido</h2>
+    <img src="./assets/miAmor.jpg" alt="Descripción de la imagen" class="card-image">
+    <p class="card-description">
+      contenido": Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae
       justo vel lorem tincidunt ultrices at non nunc. Donec in sapien viverra,
       tincidunt augue id, efficitur massa.
     </p>
-    
+  </div>
+  <div class="card-content-back">
+    <!-- Título del servicio -->
+    <p class="card-title">Nombre del Servicio</p>
+  
+    <!-- Información de país y ciudad -->
+    <div class="grid-container">
+      <div class="grid-item">
+        <strong>País:</strong> <span>País</span>
+      </div>
+      <div class="grid-item">
+        <strong>Ciudad:</strong> <span>Ciudad</span>
+      </div>
+  
+      <!-- Precio y Categoría -->
+      <div class="grid-item">
+        <strong>Precio:</strong> <span>$100</span>
+      </div>
+      <div class="grid-item">
+        <strong>Categoría:</strong> <span>Categoría</span>
+      </div>
+  
+      <!-- Latitud y Longitud (opcional) -->
+      <div class="grid-item">
+        <strong>Latitud:</strong> <span>00.000</span>
+      </div>
+      <div class="grid-item">
+        <strong>Longitud:</strong> <span>00.000</span>
+      </div>
+  
+      <!-- Fechas de salida y llegada (opcional) -->
+      <div class="grid-item">
+        <strong>Fecha de salida:</strong> <span>2024-01-01</span>
+      </div>
+      <div class="grid-item">
+        <strong>Fecha de llegada:</strong> <span>2024-01-10</span>
+      </div>
+  
+      <!-- Ruta y Tipo de Transporte (opcional) -->
+      <div class="grid-item">
+        <strong>Ruta:</strong> <span>Ruta 1</span>
+      </div>
+      <div class="grid-item">
+        <strong>Transporte:</strong> <span>Bus</span>
+      </div>
+
+      <!-- Descripción (opcional, ocupa toda la fila) -->
+      <div class="grid-item-full">
+        <strong>Descripción:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. elit.
+      </div>
+    </div>
     <button (click)="addToCart(); mostrarAlerta()" class="cartBtn">
       <svg class="cart" fill="white" viewBox="0 0 576 512" height="1em" xmlns="http://www.w3.org/2000/svg"><path d="M0 24C0 10.7 10.7 0 24 0H69.5c22 0 41.5 12.8 50.6 32h411c26.3 0 45.5 25 38.6 50.4l-41 152.3c-8.5 31.4-37 53.3-69.5 53.3H170.7l5.4 28.5c2.2 11.3 12.1 19.5 23.6 19.5H488c13.3 0 24 10.7 24 24s-10.7 24-24 24H199.7c-34.6 0-64.3-24.6-70.7-58.5L77.4 54.5c-.7-3.8-4-6.5-7.9-6.5H24C10.7 48 0 37.3 0 24zM128 464a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm336-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"></path></svg>
       Agregar al carrito

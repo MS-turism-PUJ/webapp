@@ -80,76 +80,36 @@
   cursor: pointer;
 }
 
-.side_bar ul {
-  margin-top: 35px;
-  list-style: none;
-}
-
-.side_bar ul li {
-  margin-top: 12px;
-}
-
-.side_bar ul a {
+/* Estilo de cada item del menú */
+.menu-item {
   color: #31344b;
   text-decoration: none;
-  display: block;
   font-size: 18px;
   font-weight: 400;
-  padding: 10px 25px;
-  border-radius: 6px;
+  padding: 5px 20px;
+  margin: 5px;
+  border-radius: 20px;
   box-shadow:
     -3px -3px 7px #ffffff,
     3px 3px 5px #ceced1;
-  position: relative;
+  margin-top: 12px;
   transition: all 0.2s ease;
-}
-
-.side_bar ul a i {
-  margin-right: 10px;
-}
-
-.side_bar ul a:hover {
-  color: #3498db;
-}
-
-.side_bar ul a:hover::before {
-  position: absolute;
-  content: '';
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  box-shadow:
-    inset -3px -3px 7px #ffffff,
-    inset 3px 3px 5px #ceced1;
-  border-radius: 6px;
-}
-
-/* Media Icons */
-.media_icons {
-  margin-top: 50px;
-  display: flex;
-  justify-content: center;
-}
-
-.media_icons a {
-  position: relative;
-  margin: 0 4px;
-  font-size: 17px;
   cursor: pointer;
-  height: 40px;
-  width: 40px;
-  border-radius: 50%;
+  position: relative;
   text-align: center;
-  line-height: 40px;
-  text-decoration: none;
-  box-shadow:
-    -3px -3px 7px #ffffff,
-    3px 3px 5px #ceced1;
-  transition: all 0.3s ease;
+  display: inline-block;
+  width: auto;
 }
 
-.media_icons a:hover::before {
+.menu-item:hover {
+  color: #3498db;
+  transform: translateY(-5px);
+  box-shadow:
+    0 10px 20px rgba(0, 0, 0, 0.2); 
+}
+
+/* Hover para cambiar la sombra del borde interior */
+.menu-item:hover::before {
   position: absolute;
   content: '';
   top: 0;
@@ -159,24 +119,9 @@
   box-shadow:
     inset -3px -3px 7px #ffffff,
     inset 3px 3px 5px #ceced1;
-  border-radius: 50%;
+  border-radius: 20px;
 }
 
-.media_icons a:nth-child(1) {
-  color: #4267b2;
-}
-
-.media_icons a:nth-child(2) {
-  color: #1da1f2;
-}
-
-.media_icons a:nth-child(3) {
-  color: #e1306c;
-}
-
-.media_icons a:nth-child(4) {
-  color: #ff0000;
-}
 
 /* General Label Styles */
 label.button {

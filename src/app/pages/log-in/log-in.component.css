@@ -54,17 +54,17 @@ body {
 }
 
 .field input {
-    height: 100%;
     width: 100%;
-    padding-left: 45px;
+    padding: 12px 15px 12px 45px;
     outline: none;
     border: none;
-    font-size: 18px;
+    font-size: 16px;
     background: #e2e2e2;
     color: #595959;
     border-radius: 25px;
     box-shadow: inset 2px 2px 5px #BABECC,
         inset -5px -5px 10px #ffffff73;
+    transition: box-shadow 0.3s ease;
 }
 
 .field input:focus {
@@ -75,8 +75,22 @@ body {
 .field span {
     position: absolute;
     color: #595959;
-    width: 50px;
-    line-height: 50px;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+}
+
+
+.field input:focus~label{
+    opacity: 0;
+    transform: translateY(-150%);
+}
+
+.field input:not(:placeholder-shown) ~ label{
+    opacity: 0;
+    transform: translateY(-150%);
 }
 
 .field label {
@@ -85,12 +99,13 @@ body {
     transform: translateY(-50%);
     left: 45px;
     pointer-events: none;
-    color: #666666;
+    color: #888888;
+    transition: all 0.3s ease;
+    background: transparent;
+    padding: 0 5px;
 }
 
-.field input:valid~label {
-    opacity: 0;
-}
+
 
 .forgot-pass {
     text-align: left;

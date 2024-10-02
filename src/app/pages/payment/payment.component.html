@@ -1,0 +1,112 @@
+<body>
+    <button class="cursor-pointer duration-200 hover:scale-125 active:scale-100" title="Go Back" (click)="goToDashboard()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="50px" height="50px" top="-3rem" viewBox="0 0 24 24" class="stroke-black">
+            <path stroke-linejoin="round" stroke-linecap="round" stroke-width="1.5" d="M11 6L5 12M5 12L11 18M5 12H19">
+            </path>
+        </svg>
+    </button>
+    <div class="contenedor">
+        <!-- Tarjeta Delantera -->
+        <section class="tarjeta" id="tarjeta" #card (click)=" rotate(card) ">
+            <div class="delantera">
+
+                <!-- Contenedor para logo segun numero de tarjeta -->
+                <div class="logo-marca" id="logo-marca"></div>
+
+                <img src="assets/chip-tarjeta.png" class="chip" />
+                <div class="datos">
+                    <div class="grupo">
+                        <p *ngIf="cardNumber !== '' " class="numero" id="numero">{{ cardNumber | creditNumber }}
+                        </p>
+                        <p *ngIf="cardNumber == '' " class="numero" id="numero"> #### #### #### ####
+                        </p>
+                    </div>
+                    <div class="flexbox">
+                        <div class="grupo">
+                            <p class="label">Card Holder</p>
+                            <p *ngIf=" cardName !== '' " class="nombre" id="nombre"> {{ cardName | uppercase |
+                                creditName }}
+                            </p>
+                            <p *ngIf=" cardName == '' " class="nombre" id="nombre"> Jhon Doe
+                            </p>
+                        </div>
+                        <div class="grupo" id="expiracion">
+                            <p class="label">Expiración</p>
+                            <p class="expiracion"><span id="mes"> {{ month }}</span>/<span id="year">{{ year }} </span>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tarjeta trasera -->
+            <div class="trasera">
+                <div class="barra-magnetica"></div>
+                <div class="datos">
+                    <div class="grupo" id="ccv">
+                        <p class="label" id="cvvLabel"> CVV </p>
+                        <p class="ccvP text-end" id="codigo"> {{ cvv }} </p>
+                    </div>
+                </div>
+                <div class="logo-marca back" id="logo-marca-trasera"></div>
+            </div>
+        </section>
+
+
+        <!-- Boton abrir formulario -->
+        <div class="contenedor-btn" #button (click)="displayForm()">
+            <button class="btn-abrir-formulario" id="btn-abrir-formulario">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+
+        <!-- Formulario -->
+        <form class="formulario-tarjeta" #formulario="ngForm" id="formulario-tarjeta">
+            <div class="field">
+                <input type="text" id="inputNumero" name="cardNumber" [(ngModel)]="cardNumber" maxlength="16"
+                    minlength="4" pattern="^\d*$" autocomplete="off" (keyup)="complete( formulario )" placeholder=" "
+                    required>
+                <span class="fas fa-credit-card"></span>
+                <label for="inputNumero">Número Tarjeta</label>
+            </div>
+            <div class="field">
+                <input type="text" id="inputNombre" name="cardName" pattern="/!?^[a-zA-Z\d][a-zA-Z]*$/igm"
+                    [(ngModel)]=" cardName " maxlength="24" autocomplete="off" placeholder=" " required (keyup)="complete( formulario )">
+                <span class="fas fa-user"></span>
+                <label for="inputNombre">Nombre</label>
+            </div>
+            <div class="field expira">
+                <div class="flexbox">
+                    <div class="field-select">
+                        <select name="mes" id="selectMes" [(ngModel)]=" month " required>
+                            <option value="" disabled selected>Mes</option>
+                            <option *ngFor="let mes of mesesYear" [value]="mes">{{ mes }}</option>
+                        </select>
+                        <label for="selectMes">Mes</label>
+                        <span class="fas fa-calendar"></span>
+                    </div>
+                    <div class="field-select">
+                        <select name="year" id="selectYear" [(ngModel)]=" year " required>
+                            <option value="" disabled selected>Año</option>
+                            <option *ngFor="let year of years" [value]="year">{{ year }}</option>
+                        </select>
+                        <label for="selectYear">Año</label>
+                        <span class="fas fa-calendar-alt"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="field ccv">
+                <input type="text" id="inputCCV" name="inputCCV" [(ngModel)]=" cvv " placeholder=" " maxlength="3"
+                    autocomplete="off" (click)="rellenarCVV()" required>
+                <span class="fas fa-lock"></span>
+                <label for="inputCCV">CVV</label>
+            </div>
+
+            <div class="d-grid gap-2">
+                <button [disabled]="formulario.invalid" type="button" class="btn-enviar btn-primary row">Enviar</button>
+            </div>
+        </form>
+
+
+    </div>
+</body>

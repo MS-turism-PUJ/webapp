@@ -76,11 +76,8 @@
     height: 100vh;
     background: #ecf0f3;
     padding: 12px;
-    box-shadow:
-        -3px -3px 7px #ffffff,
-        3px 3px 5px #ceced1,
-        inset -3px -3px 7px #ffffff,
-        inset 3px 3px 5px #ceced1;
+    box-shadow: inset 2px 2px 5px #BABECC,
+        inset -5px -5px 10px #ffffff73;
     transition: all 0.3s ease;
     z-index: 999;
 }
