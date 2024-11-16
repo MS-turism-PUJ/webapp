@@ -1,0 +1,16 @@
+<div>
+    <input type="number" placeholder="Latitud" [(ngModel)]="markerLat" />
+    <input type="number" placeholder="Longitud" [(ngModel)]="markerLng" />
+    <button (click)="addMarker()">Agregar Marcador</button>
+</div>
+
+<google-map #map height="450px" width="1000px" [center]="center" [zoom]="zoom" [options]="mapOptions"
+    (mapMousemove)="onMapMouseMove($event)">
+    <!-- Mostrar marcadores -->
+    <map-marker *ngFor="let marker of markers" [position]="marker.position"
+        [options]="marker.options ? marker.options : {}"></map-marker>
+
+</google-map>
+
+<div>Latitude: {{ display?.lat }}</div>
+<div>Longitude: {{ display?.lng }}</div>

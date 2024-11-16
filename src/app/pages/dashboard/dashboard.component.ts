@@ -16,6 +16,7 @@ import { ButtonPayComponent } from '../../components/button-pay/button-pay.compo
     SearchBarComponent,
     MenuComponent,
     CartShoppingComponent,
+    
   ],
   templateUrl: './dashboard.component.html',
   styleUrl: './dashboard.component.css',

@@ -6,11 +6,13 @@ import { CartShoppingComponent } from './components/cart-shopping/cart-shopping.
 import { SearchBarComponent } from './components/search-bar/search-bar.component';
 import { ButtonPayComponent } from './components/button-pay/button-pay.component';
 import { CartItemComponent } from './components/cart-item/cart-item.component';
+import { GoogleMapsComponent } from './components/google-maps/google-maps.component';
+import { DragAndDropFilesComponent } from './components/drag-and-drop-files/drag-and-drop-files.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ButtonPayComponent,RouterOutlet,CardComponent,SearchBarComponent,MenuComponent, CartShoppingComponent,CartItemComponent],
+  imports: [ButtonPayComponent,RouterOutlet,CardComponent,SearchBarComponent,MenuComponent, CartShoppingComponent,CartItemComponent,GoogleMapsComponent, DragAndDropFilesComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

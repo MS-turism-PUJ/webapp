@@ -4,6 +4,8 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
+import { GoogleMapsComponent } from "../../components/google-maps/google-maps.component";
+import { DragAndDropFilesComponent } from '../../components/drag-and-drop-files/drag-and-drop-files.component';
 
 
 @Component({
@@ -11,7 +13,7 @@ import { Router } from '@angular/router';
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.css'], 
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule],
+  imports: [CommonModule, ReactiveFormsModule, GoogleMapsComponent, DragAndDropFilesComponent],
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
