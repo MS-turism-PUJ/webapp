@@ -11,10 +11,22 @@ export class AuthService {
     baseURL: 'http://localhost:8080/users/auth',
   })
 
-  constructor() {}
+  constructor() { }
 
-  public isAuthenticated(): boolean {
-    return this.token !== null
+  public async isAuthenticated(): Promise<boolean> {
+    try {
+      const response = await this.axiosInstance.post('/refresh', {
+        grant_type: 'refresh_token',
+        client_id: 'webapp',
+        refresh_token: this.refreshToken,
+      })
+      this.token = response.data.access_token
+      this.refreshToken = response.data.refresh_token
+
+      return true
+    } catch (error) {
+      return false
+    }
   }
 
   public async login(username: string, password: string): Promise<void> {
@@ -27,7 +39,7 @@ export class AuthService {
     this.refreshToken = response.data.refresh_token
   }
 
-  public async refresh(): Promise<void> {}
+  public async refresh(): Promise<void> { }
 
   public logout(): void {
     this.token = null
