@@ -7,24 +7,22 @@
     <div class="content">
         <div class="text">
             Ingresar
-            
         </div>
-        <form action="#">
+        <form action="#" [formGroup]="loginForm" (submit)="onSubmit($event)">
             <div class="field">
-                
-                <input type="text" placeholder=" ">
+                <input type="text" placeholder="" formControlName="username">
                 <span class="fas fa-user"></span>
                 <label>Usuario</label>
             </div>
             <div class="field">
-                <input type="password" placeholder=" ">
+                <input type="password" placeholder="" formControlName="password">
                 <span class="fas fa-lock"></span>
                 <label>Contraseña</label>
             </div>
             <div class="forgot-pass">
-                <a>Olvidaste tu  contraseña?</a>
+                <a>Olvidaste tu contraseña?</a>
             </div>
-            <button (click)="goToDashboard()">Ingresar</button>
+            <button type="submit">Ingresar</button>
             
             <div class="sign-up">
                 ¿No eres miembro?
