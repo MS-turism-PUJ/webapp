@@ -14,7 +14,7 @@
                 
                 <input type="text" placeholder=" ">
                 <span class="fas fa-user"></span>
-                <label>Email o Username</label>
+                <label>Usuario</label>
             </div>
             <div class="field">
                 <input type="password" placeholder=" ">
@@ -22,13 +22,13 @@
                 <label>Contraseña</label>
             </div>
             <div class="forgot-pass">
-                <a href="/registry">Olvidaste tu  contraseña?</a>
+                <a>Olvidaste tu  contraseña?</a>
             </div>
             <button (click)="goToDashboard()">Ingresar</button>
             
-            <div class="sign-up" (click)="goToRegistry()">
+            <div class="sign-up">
                 ¿No eres miembro?
-                <a>Regístrate ahora</a>
+                <a (click)="goToRegistry()" class="cursor-pointer">Regístrate ahora</a>
             </div>
 
         </form>

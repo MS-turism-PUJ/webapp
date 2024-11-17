@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core'
 import axios from 'axios'
 import { Role } from '../models/role'
+import { API_URL } from '../config/environment/urls'
 
 @Injectable({
   providedIn: 'root',
