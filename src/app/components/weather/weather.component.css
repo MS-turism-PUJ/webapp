@@ -1,6 +1,6 @@
 body{
     margin: 0;
-    min-height: 100vh;
+    
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,14 +10,19 @@ body{
 }
 
 main{
-    width: 400px;
+    margin-top: 1.5rem;
+    width: 100%;
     height: max-content;
+    
     min-height: 300px;
     background: #e2e2e2;
-    box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px rgba(255, 255, 255, 0.7);
-    border-radius: 30px;
+    box-shadow: -3px -3px 7px #ffffff73,
+        2px 2px 5px rgba(94, 104, 121, 0.288);
+    border-radius: 20px;
     padding: 30px;
+    
     box-sizing: border-box;
+    
 }
 main form{
     border: 1px solid #5552;
@@ -59,7 +64,7 @@ main .temperature {
 
 main .temperature img{
     
-    width: 150px;
+    width: 110px;
     
     filter: drop-shadow(0 10px 50px #555);
 }
@@ -70,9 +75,9 @@ main .description{
     padding: 10px 0 30px;
 }
 #other_infos {
-    margin-top: 30px;
+    margin-top: 0px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
     gap: 12px;
 }
 
@@ -85,8 +90,8 @@ main .description{
     background: #e2e2e2;
     color: #595959;
     border-radius: 10px;
-    box-shadow: 2px 2px 5px #BABECC,
-        -5px -5px 10px #ffffff73;
+    box-shadow: -3px -3px 7px #ffffff73,
+        2px 2px 5px rgba(94, 104, 121, 0.288);
     
     grid-template-columns: 0.5fr 1.5fr;
 }

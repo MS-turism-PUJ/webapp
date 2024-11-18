@@ -4,8 +4,6 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
-import { GoogleMapsComponent } from "../../components/google-maps/google-maps.component";
-import { DragAndDropFilesComponent } from '../../components/drag-and-drop-files/drag-and-drop-files.component';
 import Swal from 'sweetalert2';
 import { Role } from '../../models/role';
 
@@ -15,7 +13,7 @@ import { Role } from '../../models/role';
   templateUrl: './log-in.component.html',
   styleUrls: ['./log-in.component.css'],
   standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, GoogleMapsComponent, DragAndDropFilesComponent],
+  imports: [CommonModule, ReactiveFormsModule],
 })
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;

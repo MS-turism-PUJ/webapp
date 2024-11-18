@@ -6,13 +6,14 @@ import { CreditNumberPipe } from './credit-number.pipe';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
+import { GoToDashboardComponent } from '../../components/go-to-dashboard/go-to-dashboard.component';
 
 
 
 @Component({
   selector: 'app-payment',
   standalone: true,
-  imports: [CommonModule, FormsModule, CreditNamePipe, CreditNumberPipe],
+  imports: [CommonModule, FormsModule, CreditNamePipe, CreditNumberPipe, GoToDashboardComponent],
   templateUrl: './payment.component.html',
   styleUrl: './payment.component.css'
 })

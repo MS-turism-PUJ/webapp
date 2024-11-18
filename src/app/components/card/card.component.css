@@ -96,7 +96,7 @@
   gap: 10px; 
   width: 100%;
   margin-top: 20px;
-
+  margin-bottom: 2rem;
 
   text-align: center;
   border-radius: 25px;
@@ -105,8 +105,7 @@
   box-shadow: inset 2px 2px 5px #BABECC,
         inset -5px -5px 10px #ffffff73;
   background: #e2e2e2; 
-  padding: 
-  10px;
+  padding: 10px;
 }
 
 .grid-item {
@@ -137,80 +136,25 @@
 }
 
 
-
-/* botton*/
-.cartBtn {
-  width: 180px;
-  height: 50px;
-  border: none;
-  border-radius: 0px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+.verMas
+{
   gap: 7px;
-  color: white;
-  font-weight: 500;
-  position: absolute;
-  bottom: 20px;
-  left: 50%;
-  transform: translateX(-50%);
+  width: 320px;
+  height: 60px;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
   background-color: rgb(29, 29, 29);
   box-shadow: 0 20px 30px -7px rgba(27, 27, 27, 0.219);
-  transition: all 0.3s ease-in-out;
+  color: white;
+  font-weight: 500;
   cursor: pointer;
-  overflow: hidden;
+  transition: all 0.1s ease-in-out;
+  align-items: center;
+
 }
 
-.cart {
-  z-index: 2;
-}
-
-.cartBtn:active {
+.verMas:active {
   transform: scale(0.96);
-  transform: translateX(-50%);
-}
-
-.product {
-  position: absolute;
-  width: 12px;
-  border-radius: 3px;
-  content: "";
-  /* cambia donde cae la camisa*/
-  left: 16px;
-  bottom: 23px;
-  opacity: 0;
-  z-index: 1;
-  fill: rgb(211, 211, 211);
-}
-
-.cartBtn:hover .product {
-  animation: slide-in-top 1.2s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-}
-
-@keyframes slide-in-top {
-  0% {
-    transform: translateY(-30px);
-    opacity: 1;
-  }
-
-  100% {
-    transform: translateY(0) rotate(-90deg);
-    opacity: 1;
-  }
-}
-
-.cartBtn:hover .cart {
-  animation: slide-in-left 1s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
-}
-
-@keyframes slide-in-left {
-  0% {
-    transform: translateX(-10px);
-    opacity: 0;
-  }
-
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
+  
 }

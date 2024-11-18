@@ -2,11 +2,17 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import moment  from 'moment';
 import { WeatherComponent } from '../../components/weather/weather.component';
+import { SweetAlertService } from '../../services/sweet-alert.service';
+import { AddToCartComponent } from '../../components/add-to-cart/add-to-cart.component';
+import { GoogleMapsComponent } from '../../components/google-maps/google-maps.component';
+import { GoToDashboardComponent } from '../../components/go-to-dashboard/go-to-dashboard.component';
+
+
 
 @Component({
   selector: 'app-info-service',
   standalone: true,
-  imports: [CommonModule, WeatherComponent],
+  imports: [CommonModule, WeatherComponent,AddToCartComponent, GoogleMapsComponent, GoToDashboardComponent],
   templateUrl: './info-service.component.html',
   styleUrl: './info-service.component.css'
 })
@@ -32,7 +38,7 @@ export class InfoServiceComponent {
 
   reviewsCountReceived: number = 0;
   averageRatingReceived: number = 0; 
-  constructor() {
+  constructor(private sweetAlertService: SweetAlertService) {
 
   }
 
@@ -124,4 +130,9 @@ export class InfoServiceComponent {
     this.dateValueExit = objectDate;
 
   }
+
+
+  
 }
+
+

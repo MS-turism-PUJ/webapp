@@ -1,11 +1,14 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { CartService } from '../../services/cart.service';
-import { SweetAlertService } from '../../services/sweet-alert.service';
+import { AddToCartComponent } from '../add-to-cart/add-to-cart.component';
+import { Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-card',
   standalone: true,
-  imports: [],
+  imports: [AddToCartComponent,CommonModule, ],
   templateUrl: './card.component.html',
   styleUrl: './card.component.css'
 })
@@ -13,16 +16,15 @@ export class CardComponent {
   producto = {
     nombre: 'Lorem Ipsum', 
     proveedor: 'Proveedor 1',
-    precio: 100
+    precio: 100,
+    tipo: false
   };
 
-  constructor(private cartService: CartService, private sweetAlertService: SweetAlertService,
+  constructor(private router: Router
   ) {}
 
-  addToCart() {
-    this.cartService.addToCart(this.producto);
+  goToInfoService() {
+    this.router.navigate(['/info-service']);
   }
-  mostrarAlerta() {
-    this.sweetAlertService.mostrarCorrectamente('Servicio agregado');
-  }
+  
 }
