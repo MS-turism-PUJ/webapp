@@ -1,50 +1,29 @@
-import axios, { AxiosInstance } from 'axios';
 import { Injectable } from '@angular/core';
-import { AuthService } from './auth.service';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Apollo, gql } from 'apollo-angular';
 
 @Injectable({
-    providedIn: 'root',
+    providedIn: 'root'
 })
 export class WeatherService {
-    private graphqlUrl = 'http://localhost:8080/graphql'; 
-    
-    private axiosInstance: AxiosInstance;
-    
-    constructor(private authService:AuthService) { 
-        this.axiosInstance = axios.create({
-            baseURL: this.graphqlUrl,
-            headers: {
-                Authorization: `Bearer ${this.authService.getToken()}`,
-                'Content-Type': 'application/json',
-            },
-        });
-    }
+    // URL del backend expuesto por WeatherController
+    private apiUrl = 'http://localhost:8080/api/weather';
+
+    constructor(private apollo: Apollo) { }
 
     async getWeather(city: string): Promise<any> {
-        const query =  `
-      query {
-        getWeather(city: "${city}") {
-          city
-          country
-          temperature
-          temp_max
-          temp_min
-          humidity
-          pressure
-          clouds
-          wind_speed
-          description
-          icon
-        }
-      }
-    ` ;
-
-        try {
-            const response = await this.axiosInstance.post('', { query });
-            return response.data.data.getWeather;
-        } catch (error) {
-            console.error('Error fetching weather data:', error);
-            throw error;
-        }
+        return this.apollo.query({
+            query: gql`
+                query getWeather(city: $city) {
+                    city
+                    temperature
+                    weather
+                }
+            `,
+            variables: {
+                city: city
+            }
+        }).toPromise();
     }
 }
