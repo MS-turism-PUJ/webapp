@@ -1,149 +1,153 @@
-<div class="rentalapplication">
-    <div class="topcontainer">
-        <h2 class="tittle">FINCA DEL OSO EN LAS MONTAÑAS</h2>
-        <div class="optioncontainer">
-            <span class="material-symbols-outlined"> share </span>
-            <h3>Compartir</h3>
+<body>
+    
+    <div class="rentalapplication">
+        <div class="topcontainer">
+            <h2 class="tittle">FINCA DEL OSO EN LAS MONTAÑAS</h2>
+            <div class="optioncontainer">
+                <span class="material-symbols-outlined"> share </span>
+                <h3>Compartir</h3>
+            </div>
+            <div class="optioncontainer">
+                <span class="material-symbols-outlined"> favorite </span>
+                <h3>Guardar</h3>
+            </div>
         </div>
-        <div class="optioncontainer">
-            <span class="material-symbols-outlined"> favorite </span>
-            <h3>Guardar</h3>
-        </div>
-    </div>
-    <div class="imagescontainer">
-        <div class="leftimage">
-            <img src="assets/living1.png" alt="placeholder" class="imgplace" />
-        </div>
-        <div class="rightimage">
-            <div class="eachimg">
+        <div class="imagescontainer">
+            <div class="leftimage">
                 <img src="assets/living1.png" alt="placeholder" class="imgplace" />
             </div>
-            <div class="eachimg">
-                <img src="assets/living1.png" alt="placeholder" class="imgplace" />
-            </div>
-            <div class="eachimg">
-                <img src="assets/living1.png" alt="placeholder" class="imgplace" />
-            </div>
-            <div class="eachimg">
-                <img src="assets/living1.png" alt="placeholder" class="img" />
-                <button class="showmore">
-                    <span><i class="fa-solid fa-plus"></i></span>
-                    <h3>Ver más</h3>
-                </button>
+            <div class="rightimage">
+                <div class="eachimg">
+                    <img src="assets/living1.png" alt="placeholder" class="imgplace" />
+                </div>
+                <div class="eachimg">
+                    <img src="assets/living1.png" alt="placeholder" class="imgplace" />
+                </div>
+                <div class="eachimg">
+                    <img src="assets/living1.png" alt="placeholder" class="imgplace" />
+                </div>
+                <div class="eachimg">
+                    <img src="assets/living1.png" alt="placeholder" class="img" />
+                    <button class="showmore">
+                        <span><i class="fa-solid fa-plus"></i></span>
+                        <h3>Ver más</h3>
+                    </button>
+                </div>
             </div>
         </div>
-    </div>
-    <div class="details">
-        <div class="placedetails">
-            <div class="state">
-                <div class="actual">
-                    <h2>Departamento, Municipio</h2>
+        <div class="details">
+            <div class="placedetails">
+                <div class="state">
+                    <div class="actual">
+                        <h2>Departamento, Municipio</h2>
+                        <div>
+                            <h2>Estado:</h2>
+                            <h2 class="available">Disponible</h2>
+                        </div>
+                    </div>
+    
+                    <div class="reviews">
+                        <i class="fa-regular fa-star"></i>
+                        <h3>{{ averageRatingReceived | number : "1.1-1" }}</h3>
+                        <h3>{{ reviewsCountReceived }} Reseñas</h3>
+                    </div>
+                </div>
+    
+                <div class="ownerinfo">
+                    <i class="fa-solid fa-user"></i>
                     <div>
-                        <h2>Estado:</h2>
-                        <h2 class="available">Disponible</h2>
+                        <h2>Anfitrión: Laura</h2>
+                        <h3>10 meses de anfitrionado</h3>
                     </div>
                 </div>
-
-                <div class="reviews">
-                    <i class="fa-regular fa-star"></i>
-                    <h3>{{ averageRatingReceived | number : "1.1-1" }}</h3>
-                    <h3>{{ reviewsCountReceived }} Reseñas</h3>
-                </div>
-            </div>
-
-            <div class="ownerinfo">
-                <i class="fa-solid fa-user"></i>
-                <div>
-                    <h2>Anfitrión: Laura</h2>
-                    <h3>10 meses de anfitrionado</h3>
-                </div>
-            </div>
-            <div class="descriptioninfo">
-                <h3>Descripción</h3>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo dolores
-                    velit modi mollitia explicabo, similique saepe dolorem, facilis
-                    eligendi asperiores adipisci. Repellendus rerum asperiores fugit
-                    impedit ullam vitae quasi explicabo!
-                </p>
-                <div class="moreinfodescription">
-                    <h4>Mostrar más</h4>
-                    <i class="fa-solid fa-chevron-right"></i>
-                </div>
-            </div>
-            <div class="dates">
-                <div class="wrapper-calendar">
-                    <h2>Fecha Entrada</h2>
-                    <div class="header-calendar">
-                        <div>
-                            <button (click)="changeMonth(-1)" class="btn-prev">
-                                <i class="fa-solid fa-chevron-left"></i>
-                            </button>
-                        </div>
-                        <h1>{{ dateSelect | date : "MMMM, yyyy" }}</h1>
-                        <div>
-                            <button (click)="changeMonth(1)" class="btn-next">
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </button>
-                        </div>
+                <div class="descriptioninfo">
+                    <h3>Descripción</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo dolores
+                        velit modi mollitia explicabo, similique saepe dolorem, facilis
+                        eligendi asperiores adipisci. Repellendus rerum asperiores fugit
+                        impedit ullam vitae quasi explicabo!
+                    </p>
+                    <div class="moreinfodescription">
+                        <h4>Mostrar más</h4>
+                        <i class="fa-solid fa-chevron-right"></i>
                     </div>
-                    <ol>
-                        <li *ngFor="let day of week" class="day-name">
-                            {{ day | slice : 0 : 3 }}
-                        </li>
-                        <li (click)="clickDay(day)" [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"
-                            [ngClass]="{ 'selected-day': selectedDay === day }"
-                            *ngFor="let day of monthSelect; let first = first">
-                            <span>{{ day?.value }}</span>
-                        </li>
-                    </ol>
                 </div>
-                <div class="wrapper-calendar">
-                    <h2>Fecha Salida</h2>
-                    <div class="header-calendar">
-                        <div>
-                            <button (click)="changeMonthExit(-1)" class="btn-prev">
-                                <i class="fa-solid fa-chevron-left"></i>
-                            </button>
+                <div class="dates">
+                    <div class="wrapper-calendar">
+                        <h2>Fecha Entrada</h2>
+                        <div class="header-calendar">
+                            <div>
+                                <button (click)="changeMonth(-1)" class="btn-prev">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </button>
+                            </div>
+                            <h1>{{ dateSelect | date : "MMMM, yyyy" }}</h1>
+                            <div>
+                                <button (click)="changeMonth(1)" class="btn-next">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </button>
+                            </div>
                         </div>
-                        <h1>{{ dateSelectExit | date : "MMMM, yyyy" }}</h1>
-                        <div>
-                            <button (click)="changeMonthExit(1)" class="btn-next">
-                                <i class="fa-solid fa-chevron-right"></i>
-                            </button>
-                        </div>
+                        <ol>
+                            <li *ngFor="let day of week" class="day-name">
+                                {{ day | slice : 0 : 3 }}
+                            </li>
+                            <li (click)="clickDay(day)" [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"
+                                [ngClass]="{ 'selected-day': selectedDay === day }"
+                                *ngFor="let day of monthSelect; let first = first">
+                                <span>{{ day?.value }}</span>
+                            </li>
+                        </ol>
                     </div>
-                    <ol>
-                        <li *ngFor="let day of week" class="day-name">
-                            {{ day | slice : 0 : 3 }}
-                        </li>
-                        <li (click)="clickDayExit(day)" [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"
-                            [ngClass]="{ 'selected-day': selectedDayExit === day }"
-                            *ngFor="let day of monthSelectExit; let first = first">
-                            <span>{{ day?.value }}</span>
-                        </li>
-                    </ol>
+                    <div class="wrapper-calendar">
+                        <h2>Fecha Salida</h2>
+                        <div class="header-calendar">
+                            <div>
+                                <button (click)="changeMonthExit(-1)" class="btn-prev">
+                                    <i class="fa-solid fa-chevron-left"></i>
+                                </button>
+                            </div>
+                            <h1>{{ dateSelectExit | date : "MMMM, yyyy" }}</h1>
+                            <div>
+                                <button (click)="changeMonthExit(1)" class="btn-next">
+                                    <i class="fa-solid fa-chevron-right"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <ol>
+                            <li *ngFor="let day of week" class="day-name">
+                                {{ day | slice : 0 : 3 }}
+                            </li>
+                            <li (click)="clickDayExit(day)" [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"
+                                [ngClass]="{ 'selected-day': selectedDayExit === day }"
+                                *ngFor="let day of monthSelectExit; let first = first">
+                                <span>{{ day?.value }}</span>
+                            </li>
+                        </ol>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="summary">
-            <h2>Precio noche</h2>
-            <h4>$ 700.000 pesos</h4>
-            <div class="itemsdetails">
-                <div class="eachitem">
-                    <h4>Llegada</h4>
-                    <h5>10/10/2020</h5>
+            <div class="summary">
+                <h2>Precio noche</h2>
+                <h4>$ 700.000 pesos</h4>
+                <div class="itemsdetails">
+                    <div class="eachitem">
+                        <h4>Llegada</h4>
+                        <h5>10/10/2020</h5>
+                    </div>
+                    <div class="eachitem">
+                        <h4>Salida</h4>
+                        <h5>15/10/2020</h5>
+                    </div>
+                    <div class="eachitem">
+                        <h4>Huéspedes</h4>
+                        <h5>4</h5>
+                    </div>
                 </div>
-                <div class="eachitem">
-                    <h4>Salida</h4>
-                    <h5>15/10/2020</h5>
-                </div>
-                <div class="eachitem">
-                    <h4>Huéspedes</h4>
-                    <h5>4</h5>
-                </div>
+                <h1>Total: $4.900.000</h1>
+                <button class="reserve">Pagar</button>
             </div>
-            <h1>Total: $4.900.000</h1>
-            <button class="reserve">Pagar</button>
         </div>
     </div>
+</body>

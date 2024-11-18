@@ -1,11 +1,11 @@
 import { Component,OnInit } from '@angular/core';
 import { WeatherService } from '../../services/weather.service';
-import { HttpClientModule } from '@angular/common/http';
+
 
 @Component({
   selector: 'app-weather',
   standalone: true,
-  imports: [HttpClientModule],
+  imports: [],
   templateUrl: './weather.component.html',
   styleUrl: './weather.component.css'
 })
@@ -20,15 +20,12 @@ export class WeatherComponent implements OnInit {
     this.fetchWeather('Washington');
   }
 
-  fetchWeather(city: string): void {
-    this.weatherService.getWeather(city).subscribe(
-      data => {
-        this.weatherData = data; 
-      },
-      error => {
-        console.error('Error fetching weather data:', error);
-      }
-    );
+  async fetchWeather(city: string): Promise<void> {
+    try {
+      this.weatherData = await this.weatherService.getWeather(city);
+    } catch (error) {
+      console.error('Error fetching weather data:', error);
+    }
   }
 
   onSearch(): void {

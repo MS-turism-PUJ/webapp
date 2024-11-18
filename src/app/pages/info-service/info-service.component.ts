@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import moment  from 'moment';
+import { WeatherComponent } from '../../components/weather/weather.component';
+
 @Component({
   selector: 'app-info-service',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, WeatherComponent],
   templateUrl: './info-service.component.html',
   styleUrl: './info-service.component.css'
 })
