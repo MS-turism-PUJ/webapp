@@ -1,5 +1,14 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins");
 
+* {
+    scrollbar-width: inherit;
+    scrollbar-color: black transparent;
+}
+
+*::-webkit-scrollbar-track {
+    background: transparent;    
+}
+
 
 body{
     background: #e2e2e2;
@@ -59,6 +68,7 @@ h2, h1, .opciones{
     margin-right: 20px;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
 }
 
 .imagescontainer {
@@ -285,11 +295,12 @@ h2, h1, .opciones{
     grid-template-columns: repeat(7, 1fr);
     margin: 0;
     padding: 0;
+    
 }
 
 .rentalapplication .dates .wrapper-calendar>ol>li {
     padding: .25rem;
-
+    transition: all 0.2s ease;
     cursor: pointer;
 }
 
@@ -299,11 +310,13 @@ h2, h1, .opciones{
     box-shadow: -3px -3px 7px #ffffff73,
         2px 2px 5px rgba(94, 104, 121, 0.288);
     border-radius: 100%;
-    /* Cambia al color que prefieras */
+    
+    
 }
 
 .dates .wrapper-calendar>ol>li:hover {
     font-weight: 600;
+    transform: translateY(-3px);
 }
 
 /* h2 {
@@ -342,3 +355,14 @@ padding: 0;
 
 }
 
+.btn-next, .btn-prev{
+    transition: all 0.2s ease;
+}
+
+.btn-next:hover{
+    transform: translateY(-3px);
+}
+
+.btn-prev:hover{
+    transform: translateY(-3px);
+}

@@ -92,9 +92,18 @@ main .description{
     border-radius: 10px;
     box-shadow: -3px -3px 7px #ffffff73,
         2px 2px 5px rgba(94, 104, 121, 0.288);
-    
+    transition: all 0.2s ease;
     grid-template-columns: 0.5fr 1.5fr;
 }
+
+#other_infos .info:hover {
+    font: 500;
+    cursor: pointer;
+    transform: translateY(-3px);
+    box-shadow:
+      0 10px 20px rgba(0, 0, 0, 0.2); 
+  }
+
 
 #other_infos .info h2 {
     font-size: 12px;
