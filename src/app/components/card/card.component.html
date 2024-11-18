@@ -1,67 +1,78 @@
 <section id="card1" class="card">
+  <!-- Parte frontal de la tarjeta -->
   <div class="card-content-front">
-    <h1 class="card-title">nombre contenido</h1>
-    <h2 >categoria contenido</h2>
-    <img src="./assets/food-service.png" alt="Descripción de la imagen" class="card-image">
+    <h1 class="card-title">{{ producto.nombre }}</h1> <!-- Nombre del contenido -->
+    <h2>{{ producto.categoria || 'Sin categoría' }}</h2> <!-- Categoría -->
+    <img src="./assets/food-service.png" alt="Imagen del servicio" class="card-image">
     <p class="card-description">
-      contenido": Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam vitae
-      justo vel lorem tincidunt ultrices at non nunc. Donec in sapien viverra,
-      tincidunt augue id, efficitur massa.
+      {{ producto.descripcion || 'Descripción no disponible.' }}
     </p>
   </div>
+
+  <!-- Parte trasera de la tarjeta -->
   <div class="card-content-back">
     <!-- Título del servicio -->
-    <p class="card-title">Nombre del Servicio</p>
-    
-  
+    <p class="card-title">{{ producto.nombre }}</p>
+
     <!-- Información de país y ciudad -->
     <div class="grid-container">
       <div class="grid-item">
-        <strong>País:</strong> <span>País</span>
+        <strong>País:</strong> <span>{{ producto.pais || 'No especificado' }}</span>
       </div>
       <div class="grid-item">
-        <strong>Ciudad:</strong> <span>Ciudad</span>
-      </div>
-  
-      <!-- Precio y Categoría -->
-      <div class="grid-item">
-        <strong>Precio:</strong> <span>$100</span>
-      </div>
-      <div class="grid-item">
-        <strong>Categoría:</strong> <span>Categoría</span>
-      </div>
-  
-      <!-- Latitud y Longitud (opcional) -->
-      <div class="grid-item">
-        <strong>Latitud:</strong> <span>00.000</span>
-      </div>
-      <div class="grid-item">
-        <strong>Longitud:</strong> <span>00.000</span>
-      </div>
-  
-      <!-- Fechas de salida y llegada (opcional) -->
-      <div class="grid-item">
-        <strong>Fecha de salida:</strong> <span>2024-01-01</span>
-      </div>
-      <div class="grid-item">
-        <strong>Fecha de llegada:</strong> <span>2024-01-10</span>
-      </div>
-  
-      <!-- Ruta y Tipo de Transporte (opcional) -->
-      <div class="grid-item">
-        <strong>Ruta:</strong> <span>Ruta 1</span>
-      </div>
-      <div class="grid-item">
-        <strong>Transporte:</strong> <span>Bus</span>
+        <strong>Ciudad:</strong> <span>{{ producto.ciudad || 'No especificada' }}</span>
       </div>
 
-      <!-- Descripción (opcional, ocupa toda la fila) -->
+      <!-- Precio y Categoría -->
+      <div class="grid-item">
+        <strong>Precio:</strong> <span>${{ producto.precio || '0.00' }}</span>
+      </div>
+      <div class="grid-item">
+        <strong>Categoría:</strong> <span>{{ producto.categoria || 'Sin categoría' }}</span>
+      </div>
+
+      <!-- Latitud y Longitud -->
+      <div *ngIf="producto.latitud && producto.longitud">
+        <div class="grid-item">
+          <strong>Latitud:</strong> <span>{{ producto.latitud }}</span>
+        </div>
+        <div class="grid-item">
+          <strong>Longitud:</strong> <span>{{ producto.longitud }}</span>
+        </div>
+      </div>
+
+      <!-- Fechas de salida y llegada -->
+      <div *ngIf="producto.fechaSalida">
+        <div class="grid-item">
+          <strong>Fecha de salida:</strong> <span>{{ producto.fechaSalida }}</span>
+        </div>
+      </div>
+      <div *ngIf="producto.fechaLlegada">
+        <div class="grid-item">
+          <strong>Fecha de llegada:</strong> <span>{{ producto.fechaLlegada }}</span>
+        </div>
+      </div>
+
+      <!-- Ruta y Tipo de Transporte -->
+      <div *ngIf="producto.ruta">
+        <div class="grid-item">
+          <strong>Ruta:</strong> <span>{{ producto.ruta }}</span>
+        </div>
+      </div>
+      <div *ngIf="producto.transporte">
+        <div class="grid-item">
+          <strong>Transporte:</strong> <span>{{ producto.transporte }}</span>
+        </div>
+      </div>
+
+      <!-- Descripción -->
       <div class="grid-item-full">
-        <strong>Descripción:</strong> Lorem ipsum dolor sit amet, consectetur adipiscing Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Lorem ipsum dolor sit amet, consectetur adipiscing elit. elit.
+        <strong>Descripción:</strong>
+        {{ producto.descripcion || 'Descripción no disponible.' }}
       </div>
     </div>
     <app-add-to-cart *ngIf="producto.tipo ==true"></app-add-to-cart>
     <button (click)="goToInfoService()" class="verMas" *ngIf="producto.tipo != true">Ver más información</button>
-    
+
   </div>
 </section>

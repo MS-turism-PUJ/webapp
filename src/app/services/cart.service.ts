@@ -1,11 +1,8 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
+import { CartItem } from '../models/CartItem';
 
-interface CartItem {
-  nombre: string;
-  proveedor: string;
-  precio: number;
-}
+
 
 @Injectable({
   providedIn: 'root',

@@ -1,27 +1,16 @@
 <main class="flex h-screen flex-col items-center justify-center bg-[#e2e2e2]">
-  <header
-    class="sticky flex w-full items-center justify-around bg-[#e2e2e2]/10 p-8"
-    style="z-index: 1000"
-  >
+  <!-- Encabezado -->
+  <header class="sticky flex w-full items-center justify-around bg-[#e2e2e2]/10 p-8" style="z-index: 1000">
     <app-menu></app-menu>
     <app-search-bar class="w-3/5"></app-search-bar>
     <app-cart-shopping class="cart"></app-cart-shopping>
   </header>
-  <section
-    class="grid w-full grid-cols-1 justify-items-center gap-16 p-8 pt-20 sm:grid-cols-2 md:grid-cols-3 overflow-y-scroll"
-  >
 
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
-    <app-card></app-card>
+  <!-- Sección de tarjetas -->
+  <section
+    class="grid w-full grid-cols-1 justify-items-center gap-16 p-8 pt-20 sm:grid-cols-2 md:grid-cols-3 overflow-y-scroll">
+    <!-- Iterar sobre los productos -->
+    <app-card *ngFor="let producto of productos" [producto]="producto" class="content-card">
+    </app-card>
   </section>
 </main>
