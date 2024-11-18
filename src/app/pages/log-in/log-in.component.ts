@@ -6,13 +6,13 @@ import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { GoogleMapsComponent } from "../../components/google-maps/google-maps.component";
 import { DragAndDropFilesComponent } from '../../components/drag-and-drop-files/drag-and-drop-files.component';
-
+import Swal from 'sweetalert2';
 
 
 @Component({
   selector: 'app-login',
   templateUrl: './log-in.component.html',
-  styleUrls: ['./log-in.component.css'], 
+  styleUrls: ['./log-in.component.css'],
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, GoogleMapsComponent, DragAndDropFilesComponent],
 })
@@ -21,38 +21,59 @@ export class LoginComponent implements OnInit {
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.loginForm = this.fb.group({
-      emailOrUsername: ['', Validators.required],
+      username: ['', Validators.required],
       password: ['', Validators.required],
     });
   }
 
-  goToDashboard() {
-    this.router.navigate(['/dashboard']);
+  async goToDashboard() {
+    try {
+      await this.authService.login(this.loginForm.value.emailOrUsername, this.loginForm.value.password);
+
+      this.router.navigate(['/dashboard']);
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Usuario o contraseña incorrectos',
+      });
+      console.error('Error en el login:', error);
+    }
   }
 
   goToRegistry() {
     this.router.navigate(['/register']);
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 
-  async onSubmit() {
+  async onSubmit(event: Event) {
+    event.preventDefault()
+
     if (this.loginForm.valid) {
       const formData = this.loginForm.value;
-      const emailOrUsername = formData.emailOrUsername;
+      const username = formData.username;
       const password = formData.password
+
       try {
-        
-        await this.authService.login(emailOrUsername, password);
-        console.log('Login exitoso!');
+        await this.authService.login(username, password);
         this.router.navigate(['/dashboard']);
+
       } catch (error) {
         console.error('Error en el login:', error);
-        
+        Swal.fire({
+          icon: 'error',
+          title: 'Error',
+          text: 'Usuario o contraseña incorrectos',
+        });
       }
     } else {
-      console.log('Formulario Inválido');
-    
+      console.error('Formulario Inválido');
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: 'Ingrese un usuario y contraseña válidos',
+      });
     }
   }
 }
