@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import moment  from 'moment';
+import moment from 'moment';
+
 @Component({
   selector: 'app-info-service',
   standalone: true,
