@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { GoogleMapsComponent } from "../../components/google-maps/google-maps.component";
 import { DragAndDropFilesComponent } from '../../components/drag-and-drop-files/drag-and-drop-files.component';
 import Swal from 'sweetalert2';
+import { Role } from '../../models/role';
 
 
 @Component({
@@ -56,8 +57,22 @@ export class LoginComponent implements OnInit {
       const password = formData.password
 
       try {
-        await this.authService.login(username, password);
-        this.router.navigate(['/dashboard']);
+        const role = await this.authService.login(username, password);
+
+        if (role === Role.CLIENT) {
+          this.router.navigate(['/dashboard'])
+
+        } else if (role === Role.PROVIDER) {
+          this.router.navigate(['/dashboard']) // TODO: Cambiar a la vista de proveedor
+
+        } else {
+          console.error('Error en el login:', 'No se reconoce el rol del usuario');
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'No se reconoce el rol del usuario',
+          });
+        }
 
       } catch (error) {
         console.error('Error en el login:', error);
@@ -67,6 +82,7 @@ export class LoginComponent implements OnInit {
           text: 'Usuario o contraseña incorrectos',
         });
       }
+
     } else {
       console.error('Formulario Inválido');
       Swal.fire({
