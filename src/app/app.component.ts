@@ -8,11 +8,21 @@ import { ButtonPayComponent } from './components/button-pay/button-pay.component
 import { CartItemComponent } from './components/cart-item/cart-item.component';
 import { GoogleMapsComponent } from './components/google-maps/google-maps.component';
 import { DragAndDropFilesComponent } from './components/drag-and-drop-files/drag-and-drop-files.component';
+import { WeatherComponent } from './components/weather/weather.component';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ButtonPayComponent,RouterOutlet,CardComponent,SearchBarComponent,MenuComponent, CartShoppingComponent,CartItemComponent,GoogleMapsComponent, DragAndDropFilesComponent],
+  imports: [ButtonPayComponent,
+            RouterOutlet,
+            CardComponent,
+            SearchBarComponent,
+            MenuComponent, 
+            CartShoppingComponent,
+            CartItemComponent,
+            GoogleMapsComponent, 
+            DragAndDropFilesComponent,
+            WeatherComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

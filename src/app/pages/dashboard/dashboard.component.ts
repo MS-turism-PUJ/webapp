@@ -5,6 +5,7 @@ import { MenuComponent } from '../../components/menu/menu.component'
 import { CartShoppingComponent } from '../../components/cart-shopping/cart-shopping.component'
 import { SearchBarComponent } from '../../components/search-bar/search-bar.component'
 import { ButtonPayComponent } from '../../components/button-pay/button-pay.component'
+import { WeatherComponent } from '../../components/weather/weather.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -16,6 +17,7 @@ import { ButtonPayComponent } from '../../components/button-pay/button-pay.compo
     SearchBarComponent,
     MenuComponent,
     CartShoppingComponent,
+    WeatherComponent
     
   ],
   templateUrl: './dashboard.component.html',
