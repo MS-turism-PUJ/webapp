@@ -14,13 +14,13 @@ export class WeatherService {
 
     async getWeather(city: string): Promise<any> {
         return this.apollo.query({
-            query: gql`{
-                getWeather(city: $city) {
+            query: gql`
+                query getWeather(city: $city) {
                     city
                     temperature
                     weather
                 }
-            }`,
+            `,
             variables: {
                 city: city
             }
