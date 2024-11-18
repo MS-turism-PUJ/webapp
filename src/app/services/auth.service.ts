@@ -26,7 +26,7 @@ export class AuthService {
       await this.refresh()
 
       return true
-    } catch (error) {
+    } catch {
       return false
     }
   }
@@ -49,11 +49,19 @@ export class AuthService {
   }
 
   public async refresh(): Promise<void> {
-    const response = await this.axiosInstance.post('/refresh', {
-      grant_type: 'refresh_token',
-      client_id: 'webapp',
-      refresh_token: this.refreshToken,
-    })
+    const response = await this.axiosInstance.post(
+      '/refresh',
+      new URLSearchParams({
+        grant_type: 'refresh_token',
+        client_id: 'webapp',
+        refresh_token: this.refreshToken as string,
+      }),
+      {
+        headers: {
+          'Content-Type': 'application/x-www-form-urlencoded',
+        },
+      }
+    )
 
     this.token = response.data.access_token
     this.refreshToken = response.data.refresh_token
