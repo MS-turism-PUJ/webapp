@@ -1,78 +1,76 @@
 <section id="card1" class="card">
   <!-- Parte frontal de la tarjeta -->
   <div class="card-content-front">
-    <h1 class="card-title">{{ producto.nombre }}</h1> <!-- Nombre del contenido -->
-    <h2>{{ producto.categoria || 'Sin categoría' }}</h2> <!-- Categoría -->
+    <h1 class="card-title">{{ content.name }}</h1> <!-- Nombre del contenido -->
+    <!-- <h2>{{ content.categoria || 'Sin categoría' }}</h2> Categoría -->
     <img src="./assets/food-service.png" alt="Imagen del servicio" class="card-image">
     <p class="card-description">
-      {{ producto.descripcion || 'Descripción no disponible.' }}
+      {{ content.description || 'Descripción no disponible.' }}
     </p>
   </div>
 
   <!-- Parte trasera de la tarjeta -->
-  <div class="card-content-back">
+  <div class="card-content-back" *ngIf="content.service">
     <!-- Título del servicio -->
-    <p class="card-title">{{ producto.nombre }}</p>
+    <p class="card-title">{{ content.service.name }}</p>
 
     <!-- Información de país y ciudad -->
     <div class="grid-container">
       <div class="grid-item">
-        <strong>País:</strong> <span>{{ producto.pais || 'No especificado' }}</span>
+        <strong>País:</strong> <span>{{ content.service.country || 'No especificado' }}</span>
       </div>
       <div class="grid-item">
-        <strong>Ciudad:</strong> <span>{{ producto.ciudad || 'No especificada' }}</span>
+        <strong>Ciudad:</strong> <span>{{ content.service.city || 'No especificada' }}</span>
       </div>
 
       <!-- Precio y Categoría -->
       <div class="grid-item">
-        <strong>Precio:</strong> <span>${{ producto.precio || '0.00' }}</span>
+        <strong>Precio:</strong> <span>${{ content.service.price || '0.00' }}</span>
       </div>
       <div class="grid-item">
-        <strong>Categoría:</strong> <span>{{ producto.categoria || 'Sin categoría' }}</span>
+        <strong>Categoría:</strong> <span>{{ content.service.category }}</span>
       </div>
 
       <!-- Latitud y Longitud -->
-      <div *ngIf="producto.latitud && producto.longitud">
+      <div *ngIf="content.service.latitude && content.service.longitude">
         <div class="grid-item">
-          <strong>Latitud:</strong> <span>{{ producto.latitud }}</span>
+          <strong>Latitud:</strong> <span>{{ content.service.latitude }}</span>
         </div>
         <div class="grid-item">
-          <strong>Longitud:</strong> <span>{{ producto.longitud }}</span>
+          <strong>Longitud:</strong> <span>{{ content.service.longitude }}</span>
         </div>
       </div>
 
       <!-- Fechas de salida y llegada -->
-      <div *ngIf="producto.fechaSalida">
+      <div *ngIf="content.service.departureDate">
         <div class="grid-item">
-          <strong>Fecha de salida:</strong> <span>{{ producto.fechaSalida }}</span>
+          <strong>Fecha de salida:</strong> <span>{{ content.service.departureDate }}</span>
         </div>
       </div>
-      <div *ngIf="producto.fechaLlegada">
+      <div *ngIf="content.service.duration">
         <div class="grid-item">
-          <strong>Fecha de llegada:</strong> <span>{{ producto.fechaLlegada }}</span>
+          <strong>Duración:</strong> <span>{{ content.service.duration }}</span>
         </div>
       </div>
 
       <!-- Ruta y Tipo de Transporte -->
-      <div *ngIf="producto.ruta">
+      <div *ngIf="content.service.category === 'TRANSPORT'">
+        <!-- <div class="grid-item">
+          <strong>Ruta:</strong> <span>{{ content.service.ruta }}</span>
+        </div> -->
         <div class="grid-item">
-          <strong>Ruta:</strong> <span>{{ producto.ruta }}</span>
-        </div>
-      </div>
-      <div *ngIf="producto.transporte">
-        <div class="grid-item">
-          <strong>Transporte:</strong> <span>{{ producto.transporte }}</span>
+          <strong>Transporte:</strong> <span>{{ content.service.transportType }}</span>
         </div>
       </div>
 
       <!-- Descripción -->
       <div class="grid-item-full">
         <strong>Descripción:</strong>
-        {{ producto.descripcion || 'Descripción no disponible.' }}
+        {{ content.service.description || 'Descripción no disponible.' }}
       </div>
     </div>
-    <app-add-to-cart *ngIf="producto.tipo ==true"></app-add-to-cart>
-    <button (click)="goToInfoService()" class="verMas" *ngIf="producto.tipo != true">Ver más información</button>
+    <app-add-to-cart *ngIf="content.service"></app-add-to-cart>
+    <button (click)="goToInfoService()" class="verMas" *ngIf="content.service">Ver más información</button>
 
   </div>
 </section>

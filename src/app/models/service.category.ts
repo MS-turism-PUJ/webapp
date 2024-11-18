@@ -1,0 +1,6 @@
+export enum ServiceCategory {
+  ALIMENTATION = "ALIMENTATION",
+  TRANSPORT = "TRANSPORT",
+  HOUSING = "HOUSING",
+  ECO_WALK = "ECO_WALK",
+}

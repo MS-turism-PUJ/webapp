@@ -4,8 +4,7 @@ import { CartService } from '../../services/cart.service';
 import { AddToCartComponent } from '../add-to-cart/add-to-cart.component';
 import { Router } from '@angular/router';
 
-import { Producto } from '../../models/Producto';
-import { CartItem } from '../../models/CartItem';
+import { Content } from '../../models/content';
 
 @Component({
   selector: 'app-card',
@@ -15,17 +14,17 @@ import { CartItem } from '../../models/CartItem';
   styleUrl: './card.component.css'
 })
 export class CardComponent {
-  @Input() producto!: Producto;
+  @Input() content!: Content;
 
   constructor(private cartService: CartService, private router: Router
   ) { }
 
   addToCart() {
-    const cartItem: CartItem = {
-      nombre: this.producto.nombre,
-      precio: this.producto.precio || 0,
-    };
-    this.cartService.addToCart(cartItem);
+    if (!this.content.service) {
+      console.error('No service found');
+      return;
+    }
+    this.cartService.addToCart(this.content.service);
   }
 
   goToInfoService() {

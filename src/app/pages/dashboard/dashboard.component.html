@@ -9,8 +9,8 @@
   <!-- Sección de tarjetas -->
   <section
     class="grid w-full grid-cols-1 justify-items-center gap-16 p-8 pt-20 sm:grid-cols-2 md:grid-cols-3 overflow-y-scroll">
-    <!-- Iterar sobre los productos -->
-    <app-card *ngFor="let producto of productos" [producto]="producto" class="content-card">
+    <!-- Iterar sobre los contents -->
+    <app-card *ngFor="let content of contents" [content]="content" class="content-card">
     </app-card>
   </section>
 </main>

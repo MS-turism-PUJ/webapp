@@ -5,13 +5,14 @@ import { PaymentComponent } from './pages/payment/payment.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { InfoServiceComponent } from './pages/info-service/info-service.component';
 import { NgModule } from '@angular/core';
+import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent },
     { path: 'register', component: RegisterComponent },
-    { path: 'dashboard', component: DashboardComponent},
-    { path: 'payment', component: PaymentComponent },
-    {path: 'info-service', component: InfoServiceComponent}
+    { path: 'dashboard', component: DashboardComponent, canActivate: [] },
+    { path: 'payment', component: PaymentComponent, canActivate: [] },
+    { path: 'info-service', component: InfoServiceComponent }
 ];
 @NgModule({
     imports: [RouterModule.forRoot(routes)],

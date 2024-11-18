@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
-import { CartItem } from '../models/CartItem';
+import { Service } from '../models/service';
 
 
 
@@ -8,8 +8,9 @@ import { CartItem } from '../models/CartItem';
   providedIn: 'root',
 })
 export class CartService {
-  private items: CartItem[] = [];
-  private cartSubject = new BehaviorSubject<CartItem[]>([]);
+  private items: Service[] = [];
+  private cartSubject = new BehaviorSubject<Service[]>([]);
+
   updateCartItems(items: any[]) {
     this.cartSubject.next(items);
   }
@@ -18,8 +19,8 @@ export class CartService {
     return this.cartSubject.asObservable();
   }
 
-  addToCart(item: CartItem) {
-    this.items.push(item);
+  addToCart(service: Service) {
+    this.items.push(service);
     this.cartSubject.next(this.items);
   }
 
