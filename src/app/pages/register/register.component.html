@@ -9,7 +9,7 @@
                 <div class="wrapper">
                     <div class="img-area">
                         <div class="inner-area">
-                            <img [src]="imageUrl" alt="Fotografía" class="fotografia" id="profileImage">
+                            <img [src]="imageUrl" alt="photo" class="fotografia" id="profileImage">
                         </div>
                     </div>
                     <!-- Botón circular pequeño con el ícono de + para subir imagen -->
@@ -30,7 +30,7 @@
                 <div class="field">
                     <input type="text" formControlName="username" placeholder=" ">
                     <span class="fas fa-user-circle"></span>
-                    <label>Username</label>
+                    <label>Usuario</label>
                 </div>
                 <div class="field">
                     <input type="text" formControlName="email" placeholder=" ">
@@ -48,14 +48,14 @@
             <div *ngIf="currentStep === 2" class="step">
                 <div class="field">
                     <input type="number" formControlName="edad" required min="1"
-                        (input)="validatePositiveValue($event)" placeholder=" ">
+                        (input)="validatePositiveValue($event)" placeholder="">
                     <span class="fas fa-birthday-cake"></span>
                     <label>Edad</label>
                 </div>
 
                 <div class="field">
-                    <select formControlName="tipoUsuario" (change)="onTipoUsuarioChange()">
-                        <option value="" disabled>Selecciona una opción</option> 
+                    <select formControlName="tipoUsuario" (select)="onTipoUsuarioChange()">
+                        <option value="" disabled>Selecciona una opción</option>
                         <option value="cliente">Cliente</option>
                         <option value="proveedor">Proveedor</option>
                     </select>
@@ -65,7 +65,7 @@
 
 
                 <div class="field">
-                    <textarea formControlName="descripcion" maxlength="300" placeholder=" " ></textarea>
+                    <textarea formControlName="descripcion" maxlength="300" placeholder=""></textarea>
                     <label>Descripción (máx. 300 caracteres)</label>
                 </div>
             </div>
@@ -78,12 +78,12 @@
                     <label>Número de Teléfono</label>
                 </div>
                 <div class="field">
-                    <input type="text" formControlName="web_page" placeholder=" ">
+                    <input type="text" formControlName="web_page" placeholder="">
                     <span class="fas fa-globe"></span>
                     <label>Página web</label>
                 </div>
                 <div class="field">
-                    <input type="text" formControlName="redes_sociales" placeholder=" ">
+                    <input type="text" formControlName="redes_sociales" placeholder="">
                     <span class="fas fa-share-alt"></span>
                     <label>Redes sociales</label>
                 </div>

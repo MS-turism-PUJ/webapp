@@ -31,7 +31,7 @@ export class AuthService {
     }
   }
 
-  public async login(username: string, password: string): Promise<void> {
+  public async login(username: string, password: string): Promise<Role> {
     const response = await this.axiosInstance.post('/login', {
       username,
       password,
@@ -44,6 +44,8 @@ export class AuthService {
     localStorage.setItem('auth_token', response.data.access_token);
     localStorage.setItem('auth_refresh_token', response.data.refresh_token);
     localStorage.setItem('auth_role', response.data.role);
+
+    return this.role as Role
   }
 
   public async refresh(): Promise<void> {
@@ -67,8 +69,46 @@ export class AuthService {
     localStorage.removeItem('auth_role')
   }
 
-  public async register(): Promise<void> {
-    return
+  public async registerClient(username: string, name: string, age: number, email: string, password: string, description: string, photo?: File): Promise<void> {
+    const response = await this.axiosInstance.postForm('/client/register', {
+      username,
+      name,
+      age,
+      email,
+      password,
+      description,
+      photo,
+    })
+
+    this.token = response.data.access_token
+    this.refreshToken = response.data.refresh_token
+    this.role = response.data.role
+
+    localStorage.setItem('auth_token', response.data.access_token)
+    localStorage.setItem('auth_refresh_token', response.data.refresh_token)
+    localStorage.setItem('auth_role', response.data.role)
+  }
+
+  public async registerProvider(username: string, name: string, age: number, email: string, password: string, description: string, phone: number, webPage?: string, photo?: File): Promise<void> {
+    const response = await this.axiosInstance.postForm('/provider/register', {
+      username,
+      name,
+      age,
+      email,
+      password,
+      description,
+      photo,
+      phone,
+      webPage,
+    })
+
+    this.token = response.data.access_token
+    this.refreshToken = response.data.refresh_token
+    this.role = response.data.role
+
+    localStorage.setItem('auth_token', response.data.access_token)
+    localStorage.setItem('auth_refresh_token', response.data.refresh_token)
+    localStorage.setItem('auth_role', response.data.role)
   }
 
   public getToken(): string | null {
