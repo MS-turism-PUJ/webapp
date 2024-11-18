@@ -3,7 +3,7 @@ import { provideRouter } from '@angular/router';
 import { BrowserModule } from '@angular/platform-browser';
 import { GoogleMapsModule } from '@angular/google-maps';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule, provideHttpClient } from '@angular/common/http'; 
+import { HttpClientModule, provideHttpClient } from '@angular/common/http';
 import { routes } from './app.routes';
 import { provideApollo } from 'apollo-angular';
 import { HttpLink } from 'apollo-angular/http';
@@ -17,7 +17,7 @@ export const appConfig: ApplicationConfig = {
       BrowserModule,
       GoogleMapsModule,
       FormsModule,
-      HttpClientModule 
+      HttpClientModule
     ), provideHttpClient(), provideApollo(() => {
       const httpLink = inject(HttpLink);
 
