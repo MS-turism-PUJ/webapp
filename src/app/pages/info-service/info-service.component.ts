@@ -29,7 +29,8 @@ export class InfoServiceComponent {
       name: '',
       email: '',
       username: ''
-    }
+    },
+    photo: ''
   };
 
   cityName: string = '';

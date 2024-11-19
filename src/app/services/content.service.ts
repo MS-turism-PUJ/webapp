@@ -3,6 +3,9 @@ import { Apollo, gql } from 'apollo-angular';
 import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Content } from '../models/content';
 import { ServiceCategory } from '../models/service.category';
+import axios, { AxiosInstance } from 'axios';
+import { API_URL } from '../config/environment/urls';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +18,16 @@ export class ContentService {
   lessThanSubject = new BehaviorSubject<number | undefined>(undefined);
   moreThanSubject = new BehaviorSubject<number | undefined>(undefined);
 
-  constructor(private apollo: Apollo) {}
+  axiosInstance: AxiosInstance
+
+  constructor(private apollo: Apollo, private authService: AuthService) {
+    this.axiosInstance = axios.create({
+      baseURL: `${API_URL}/services/contents`,
+      headers: {
+        Authorization: `Bearer ${this.authService.getToken()}`,
+      }
+    });
+  }
 
   async syncAllContents(page: number = 1, limit: number = 10) {
     this.loadingSubject.next(true);
@@ -198,5 +210,32 @@ export class ContentService {
     return result?.data?.findContentById || null;
   }
 
+  async getPhoto(contentId: string): Promise<string> {
+    this.loadingSubject.next(true);
+
+    try {
+      const response = await this.axiosInstance.get(`/${contentId}/photo`, {
+        responseType: 'blob',
+        validateStatus: (status) => status === 200 || status === 404,
+        headers: {
+          Authorization: `Bearer ${this.authService.getToken()}`,
+        },
+      });
+
+      if (response.status === 404) {
+        this.loadingSubject.next(false);
+        return '';
+      }
+
+      const href = URL.createObjectURL(response.data);
+
+      this.loadingSubject.next(false);
+      return href;
+    } catch (error) {
+      this.loadingSubject.next(false);
+      console.error('Error fetching blob:', error);
+      throw error;
+    }
+  }
 
 }

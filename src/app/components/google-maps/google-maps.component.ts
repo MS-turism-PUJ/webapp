@@ -21,7 +21,8 @@ export class GoogleMapsComponent {
       name: '',
       email: '',
       username: ''
-    }
+    },
+    photo: ''
   };
   @ViewChild(GoogleMap) map!: GoogleMap;
 

@@ -8,5 +8,6 @@ export class Content {
     public description: string,
     public user: User,
     public service?: Service,
+    public photo?: string,
   ) { }
 }

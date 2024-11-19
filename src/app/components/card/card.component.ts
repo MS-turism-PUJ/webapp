@@ -5,6 +5,7 @@ import { AddToCartComponent } from '../add-to-cart/add-to-cart.component';
 import { Router } from '@angular/router';
 
 import { Content } from '../../models/content';
+import { ContentService } from '../../services/content.service';
 
 @Component({
   selector: 'app-card',
@@ -14,9 +15,28 @@ import { Content } from '../../models/content';
   styleUrl: './card.component.css'
 })
 export class CardComponent {
-  @Input() content!: Content;
+  @Input() content: Content = {
+    contentId: '',
+    name: '',
+    description: '',
+    user: {
+      userId: 0,
+      name: '',
+      email: '',
+      username: ''
+    },
+    photo: '',
+  };
 
-  constructor(private cartService: CartService, private router: Router) {}
+  photo: string = '';
+
+  constructor(private cartService: CartService, private router: Router, private contentService: ContentService) {}
+  
+  ngOnInit(): void {
+    this.contentService.getPhoto(this.content.contentId).then((photo) => {
+      this.photo = photo;
+    });
+  }
 
   addToCart() {
     if (!this.content.service) {

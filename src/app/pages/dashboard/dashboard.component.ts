@@ -21,7 +21,7 @@ import { Content } from '../../models/content';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  contents: Content[] = []; // Cambiar `contents` a `contents` y usar el tipo Producto
+  contents: Content[] = [];
 
   constructor(private contentService: ContentService) {}
 
