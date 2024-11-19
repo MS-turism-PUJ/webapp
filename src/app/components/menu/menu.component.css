@@ -44,7 +44,7 @@
   position: fixed;
   top: 0;
   left: -100%;
-  width: 300px;
+  width: 335px;
   height: 100vh;
   background: #ecf0f3;
   padding: 12px;
@@ -104,10 +104,6 @@
 .menu-item.active {
   box-shadow:
     0 10px 20px rgba(0, 0, 0, 0.2); 
-}
-
-.menu-item:hover {
-  transform: translateY(-3px);
   &::before {
     position: absolute;
     content: '';
@@ -120,6 +116,10 @@
       inset 3px 3px 5px #ceced1;
     border-radius: 20px;
   }
+}
+
+.menu-item:hover {
+  transform: translateY(-3px);
 }
 
 
