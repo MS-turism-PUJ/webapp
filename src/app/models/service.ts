@@ -1,13 +1,16 @@
 import { ServiceCategory } from "./service.category";
+import { User } from "./user";
 
 export class Service {
   constructor (
+    public serviceId: string,
     public price: number,
     public name: string,
     public city: string,
     public country: string,
     public description: string,
     public category: ServiceCategory,
+    public user: User,
     public capital?: string,
     public currency?: string,
     public officialName?: string,

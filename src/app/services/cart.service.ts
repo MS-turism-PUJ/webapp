@@ -1,31 +1,64 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
-import { Service } from '../models/service';
-
-
+import { Apollo, gql } from 'apollo-angular';
+import { Payment } from '../models/payment';
+import { map } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  private items: Service[] = [];
-  private cartSubject = new BehaviorSubject<Service[]>([]);
+  constructor(private apollo: Apollo) {}
 
-  updateCartItems(items: any[]) {
-    this.cartSubject.next(items);
+  async getCartItems(): Promise<Payment> {
+    const result = await this.apollo.query<{ getMyShoppingCart: Payment }>({
+      query: gql`
+        query getMyShoppingCart {
+          getMyShoppingCart {
+            totalAmount
+            paid
+            services {
+              name
+              price
+              description
+            }
+          }
+        }
+      `
+    }).pipe(
+      // Mapear la respuesta al modelo Producto
+      map(result => {
+        return result.data.getMyShoppingCart;
+      })
+    ).toPromise();
+
+    return result || new Payment('', 0, { userId: 0, name: '', email: '', username: '' }, false, []);
   }
 
-  getCartItems() {
-    return this.cartSubject.asObservable();
+  async addToCart(serviceId: string) {
+    const response = await this.apollo.mutate({
+      mutation: gql`
+        mutation addToMyShoppingCart($serviceId: ID!) {
+          addToMyShoppingCart(serviceId: $serviceId)
+        }
+      `,
+      variables: {
+        serviceId
+      }
+    }).toPromise();
+
+    console.log(response);
   }
 
-  addToCart(service: Service) {
-    this.items.push(service);
-    this.cartSubject.next(this.items);
-  }
-
-  removeItem(index: number) {
-    this.items.splice(index, 1);
-    this.cartSubject.next(this.items);
+  async removeItem(serviceId: string) {
+    await this.apollo.mutate({
+      mutation: gql`
+        mutation removeFromMyShoppingCart($serviceId: ID!) {
+          removeFromMyShoppingCart(serviceId: $serviceId)
+        }
+      `,
+      variables: {
+        serviceId
+      }
+    }).toPromise();
   }
 }

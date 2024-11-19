@@ -1,8 +1,8 @@
 <div class="cart-item">
     <div class="item-details">
-        <h4>{{ nombre }}</h4>
-        <p>Proveedor: {{ proveedor }}</p>
-        <p>Precio: {{ precio | currency }}</p>
+        <h4>{{ service.name }}</h4>
+        <p>Proveedor: {{ service.user.name }}</p>
+        <p>Precio: {{ service.price | currency }}</p>
     </div>
     <button class="remove-btn" (click)="onEliminar()">Eliminar</button>
 </div>

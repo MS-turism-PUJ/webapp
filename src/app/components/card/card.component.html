@@ -69,8 +69,7 @@
         {{ content.service.description || 'Descripción no disponible.' }}
       </div>
     </div>
-    <app-add-to-cart *ngIf="content.service"></app-add-to-cart>
-    <button (click)="goToInfoService()" class="verMas" *ngIf="content.service">Ver más información</button>
-
+    <app-add-to-cart *ngIf="content.service" [serviceId]="content.service.serviceId"></app-add-to-cart>
+    <button (click)="goToInfoService()" class="verMas" style="margin-top: 1rem;" *ngIf="content.service">Ver más información</button>
   </div>
 </section>
