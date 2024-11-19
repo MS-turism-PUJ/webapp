@@ -2,7 +2,7 @@
     <app-go-to-dashboard></app-go-to-dashboard>
     <div class="rentalapplication">
         <div class="topcontainer">
-            <div class="tittle">FINCA DEL OSO EN LAS MONTAÑAS</div>
+            <div class="tittle">{{ content.service?.name }}</div>
             <div class="optioncontainer">
                 <i class="fa-solid fa-share-nodes"></i>
                 <h3>Compartir</h3>
@@ -23,22 +23,58 @@
         </div>
         <div class="details">
             <div class="placedetails">
-                <div class="state">
+                <!-- <div class="state">
                     <div class="actual">
-                        <h2>Departamento, Municipio</h2>
+                        <h2>{{ content.service?.country }} - {{ content.service?.capital }} ({{ content.service?.city
+                            }})</h2>
                         <div>
-                            <h2>Estado:</h2>
-                            <h2 class="available">Disponible</h2>
+                            <h2>Idioma: </h2>
+                            <h2 class="available">{{ content.service?.language }}</h2>
                         </div>
                     </div>
-    
+                    <h3>{{ content.service?.officialName }}</h3>
+
                     <div class="reviews">
                         <i class="fa-regular fa-star"></i>
                         <h3>{{ averageRatingReceived | number : "1.1-1" }}</h3>
                         <h3>{{ reviewsCountReceived }} Reseñas</h3>
                     </div>
+                </div> -->
+
+                <div class="card">
+                    <div class="card-header">
+                        <h2>{{ content.service?.country }} - {{ content.service?.capital }} ({{ content.service?.city
+                            }})</h2>
+                        <h3>{{ content.service?.officialName }}</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="card-info">
+                            <div class="info-item">
+                                <strong>Idioma:</strong>
+                                <span>{{ content.service?.language }}</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Región:</strong>
+                                <span>{{ content.service?.region }}</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Moneda:</strong>
+                                <span>{{ content.service?.currency }}</span>
+                            </div>
+                            <div class="info-item">
+                                <strong>Población:</strong>
+                                <span>{{ content.service?.population | number }}</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-    
+
+                <div class="reviews">
+                    <i class="fa-regular fa-star"></i>
+                    <h3>{{ averageRatingReceived | number : "1.1-1" }}</h3>
+                    <h3>{{ reviewsCountReceived }} Reseñas</h3>
+                </div>
+
                 <div class="ownerinfo">
                     <i class="fa-solid fa-user"></i>
                     <div>
@@ -106,7 +142,8 @@
                                 <li *ngFor="let day of week" class="day-name">
                                     {{ day | slice : 0 : 3 }}
                                 </li>
-                                <li (click)="clickDayExit(day)" [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"
+                                <li (click)="clickDayExit(day)"
+                                    [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"
                                     [ngClass]="{ 'selected-day': selectedDayExit === day }"
                                     *ngFor="let day of monthSelectExit; let first = first">
                                     <span>{{ day?.value }}</span>
@@ -135,10 +172,10 @@
                     </div>
                 </div>
                 <h1>Total: $4.900.000</h1>
-                <div class="reserve">   
+                <div class="reserve">
                     <app-add-to-cart></app-add-to-cart>
                 </div>
-                
+
             </div>
         </div>
     </div>

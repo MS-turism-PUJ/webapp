@@ -14,7 +14,7 @@ export const routes: Routes = [
     { path: 'provider', component: ProviderScreenComponent, canActivate: [authGuard] },
     { path: 'dashboard', component: DashboardComponent, canActivate: [authGuard] },
     { path: 'payment', component: PaymentComponent, canActivate: [authGuard] },
-    { path: 'info-service', component: InfoServiceComponent, canActivate: [authGuard] }
+    { path: 'info-service/:contentId', component: InfoServiceComponent, canActivate: [authGuard] }
 ];
 @NgModule({
     imports: [RouterModule.forRoot(routes)],

@@ -6,39 +6,43 @@
 }
 
 *::-webkit-scrollbar-track {
-    background: transparent;    
+    background: transparent;
 }
 
 
-body{
-    background: #e2e2e2;
+body {
+    background: #f4f4f4;
     padding: 2rem;
 }
 
-h1,h2,span, p,h3, h4
-{
+h1,
+h2,
+span,
+p,
+h3,
+h4 {
     font-family: Poppins;
 }
 
-h3{
-    
+h3 {
+
     font-size: 1.25rem;
     font-weight: bold;
 }
 
-h4
-{
+h4 {
     font-size: 1rem;
     font-weight: bold;
 }
 
-h2, h1, .opciones{
+h2,
+h1,
+.opciones {
     font-size: 1.5rem;
     font-weight: bold;
 }
 
-.tittle
-{
+.tittle {
     font-size: 2.5rem;
     font-weight: bold;
 }
@@ -75,7 +79,7 @@ h2, h1, .opciones{
     height: 80%;
     display: flex;
     gap: 1rem;
-    
+
 
 }
 
@@ -91,7 +95,7 @@ h2, h1, .opciones{
 
 .imagescontainer .leftimage {
     flex: 0.42;
-    
+
 }
 
 
@@ -99,8 +103,8 @@ h2, h1, .opciones{
     flex: 0.58;
     width: 100%;
     border-radius: 2rem;
-    
-    
+
+
 }
 
 
@@ -113,13 +117,13 @@ h2, h1, .opciones{
 
 .details>.placedetails {
     flex: 2.5;
-    
+
 }
 
 
 
 .details>.placedetails>.state>.actual {
-    
+
     display: flex;
     justify-content: space-between;
 
@@ -142,7 +146,7 @@ h2, h1, .opciones{
     margin-top: 1rem;
     align-items: center;
     margin-bottom: 1rem;
-    
+
 }
 
 .details>.placedetails>.ownerinfo {
@@ -155,14 +159,14 @@ h2, h1, .opciones{
 
 .details>.placedetails>.ownerinfo>.fa-user {
     font-size: 3rem;
-   
-    
+
+
 }
 
 .details>.placedetails>.descriptioninfo>.moreinfodescription {
     display: flex;
     align-items: center;
-    
+
 }
 
 .details>.placedetails>.descriptioninfo {
@@ -178,7 +182,7 @@ h2, h1, .opciones{
     flex: 1;
     height: 100%;
     padding: 2rem 2rem 2rem 2rem;
-    
+
     border-radius: 10px;
     background: #e2e2e2;
     border-radius: 10px;
@@ -189,7 +193,7 @@ h2, h1, .opciones{
 .rentalapplication>.details>.summary>.itemsdetails {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    
+
     background: #acabab;
     border-radius: 10px;
     box-shadow: -3px -3px 7px #ffffff73,
@@ -200,10 +204,10 @@ h2, h1, .opciones{
 
 .rentalapplication>.details>.summary>.itemsdetails>.eachitem {
     padding: 1rem;
-    
+
     background-color: #e2e2e2;
     text-align: center;
-    
+
 }
 
 .rentalapplication>.details>.summary>.itemsdetails>.eachitem>h5 {
@@ -213,13 +217,13 @@ h2, h1, .opciones{
 .rentalapplication>.details>.summary>.itemsdetails>.eachitem:nth-child(3) {
     grid-column: 1 / -1;
     /* Ocupar ambas columnas */
-    
+
     /* Borde superior para separar de las fechas */
 }
 
 .rentalapplication>.details>.summary>.itemsdetails>.eachitem:nth-child(2) {
 
-    
+
     border-top-right-radius: 10px;
     /* Borde superior para separar de las fechas */
 }
@@ -235,7 +239,7 @@ h2, h1, .opciones{
 .rentalapplication>.details>.summary>.itemsdetails>.eachitem:last-child {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
-    
+
 }
 
 .rentalapplication>.details>.summary>.reserve {
@@ -243,7 +247,7 @@ h2, h1, .opciones{
     justify-content: center;
     align-items: center;
     display: flex;
-    
+
 }
 
 
@@ -254,11 +258,12 @@ h2, h1, .opciones{
     align-items: center;
     justify-content: center;
 }
-.contenidoSecciones{
-    
-    
+
+.contenidoSecciones {
+
+
     padding: 3rem;
-    
+
 }
 
 .rentalapplication .dates .wrapper-calendar {
@@ -275,7 +280,7 @@ h2, h1, .opciones{
     background: #eee;
     font-weight: bold;
     font-size: 12px;
-    
+
     margin-bottom: 2px;
     padding: 4px;
     text-align: center;
@@ -295,7 +300,7 @@ h2, h1, .opciones{
     grid-template-columns: repeat(7, 1fr);
     margin: 0;
     padding: 0;
-    
+
 }
 
 .rentalapplication .dates .wrapper-calendar>ol>li {
@@ -306,12 +311,12 @@ h2, h1, .opciones{
 
 .selected-day {
     background: #d8d8d8;
-    
+
     box-shadow: -3px -3px 7px #ffffff73,
         2px 2px 5px rgba(94, 104, 121, 0.288);
     border-radius: 100%;
-    
-    
+
+
 }
 
 .dates .wrapper-calendar>ol>li:hover {
@@ -355,14 +360,90 @@ padding: 0;
 
 }
 
-.btn-next, .btn-prev{
+.btn-next,
+.btn-prev {
     transition: all 0.2s ease;
 }
 
-.btn-next:hover{
+.btn-next:hover {
     transform: translateY(-3px);
 }
 
-.btn-prev:hover{
+.btn-prev:hover {
     transform: translateY(-3px);
+}
+
+/* card del pais */
+.card {
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 16px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: auto;
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.card-header {
+    text-align: center;
+    margin-bottom: 16px;
+}
+
+.card-header h2 {
+    font-size: 1.5rem;
+    color: #333;
+    margin: 0;
+}
+
+.card-header h3 {
+    font-size: 1rem;
+    color: #666;
+    margin: 4px 0 0 0;
+}
+
+.card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.card-info {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.info-item strong {
+    font-size: 0.9rem;
+    color: #555;
+}
+
+.info-item span {
+    font-size: 1rem;
+    color: #333;
+}
+
+.reviews {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    justify-content: center;
+}
+
+.reviews i {
+    font-size: 1.5rem;
+    color: gold;
+}
+
+.reviews h3 {
+    font-size: 1rem;
+    color: #333;
+    margin: 0;
 }

@@ -1,5 +1,8 @@
 import { Component, ViewChild } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
+import { ActivatedRoute } from '@angular/router';
+import { ContentService } from '../../services/content.service';
+import { Content } from '../../models/content';
 
 @Component({
   selector: 'app-google-maps',
@@ -9,6 +12,17 @@ import { GoogleMap } from '@angular/google-maps';
   imports: [GoogleMap],
 })
 export class GoogleMapsComponent {
+  content: Content = {
+    contentId: '',
+    name: '',
+    description: '',
+    user: {
+      userId: 0,
+      name: '',
+      email: '',
+      username: ''
+    }
+  };
   @ViewChild(GoogleMap) map!: GoogleMap;
 
   center: google.maps.LatLngLiteral = { lat: 4.6556, lng: -74.06 };
@@ -29,6 +43,7 @@ export class GoogleMapsComponent {
     this.directionsRenderer.setMap(this.map.googleMap!);
   }
 
+  // TODO COLOCAR AQUÌ LAS COORDENADAS DEL SERVICIO
   addMarker(lat: number, lng: number): void {
     if (isNaN(lat) || isNaN(lng)) {
       alert('Por favor, ingresa coordenadas válidas.');

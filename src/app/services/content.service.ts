@@ -63,4 +63,49 @@ export class ContentService {
 
     return result || [];
   }
+
+  async getContentById(contentId: string): Promise<Content | null> {
+    const result = await this.apollo
+      .query<{ findContentById: Content }>({
+        query: gql`
+          query findContentById($contentId: ID!) {
+            findContentById(contentId: $contentId) {
+              name
+              description
+              service {
+                serviceId
+                price
+                name
+                city
+                country
+                description
+                category
+                capital
+                currency
+                officialName
+                region
+                language
+                population
+                latitude
+                longitude
+                arrivalLatitude
+                arrivalLongitude
+                departureDate
+                duration
+                transportType
+                drink
+                lunch
+                dessert
+              }
+            }
+          }
+        `,
+        variables: {
+          contentId,
+        },
+      })
+      .toPromise();
+
+    return result?.data?.findContentById || null;
+  }
 }

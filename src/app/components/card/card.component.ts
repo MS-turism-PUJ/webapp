@@ -26,8 +26,13 @@ export class CardComponent {
     this.cartService.addToCart(this.content.service.serviceId);
   }
 
-  goToInfoService() {
-    this.router.navigate(['/info-service']);
+  goToInfoService(): void {
+    if (this.content.contentId) {
+      // Redirige a la ruta con el ID del servicio
+      this.router.navigate(['/info-service/', this.content.contentId]);
+    } else {
+      console.error('No se puede redirigir: El contenido no tiene ID.');
+    }
   }
 
 }

@@ -2,7 +2,7 @@ import { ServiceCategory } from "./service.category";
 import { User } from "./user";
 
 export class Service {
-  constructor (
+  constructor(
     public serviceId: string,
     public price: number,
     public name: string,
@@ -27,5 +27,5 @@ export class Service {
     public drink?: string,
     public lunch?: string,
     public dessert?: string
-  ) {}
+  ) { }
 }
