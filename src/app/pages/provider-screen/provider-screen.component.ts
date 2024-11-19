@@ -21,7 +21,7 @@ export class ProviderScreenComponent implements OnInit {
   constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   goToLogin() {
     this.router.navigate(['/']);
