@@ -1,0 +1,252 @@
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+.popup-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 90%;
+  background: #e2e2e2;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+  z-index: 1001;
+  overflow-y: auto;
+}
+
+.popup-container header {
+  display: flex;
+  justify-content: space-between;
+
+}
+
+.popup-container header .submit-button {
+  margin-bottom: 30px;
+  transition: all 0.2s ease;
+}
+
+.popup-container header .submit-button:hover {
+  scale: 1.25
+}
+
+.grid-container {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 20px;
+  align-items: start;
+  margin-bottom: 15px;
+  
+
+}
+
+.inputs-container {
+  display: flex;
+  flex-direction: column;
+
+  gap: 16px;
+}
+
+.drag-container {
+  display: flex;
+
+  height: 98%;
+}
+
+
+.text {
+  font-size: 33px;
+  font-weight: 600;
+  margin-bottom: 30px;
+  color: #595959;
+}
+
+/* Inputs, selects y textareas */
+.field {
+  position: relative;
+
+}
+
+.field input,
+.field select,
+.field textarea,
+.fecha-salida {
+  width: 100%;
+  height: 6.2vh;
+  padding: 0px 0px 0px 45px;
+  outline: none;
+  border: none;
+  font-size: 16px;
+  background: #e2e2e2;
+  color: #595959;
+  border-radius: 25px;
+  box-shadow: inset 2px 2px 5px #BABECC,
+    inset -5px -5px 10px #ffffff73;
+  transition: box-shadow 0.3s ease;
+}
+
+/* Efecto al enfocar los campos */
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+  box-shadow: inset 1px 1px 2px #BABECC,
+    inset -1px -1px 2px #ffffff73;
+}
+
+.field textarea {
+  height: 35vh;
+}
+
+/* Iconos dentro de los campos */
+.field span,
+.fecha-salida span {
+  position: absolute;
+  color: #595959;
+  left: 15px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 16px;
+  pointer-events: none;
+}
+
+
+/* Labels flotantes */
+.field label,
+.fecha-salida label,
+.date-picker input {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 45px;
+  pointer-events: none;
+  color: #888888;
+  transition: all 0.3s ease;
+  background: transparent;
+  padding: 0 5px;
+}
+
+/* Ocultar label cuando el input tiene contenido */
+.field input:focus~label,
+.field select:focus~label,
+.field textarea:focus~label {
+  opacity: 0;
+  transform: translateY(-150%);
+}
+
+/* Mover el label cuando el campo tiene un valor */
+.field input:not(:placeholder-shown)~label,
+.field select:not([value=""])~label,
+.field textarea:not(:placeholder-shown)~label {
+  opacity: 0;
+  transform: translateY(-150%);
+}
+
+/* Contenedor principal para dividir el área en dos partes */
+.service-grid-container {
+  display: grid;
+  grid-template-columns: 1fr 1.5fr;
+  gap: 20px;
+  align-items: start;
+}
+
+.service-grid-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  align-items: start;
+}
+
+/* Lado izquierdo: Campos comunes */
+.service-inputs-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Lado derecho: Campos variables */
+.service-variable-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+}
+
+.map-container {
+  height: 44.1vh;
+}
+
+.date-picker input {
+  appearance: none;
+  /* Oculta el ícono predeterminado */
+  background-color: transparent;
+  left: 175px;
+}
+
+.date-picker input::-webkit-calendar-picker-indicator {
+  display: none;
+  /* Oculta el ícono original */
+}
+
+.fecha-salida {
+  display: flex;
+  position: relative;
+}
+
+.navigation {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  margin-bottom: 1rem;
+  
+}
+
+.navigation .submit-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 20%;
+  border-radius: 25px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #ffffff;
+  background: #3498db;
+  transition: background 0.3s ease;
+  box-shadow: 2px 2px 5px #BABECC,
+    -5px -5px 10px #ffffff73;
+  border: none;
+  height: 50px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Estilo para los asteriscos de campos obligatorios */
+.required {
+  color: red;
+  margin-left: 4px;
+}
+
+/* Estilo para los mensajes de error */
+.error {
+  color: red;
+  font-size: 0.8em;
+  margin-top: 4px;
+}
+
+/* Opcional: Resaltar los campos con errores */
+input.ng-touched.ng-invalid,
+textarea.ng-touched.ng-invalid,
+select.ng-touched.ng-invalid {
+  border: 1px solid red;
+}

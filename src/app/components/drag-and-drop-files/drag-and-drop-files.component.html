@@ -15,7 +15,9 @@
 
   <!-- Template para mostrar la imagen -->
   <ng-template #imagePreview>
-    <img [src]="previewUrl" alt="Uploaded Image" />
+    <div class="inner-area">
+      <img [src]="previewUrl" alt="Uploaded Image" />
+    </div>
     <!-- Botón opcional para eliminar o cambiar la imagen -->
     <button class="remove-btn" (click)="reset()">Remove Image</button>
   </ng-template>

@@ -1,15 +1,16 @@
 import { Component, OnInit  } from '@angular/core';
-import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
 import { CardComponent } from '../../components/card/card.component';
 import { GoToDashboardComponent } from '../../components/go-to-dashboard/go-to-dashboard.component';
+import { CreateContentProviderComponent } from '../../components/create-content-provider/create-content-provider.component';
+
 
 @Component({
   selector: 'app-provider-screen',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule,CardComponent, GoToDashboardComponent],
+  imports: [CommonModule,CardComponent, GoToDashboardComponent, CreateContentProviderComponent],
   templateUrl: './provider-screen.component.html',
   styleUrl: './provider-screen.component.css'
 })
@@ -17,8 +18,17 @@ export class ProviderScreenComponent implements OnInit {
   defaultAvatar: string = 'assets/avatar.svg';
   imageUrl: string = this.defaultAvatar;
   file?: File;
+  isPopupVisible: boolean = false;
 
-  constructor(private fb: FormBuilder, private router: Router, private authService: AuthService) {
+  constructor( private router: Router, private authService: AuthService) {
+  }
+  openPopup() {
+    this.isPopupVisible = true;
+    console.log('openPopup');
+  }
+
+  closePopup() {
+    this.isPopupVisible = false;
   }
 
   ngOnInit(): void { }

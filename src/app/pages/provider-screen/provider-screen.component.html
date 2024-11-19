@@ -1,74 +1,73 @@
 <div class="container">
     <div class="profile">
-        <div class="profile-tittle">
-            <app-go-to-dashboard ></app-go-to-dashboard>            
-            <div class="text">
-                Perfil
+
+        <div class="text">
+            Perfil
+        </div>
+
+        <!-- Fotografía (se muestra en el paso 1) -->
+        <div class="photo-upload">
+            <div class="wrapper">
+                <div class="img-area">
+                    <div class="inner-area">
+                        <img [src]="imageUrl" alt="photo" class="fotografia" id="profileImage">
+                    </div>
+                </div>
+                <!-- Botón circular pequeño con el ícono de + para subir imagen -->
+                <label for="file-upload" class="upload-icon">
+                    <i class="fas fa-plus"></i>
+                </label>
+                <input type="file" id="file-upload" accept="image/*" (change)="onFileSelected($event)" hidden>
             </div>
         </div>
-            <!-- Fotografía (se muestra en el paso 1) -->
-            <div class="photo-upload">
-                <div class="wrapper">
-                    <div class="img-area">
-                        <div class="inner-area">
-                            <img [src]="imageUrl" alt="photo" class="fotografia" id="profileImage">
-                        </div>
-                    </div>
-                    <!-- Botón circular pequeño con el ícono de + para subir imagen -->
-                    <label for="file-upload" class="upload-icon">
-                        <i class="fas fa-plus"></i>
-                    </label>
-                    <input type="file" id="file-upload" accept="image/*" (change)="onFileSelected($event)" hidden>
-                </div>
+
+        <!-- Paso 1 -->
+        <div class="step">
+            <div class="data-provider">
+                <span class="fas fa-user"></span>
+                <label>Nombre</label>
+            </div>
+            <div class="data-provider">
+                <span class="fas fa-user-circle"></span>
+                <label>Usuario</label>
+            </div>
+            <div class="data-provider">
+                <span class="fas fa-envelope"></span>
+                <label>Email</label>
             </div>
 
-            <!-- Paso 1 -->
-            <div class="step">
-                <div class="data-provider">
-                    <span class="fas fa-user"></span>
-                    <label>Nombre</label>
-                </div>
-                <div class="data-provider">
-                    <span class="fas fa-user-circle"></span>
-                    <label>Usuario</label>
-                </div>
-                <div class="data-provider">
-                    <span class="fas fa-envelope"></span>
-                    <label>Email</label>
-                </div>
-
-                <div class="data-provider">
-                    <span class="fas fa-phone"></span>
-                    <label>Número de Teléfono</label>
-                </div>
-                <div class="data-provider">
-                    <span class="fas fa-birthday-cake"></span>
-                    <label>Edad</label>
-                </div>
-
-                <div class="data-provider">
-                    <span class="fas fa-globe"></span>
-                    <label>Página web</label>
-                </div>
-                
-                
-                <div class="data-provider">
-                    <span class="fa-solid fa-square-pen"></span>
-                    <label>Descripción</label>
-                </div>
-                <div class="data-provider">
-                    <span class="fas fa-share-alt"></span>
-                    <label>Redes sociales</label>
-                </div>
-
+            <div class="data-provider">
+                <span class="fas fa-phone"></span>
+                <label>Número de Teléfono</label>
             </div>
+            <div class="data-provider">
+                <span class="fas fa-birthday-cake"></span>
+                <label>Edad</label>
+            </div>
+
+            <div class="data-provider">
+                <span class="fas fa-globe"></span>
+                <label>Página web</label>
+            </div>
+
+
+            <div class="data-provider">
+                <span class="fa-solid fa-square-pen"></span>
+                <label>Descripción</label>
+            </div>
+            <div class="data-provider">
+                <span class="fas fa-share-alt"></span>
+                <label>Redes sociales</label>
+            </div>
+
+        </div>
 
     </div>
     <div class="main">
-        <app-card ></app-card>
-        <app-card ></app-card>
-        <app-card ></app-card>
-        <app-card ></app-card>
+        <!-- <app-card></app-card>
+        <app-card></app-card>
+        <app-card></app-card>
+        <app-card></app-card> -->
     </div>
     <div class="filters">
         <div class="text">
@@ -87,9 +86,11 @@
                 <div class="menu-item">Feedback</div>
 
             </div>
-            <button type="submit" class="create-content-button">
+            <button type="submit" class="create-content-button" (click)="openPopup()">
                 Crear contenido
             </button>
+            <app-create-content-provider [isVisible]="isPopupVisible" (close)="closePopup()">
+            </app-create-content-provider>
         </div>
     </div>
 </div>

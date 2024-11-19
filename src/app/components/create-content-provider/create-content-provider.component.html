@@ -1,1 +1,258 @@
-<p>create-content-provider works!</p>
+<div *ngIf="isVisible">
+    <div class="popup-overlay" (click)="closePopup()"></div>
+    <div class="popup-container">
+        <header>
+            <div class="text">Crear Contenido</div>
+            <button type="button" class="submit-button" (click)="closePopup()"><i class="fa-solid fa-xmark  fa-2x"></i></button>
+        </header>
+        <form [formGroup]="contentForm" (ngSubmit)="onSubmit()">
+            <!-- Contenedor en forma de grid -->
+            <div class="grid-container">
+                <!-- Inputs del lado izquierdo -->
+                <div class="inputs-container">
+                    <div class="field">
+                        <input type="text" formControlName="name" placeholder=" ">
+                        <span class="fa-solid fa-square-pen"></span>
+                        <label>Nombre del Contenido</label>
+                    </div>
+                    <div class="field">
+                        <input type="text" formControlName="link" placeholder=" ">
+                        <span class="fas fa-globe"></span>
+                        <label>Link</label>
+                    </div>
+                    <div class="field">
+                        <textarea formControlName="description" maxlength="300" placeholder=""></textarea>
+                        <label>Descripción del Contenido (máx. 300 caracteres)</label>
+                    </div>
+                </div>
+
+                <!-- Drag and Drop a la derecha -->
+                <div class="drag-container">
+                    <app-drag-and-drop-files></app-drag-and-drop-files>
+                </div>
+            </div>
+
+            <!-- ¿Tiene servicio? -->
+            <div class="grid gap-4 mb-4" >
+                <div class="field">
+                    <select formControlName="hasService" (change)="onHasServiceChange()">
+                        <option value="" disabled>¿Tiene Servicio?</option>
+                        <option value="false">No</option>
+                        <option value="true">Sí</option>
+                    </select>
+                    <span class="fa-solid fa-bell-concierge"></span>
+                </div>
+
+                <!-- Selección del Tipo de Servicio -->
+                <div *ngIf="hasService" class="field">
+                    <select formControlName="serviceType" (change)="onServiceTypeChange()">
+                        <option value="">Seleccione un tipo de servicio</option>
+                        <option value="ALIMENTATION">ALIMENTATION</option>
+                        <option value="HOUSING">HOUSING</option>
+                        <option value="ECO_WALK">ECO_WALK</option>
+                        <option value="TRANSPORT">TRANSPORT</option>
+                    </select>
+                    <label>Tipo de Servicio</label>
+                    <span class="fa-solid fa-list"></span>
+                </div>
+            </div>
+
+            <!-- Contenedor Principal del Grid para el Servicio -->
+            <div *ngIf="selectedService" class="service-grid-container">
+                <!-- Lado Izquierdo: Campos Comunes -->
+                <div class="service-inputs-container">
+                    <div class="field">
+                        <input type="text" formControlName="nameService" placeholder=" ">
+                        <span class="fa-solid fa-square-pen"></span>
+                        <label>Nombre del Servicio</label>
+                    </div>
+
+                    <div class="field">
+                        <textarea formControlName="descriptionService" maxlength="300" placeholder=""></textarea>
+                        <label>Descripción del Servicio</label>
+                    </div>
+
+                    <div class="field">
+                        <input type="number" formControlName="price" placeholder=" ">
+                        <span class="fa-solid fa-dollar-sign"></span>
+                        <label>Precio</label>
+                    </div>
+
+                    <div class="field">
+                        <input type="text" formControlName="city" placeholder=" ">
+                        <span class="fa-solid fa-city"></span>
+                        <label>Ciudad</label>
+                    </div>
+
+                    <div class="field">
+                        <input type="text" formControlName="country" placeholder=" ">
+                        <span class="fa-solid fa-map"></span>
+                        <label>País</label>
+                    </div>
+                </div>
+
+                <!-- Lado Derecho: Campos Variables -->
+                <div class="service-inputs-container">
+                    <!-- ALIMENTATION -->
+                    <div *ngIf="selectedService === 'ALIMENTATION'" class="service-variable-container">
+                        <div class="field">
+                            <input type="text" formControlName="drink" placeholder=" ">
+                            <span class="fa-solid fa-wine-glass"></span>
+                            <label>Bebida</label>
+                        </div>
+                        <div class="field">
+                            <input type="text" formControlName="lunch" placeholder=" ">
+                            <span class="fa-solid fa-utensils"></span>
+                            <label>Almuerzo</label>
+                        </div>
+                        <div class="field">
+                            <input type="text" formControlName="dessert" placeholder=" ">
+                            <span class="fa-solid fa-ice-cream"> </span>
+                            <label>Postre</label>
+                        </div>
+                    </div>
+
+                    <!-- HOUSING -->
+                    <div *ngIf="selectedService === 'HOUSING'" class="service-variable-container">
+                        <div class="map-container">
+                            <app-google-maps></app-google-maps>
+                        </div>
+                        <div class="service-grid-content">
+                            <div class="service-inputs-container">
+                                <div class="field">
+                                    <input type="text" formControlName="latitude" placeholder=" ">
+                                    <span class="fa-solid fa-ruler-horizontal"></span>
+                                    <label>Latitud</label>
+                                </div>
+                                <div class="field">
+                                    <input type="text" formControlName="longitude" placeholder=" ">
+                                    <span class="fa-solid fa-ruler-vertical"></span>
+                                    <label>Longitud</label>
+                                </div>
+                            </div>
+                            <div class="service-variable-container">
+                                <div class="fecha-salida" (click)="triggerDatePicker('departureDate')">
+                                    <span class="fa-solid fa-calendar-days"></span>
+                                    <label for="departureDate">Fecha de Salida</label>
+                                    <div class=" date-picker">
+                                        <input type="date" formControlName="departureDate" id="departureDate" placeholder=" ">
+                                    </div>
+                                </div>
+                                <div class="field">
+                                    <input type="number" formControlName="duration" placeholder=" ">
+                                    <span class="fa-solid fa-clock"></span>
+                                    <label>Duración</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- TRANSPORT -->
+                    <div *ngIf="selectedService === 'TRANSPORT'" class="service-variable-container">
+                        <div class="map-container">
+                            <app-google-maps></app-google-maps>
+                        </div>
+                        <div class="service-grid-content">
+                            <div class="service-inputs-container">
+                                <div class="field">
+                                    <input type="text" formControlName="latitude" placeholder=" ">
+                                    <span class="fa-solid fa-ruler-horizontal"></span>
+                                    <label>Latitud</label>
+                                </div>
+                                <div class="field">
+                                    <input type="text" formControlName="arrivalLatitude" placeholder=" ">
+                                    <span class="fa-solid fa-ruler-horizontal"></span>
+                                    <label>Latitud de Llegada</label>
+                                </div>
+                                <div class="fecha-salida" (click)="triggerDatePicker('departureDate')">
+                                    <span class="fa-solid fa-calendar-days"></span>
+                                    <label for="departureDate">Fecha de Salida</label>
+                                    <div class=" date-picker">
+                                        <input type="date" formControlName="departureDate" id="departureDate" placeholder=" ">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="service-variable-container">
+                                <div class="field">
+                                    <input type="text" formControlName="longitude" placeholder=" ">
+                                    <span class="fa-solid fa-ruler-vertical"></span>
+                                    <label>Longitud</label>
+                                </div>
+                                <div class="field">
+                                    <input type="text" formControlName="arrivalLongitude" placeholder=" ">
+                                    <span class="fa-solid fa-ruler-vertical"></span>
+                                    <label>Longitud de Llegada</label>
+                                </div>
+                                <div class="field">
+                                    <input type="number" formControlName="duration" placeholder=" ">
+                                    <span class="fa-solid fa-clock"></span>
+                                    <label>Duración</label>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="field">
+                            <input type="text" formControlName="transportType" placeholder=" ">
+                            <span class="fa-solid fa-car"></span>
+                            <label>Tipo de Transporte</label>
+                        </div>
+                    </div>
+
+                    <!-- ECO_WALK -->
+                    <div *ngIf="selectedService === 'ECO_WALK'" class="service-variable-container">
+                        <div class="map-container">
+                            <app-google-maps></app-google-maps>
+                        </div>
+                        <div class="service-grid-content">
+                            <div class="service-inputs-container">
+                                <div class="field">
+                                    <input type="text" formControlName="latitude" placeholder=" ">
+                                    <span class="fa-solid fa-ruler-horizontal"></span>
+                                    <label>Latitud</label>
+                                </div>
+                                <div class="field">
+                                    <input type="text" formControlName="arrivalLatitude" placeholder=" ">
+                                    <span class="fa-solid fa-ruler-horizontal"></span>
+                                    <label>Latitud de Llegada</label>
+                                </div>
+                                
+                                <div class="fecha-salida" (click)="triggerDatePicker('departureDate')">
+                                    <span class="fa-solid fa-calendar-days"></span>
+                                    <label for="departureDate">Fecha de Salida</label>
+                                    <div class=" date-picker">
+                                        <input type="date" formControlName="departureDate" id="departureDate" placeholder=" ">
+                                    </div>
+                                </div>
+                                
+                                
+                                
+                            </div>
+                            <div class="service-variable-container">
+                                <div class="field">
+                                    <input type="text" formControlName="longitude" placeholder=" ">
+                                    <span class="fa-solid fa-ruler-vertical"></span>
+                                    <label>Longitud</label>
+                                </div>
+                                <div class="field">
+                                    <input type="text" formControlName="arrivalLongitude" placeholder=" ">
+                                    <span class="fa-solid fa-ruler-vertical"></span>
+                                    <label>Longitud de Llegada</label>
+                                </div>
+                                <div class="field">
+                                    <input type="number" formControlName="duration" placeholder=" ">
+                                    <span class="fa-solid fa-clock"></span>
+                                    <label>Duración</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- Botones -->
+            <div class="navigation">
+                <button type="submit" class="submit-button">Guardar Contenido</button>
+            </div>
+        </form>
+    </div>
+</div>
