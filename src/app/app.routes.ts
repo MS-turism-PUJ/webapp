@@ -5,6 +5,7 @@ import { PaymentComponent } from './pages/payment/payment.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { InfoServiceComponent } from './pages/info-service/info-service.component';
 import { NgModule } from '@angular/core';
+import { ProviderScreenComponent } from './pages/provider-screen/provider-screen.component';
 import { authGuard } from './guards/auth.guard';
 
 export const routes: Routes = [
@@ -12,7 +13,8 @@ export const routes: Routes = [
     { path: 'register', component: RegisterComponent },
     { path: 'dashboard', component: DashboardComponent, canActivate: [] },
     { path: 'payment', component: PaymentComponent, canActivate: [] },
-    { path: 'info-service', component: InfoServiceComponent }
+    { path: 'info-service', component: InfoServiceComponent },
+    { path: 'provider-Screen', component: ProviderScreenComponent,canActivate: [] }
 ];
 @NgModule({
     imports: [RouterModule.forRoot(routes)],

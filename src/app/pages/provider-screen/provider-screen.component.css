@@ -1,0 +1,329 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    margin: 0;
+}
+
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #e2e2e2;
+    text-align: center;
+    min-height: 100vh;
+}
+
+
+.content {
+    width: 90%;
+    max-width: 500px;
+    padding: 40px 30px;
+    background: #e2e2e2;
+    border-radius: 10px;
+    box-shadow: -3px -3px 7px #ffffff73,
+        2px 2px 5px rgba(94, 104, 121, 0.288);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: auto;
+    position: relative;
+    max-height: 90vh;
+    overflow: hidden;
+}
+
+
+.content .text {
+    font-size: 33px;
+    font-weight: 600;
+    margin-bottom: 30px;
+    color: #595959;
+}
+
+
+
+.img-area {
+    background: #e2e2e2;
+    box-shadow: 2px 2px 5px #BABECC,
+        -5px -5px 10px #ffffff73;
+}
+
+
+.wrapper .icon {
+    font-size: 17px;
+    color: #31344b;
+    position: absolute;
+    cursor: pointer;
+    opacity: 0.7;
+    top: 15px;
+    height: 35px;
+    width: 35px;
+    text-align: center;
+    line-height: 35px;
+    border-radius: 50%;
+    font-size: 16px;
+}
+
+.wrapper .img-area {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.img-area .inner-area {
+    height: calc(100% - 25px);
+    width: calc(100% - 25px);
+    border-radius: 50%;
+}
+
+.inner-area img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+
+
+
+
+/* Inputs, selects y textareas */
+.field {
+    margin-bottom: 20px;
+    position: relative;
+
+}
+.field input,
+.field select,
+.field textarea {
+    width: 100%;
+    padding: 12px 15px 12px 45px;
+    outline: none;
+    border: none;
+    font-size: 16px;
+    background: #e2e2e2;
+    color: #595959;
+    border-radius: 25px;
+    box-shadow: inset 2px 2px 5px #BABECC,
+        inset -5px -5px 10px #ffffff73;
+    transition: box-shadow 0.3s ease;
+}
+
+/* Efecto al enfocar los campos */
+.field input:focus,
+.field select:focus,
+.field textarea:focus {
+    box-shadow: inset 1px 1px 2px #BABECC,
+        inset -1px -1px 2px #ffffff73;
+}
+
+/* Iconos dentro de los campos */
+.field span {
+    position: absolute;
+    color: #595959;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 16px;
+    pointer-events: none;
+}
+
+/* Labels flotantes */
+.field label {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 45px;
+    pointer-events: none;
+    color: #888888;
+    transition: all 0.3s ease;
+    background: transparent;
+    padding: 0 5px;
+}
+
+/* Ocultar label cuando el input tiene contenido */
+.field input:focus~label,
+.field select:focus~label,
+.field textarea:focus~label {
+    opacity: 0;
+    transform: translateY(-150%);
+}
+
+/* Mover el label cuando el campo tiene un valor */
+.field input:not(:placeholder-shown) ~ label,
+.field select:not([value=""]) ~ label,
+.field textarea:not(:placeholder-shown) ~ label {
+    opacity: 0;
+    transform: translateY(-150%);
+}
+
+
+/* Fotografía */
+.fotografia {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 20px;
+    border: 2px solid #e2e2e2;
+    
+}
+
+/* Sección de carga de fotografía */
+.photo-upload {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+    margin-bottom: 20px;
+}
+
+.wrapper .img-area {
+    height: 150px;
+    width: 150px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+.wrapper .inner-area {
+    height: calc(100% - 25px);
+    width: calc(100% - 25px);
+    border-radius: 50%;
+}
+
+.inner-area img {
+    height: 100%;
+    width: 100%;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+/* Icono de + para subir imagen */
+.upload-icon {
+    position: absolute;
+    bottom: 0;
+    right: 165px;
+    background: #a2a2a2;
+    color: white;
+    padding: 0.6rem;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 16px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease;
+}
+
+.upload-icon:hover {
+    background: #2364d2;
+}
+
+
+
+/* Navegación */
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 20px;
+}
+
+/* Botones de navegación y envío */
+.nav-button,
+.submit-button {
+    background: #e2e2e2;
+    color: #595959;
+    box-shadow: 2px 2px 5px #BABECC,
+        -5px -5px 10px #ffffff73;
+    border: none;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: box-shadow 0.3s ease, background 0.3s ease;
+}
+
+
+
+/* Efecto al pasar el mouse sobre los botones */
+.nav-button:hover {
+    box-shadow: inset 2px 2px 5px #e0e0e0,
+        inset -2px -2px 5px #ffffff;
+}
+
+/* Botón de envío */
+.submit-button {
+    width: 85%;
+    border-radius: 25px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    background: #3498db;
+    transition: background 0.3s ease;
+}
+
+/* Efecto al pasar el mouse sobre el botón de envío */
+.submit-button:hover {
+    background: #2980b9;
+    color: #ffffff;
+}
+
+/* Responsividad */
+@media (max-width: 600px) {
+    .content {
+        padding: 30px 20px;
+    }
+
+    .content .text {
+        font-size: 24px;
+        margin-bottom: 25px;
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+        padding: 10px 15px 10px 40px;
+    }
+
+    .field span {
+        font-size: 14px;
+    }
+
+    .submit-button {
+        font-size: 16px;
+    }
+}
+
+.forgot-pass {
+    text-align: left;
+    margin: 10px 0 10px 5px;
+}
+
+.forgot-pass a {
+    font-size: 16px;
+    color: #3498db;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.forgot-pass:hover a {
+    color: #22638e;
+    
+}
