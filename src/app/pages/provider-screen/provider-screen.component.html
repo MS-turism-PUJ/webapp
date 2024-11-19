@@ -1,11 +1,13 @@
-<body>
-    <div class="content">
-        <div class="text">
-            Registro
+<div class="container">
+    <div class="profile">
+        <div class="profile-tittle">
+            <app-go-to-dashboard ></app-go-to-dashboard>            
+            <div class="text">
+                Perfil
+            </div>
         </div>
-        <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
             <!-- Fotografía (se muestra en el paso 1) -->
-            <div *ngIf="currentStep === 1" class="photo-upload">
+            <div class="photo-upload">
                 <div class="wrapper">
                     <div class="img-area">
                         <div class="inner-area">
@@ -21,90 +23,73 @@
             </div>
 
             <!-- Paso 1 -->
-            <div *ngIf="currentStep === 1" class="step">
-                <div class="field">
-                    <input type="text" formControlName="nombre" placeholder=" ">
+            <div class="step">
+                <div class="data-provider">
                     <span class="fas fa-user"></span>
                     <label>Nombre</label>
                 </div>
-                <div class="field">
-                    <input type="text" formControlName="username" placeholder=" ">
+                <div class="data-provider">
                     <span class="fas fa-user-circle"></span>
                     <label>Usuario</label>
                 </div>
-                <div class="field">
-                    <input type="text" formControlName="email" placeholder=" ">
+                <div class="data-provider">
                     <span class="fas fa-envelope"></span>
                     <label>Email</label>
                 </div>
-                <div class="field">
-                    <input type="password" formControlName="password" placeholder=" ">
-                    <span class="fas fa-lock"></span>
-                    <label>Contraseña</label>
-                </div>
-            </div>
 
-            <!-- Paso 2 -->
-            <div *ngIf="currentStep === 2" class="step">
-                <div class="field">
-                    <input type="number" formControlName="edad" required min="1"
-                        (input)="validatePositiveValue($event)" placeholder="">
+                <div class="data-provider">
+                    <span class="fas fa-phone"></span>
+                    <label>Número de Teléfono</label>
+                </div>
+                <div class="data-provider">
                     <span class="fas fa-birthday-cake"></span>
                     <label>Edad</label>
                 </div>
 
-                <div class="field">
-                    <select formControlName="tipoUsuario" (select)="onTipoUsuarioChange()">
-                        <option value="" disabled>Selecciona una opción</option>
-                        <option value="cliente">Cliente</option>
-                        <option value="proveedor">Proveedor</option>
-                    </select>
-                    <label>Tipo de Usuario</label>
-                    <span class="fas fa-user-tag"></span>
-                </div>
-
-
-                <div class="field">
-                    <textarea formControlName="descripcion" maxlength="300" placeholder=""></textarea>
-                    <label>Descripción (máx. 300 caracteres)</label>
-                </div>
-            </div>
-
-            <!-- Solo para proveedores -->
-            <div *ngIf="isProveedor()">
-                <div class="field">
-                    <input type="number" formControlName="telefono" min="1" (input)="validatePositiveValue($event)" placeholder=" ">
-                    <span class="fas fa-phone"></span>
-                    <label>Número de Teléfono</label>
-                </div>
-                <div class="field">
-                    <input type="text" formControlName="web_page" placeholder="">
+                <div class="data-provider">
                     <span class="fas fa-globe"></span>
                     <label>Página web</label>
                 </div>
-                <div class="field">
-                    <input type="text" formControlName="redes_sociales" placeholder="">
+                
+                
+                <div class="data-provider">
+                    <span class="fa-solid fa-square-pen"></span>
+                    <label>Descripción</label>
+                </div>
+                <div class="data-provider">
                     <span class="fas fa-share-alt"></span>
                     <label>Redes sociales</label>
                 </div>
+
             </div>
 
-            <!-- Navegación -->
-            <div class="navigation">
-                <button type="button" (click)="prevStep()" *ngIf="currentStep > 1" class="nav-button">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
-                <button type="button" (click)="nextStep()" *ngIf="currentStep < 2" class="nav-button">
-                    <i class="fas fa-arrow-right"></i>
-                </button>
-
-                <button type="submit" *ngIf="currentStep === 2" class="submit-button">
-                    Registrarse
-                </button>
-                <div class="forgot-pass" *ngIf="currentStep < 2">
-                    <a (click)="goToLogin()" class="cursor-pointer">Ya tienes cuenta?</a>
-                </div>
-            </div>
-        </form>
     </div>
-</body>
+    <div class="main">
+        <app-card ></app-card>
+        <app-card ></app-card>
+        <app-card ></app-card>
+        <app-card ></app-card>
+    </div>
+    <div class="filters">
+        <div class="text">
+            Filtros
+        </div>
+        <div class="filters-sub">
+            <div class="filters-sub1">
+                <!-- Contenido de Filtros -->
+                <div class="menu-item">Dashboard</div>
+                <div class="menu-item">Shortcuts</div>
+                <div class="menu-item">Overview</div>
+                <div class="menu-item">Events</div>
+                <div class="menu-item">About</div>
+                <div class="menu-item">Services</div>
+                <div class="menu-item">Contact</div>
+                <div class="menu-item">Feedback</div>
+
+            </div>
+            <button type="submit" class="create-content-button">
+                Crear contenido
+            </button>
+        </div>
+    </div>
+</div>

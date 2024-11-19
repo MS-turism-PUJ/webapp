@@ -1,59 +1,89 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-html,
-body {
-    height: 100%;
-    margin: 0;
-}
-
-
-body {
+.container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    background: #e2e2e2;
-    text-align: center;
-    min-height: 100vh;
+    height: 100vh;
+    overflow-y: auto;
+    /* Permite desplazamiento interno si el contenido lo requiere */
+    width: 100%;
+    background-color: #e2e2e2;
 }
 
 
-.content {
-    width: 90%;
-    max-width: 500px;
-    padding: 40px 30px;
-    background: #e2e2e2;
-    border-radius: 10px;
+
+.profile,
+.filters {
+    flex-shrink: 0;
+    /* Evita que estas secciones se redimensionen */
+    position: sticky;
+    /* Hace que estas secciones permanezcan visibles mientras se desplaza */
+    top: 0;
+    /* Fija la posición al borde superior */
+    height: 100vh;
+    overflow-y: auto;
+    background-color: #e2e2e2;
+    padding: 20px;
+    box-shadow: inset 0px 0px 10px rgba(0, 0, 0, 0.1);
+}
+
+.filters {
+    width: 30%;
+    box-shadow: 3px 3px 7px #ffffff73,
+        -2px -2px 5px rgba(94, 104, 121, 0.288);
+        
+    }
+    
+.filters-sub
+{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        
+        
+}
+
+.main {
+    flex-grow: 1;
+    /* Permite que esta sección se expanda */
+    overflow-y: visible;
+    /* No restringe el scroll aquí */
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+    background-color: #e2e2e2;
+}
+
+.profile-tittle
+{
+    display: flex;
+    
+}
+
+.profile {
+    width: 30%;
     box-shadow: -3px -3px 7px #ffffff73,
         2px 2px 5px rgba(94, 104, 121, 0.288);
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    height: auto;
-    position: relative;
-    max-height: 90vh;
-    overflow: hidden;
+
 }
 
-
-.content .text {
-    font-size: 33px;
+.text {
+    font-size: 30px;
     font-weight: 600;
-    margin-bottom: 30px;
     color: #595959;
+    position: absolute;
+    left: 50%;
+    top: 6%;
+    transform: translate(-50%, -50%); 
 }
-
-
 
 .img-area {
     background: #e2e2e2;
     box-shadow: 2px 2px 5px #BABECC,
         -5px -5px 10px #ffffff73;
-}
 
+}
 
 .wrapper .icon {
     font-size: 17px;
@@ -67,17 +97,10 @@ body {
     text-align: center;
     line-height: 35px;
     border-radius: 50%;
-    font-size: 16px;
+
 }
 
-.wrapper .img-area {
-    height: 150px;
-    width: 150px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
+
 
 .img-area .inner-area {
     height: calc(100% - 25px);
@@ -92,53 +115,39 @@ body {
     object-fit: cover;
 }
 
-
-
-
-
-/* Inputs, selects y textareas */
-.field {
+.data-provider {
     margin-bottom: 20px;
     position: relative;
-
-}
-.field input,
-.field select,
-.field textarea {
-    width: 100%;
-    padding: 12px 15px 12px 45px;
-    outline: none;
-    border: none;
-    font-size: 16px;
-    background: #e2e2e2;
-    color: #595959;
+    transition: all 0.2s ease;
+    box-shadow: -3px -3px 7px #ffffff73,
+        2px 2px 5px rgba(94, 104, 121, 0.288);
+    padding: 6px 15px;
     border-radius: 25px;
-    box-shadow: inset 2px 2px 5px #BABECC,
-        inset -5px -5px 10px #ffffff73;
-    transition: box-shadow 0.3s ease;
-}
-
-/* Efecto al enfocar los campos */
-.field input:focus,
-.field select:focus,
-.field textarea:focus {
-    box-shadow: inset 1px 1px 2px #BABECC,
-        inset -1px -1px 2px #ffffff73;
 }
 
 /* Iconos dentro de los campos */
-.field span {
-    position: absolute;
-    color: #595959;
-    left: 15px;
-    top: 50%;
-    transform: translateY(-50%);
+.data-provider span {
+    outline: none;
+    border-radius: 25px;
+    border: none;
+    width: 100%;
+
     font-size: 16px;
-    pointer-events: none;
+    background: #e2e2e2;
+    color: #595959;
+
+}
+
+.data-provider:hover {
+    font: 500;
+    cursor: pointer;
+    transform: translateY(-3px);
+    box-shadow:
+        0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 /* Labels flotantes */
-.field label {
+.data-provider label {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -150,22 +159,6 @@ body {
     padding: 0 5px;
 }
 
-/* Ocultar label cuando el input tiene contenido */
-.field input:focus~label,
-.field select:focus~label,
-.field textarea:focus~label {
-    opacity: 0;
-    transform: translateY(-150%);
-}
-
-/* Mover el label cuando el campo tiene un valor */
-.field input:not(:placeholder-shown) ~ label,
-.field select:not([value=""]) ~ label,
-.field textarea:not(:placeholder-shown) ~ label {
-    opacity: 0;
-    transform: translateY(-150%);
-}
-
 
 /* Fotografía */
 .fotografia {
@@ -175,7 +168,7 @@ body {
     object-fit: cover;
     margin-bottom: 20px;
     border: 2px solid #e2e2e2;
-    
+
 }
 
 /* Sección de carga de fotografía */
@@ -188,8 +181,8 @@ body {
 }
 
 .wrapper .img-area {
-    height: 150px;
-    width: 150px;
+    height: 140px;
+    width: 140px;
     border-radius: 50%;
     display: flex;
     align-items: center;
@@ -203,22 +196,17 @@ body {
     border-radius: 50%;
 }
 
-.inner-area img {
-    height: 100%;
-    width: 100%;
-    border-radius: 50%;
-    object-fit: cover;
-}
+
 
 /* Icono de + para subir imagen */
 .upload-icon {
     position: absolute;
     bottom: 0;
-    right: 165px;
+    right: 145px;
     background: #a2a2a2;
     color: white;
-    padding: 0.6rem;
-    border-radius: 50%;
+    padding: 0.5rem;
+    border-radius: 100%;
     cursor: pointer;
     display: flex;
     justify-content: center;
@@ -229,47 +217,35 @@ body {
 }
 
 .upload-icon:hover {
-    background: #2364d2;
+    background: #3498db;
 }
 
-
-
-/* Navegación */
-.navigation {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-top: 20px;
-}
-
-/* Botones de navegación y envío */
-.nav-button,
-.submit-button {
-    background: #e2e2e2;
-    color: #595959;
+.menu-item {
+    color: #31344b;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: 400;
+    padding: 5px 20px;
+    margin: 5px;
+    border-radius: 20px;
     box-shadow: 2px 2px 5px #BABECC,
         -5px -5px 10px #ffffff73;
-    border: none;
-    border-radius: 50%;
-    width: 50px;
-    height: 50px;
+    margin-top: 12px;
+    transition: all 0.2s ease;
     cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: box-shadow 0.3s ease, background 0.3s ease;
+    position: relative;
+    text-align: center;
+    display: inline-block;
+    width: auto;
 }
 
-
-
-/* Efecto al pasar el mouse sobre los botones */
-.nav-button:hover {
-    box-shadow: inset 2px 2px 5px #e0e0e0,
-        inset -2px -2px 5px #ffffff;
+.menu-item:hover {
+    transform: translateY(-3px);
+    box-shadow:
+        0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
-/* Botón de envío */
-.submit-button {
+.create-content-button {
     width: 85%;
     border-radius: 25px;
     font-size: 18px;
@@ -277,53 +253,25 @@ body {
     color: #ffffff;
     background: #3498db;
     transition: background 0.3s ease;
+    box-shadow: 2px 2px 5px #BABECC,
+        -5px -5px 10px #ffffff73;
+    border: none;
+    height: 50px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
 }
 
-/* Efecto al pasar el mouse sobre el botón de envío */
-.submit-button:hover {
+.create-content-button:hover {
     background: #2980b9;
     color: #ffffff;
 }
 
-/* Responsividad */
-@media (max-width: 600px) {
-    .content {
-        padding: 30px 20px;
-    }
-
-    .content .text {
-        font-size: 24px;
-        margin-bottom: 25px;
-    }
-
-    .field input,
-    .field select,
-    .field textarea {
-        padding: 10px 15px 10px 40px;
-    }
-
-    .field span {
-        font-size: 14px;
-    }
-
-    .submit-button {
-        font-size: 16px;
-    }
-}
-
-.forgot-pass {
-    text-align: left;
-    margin: 10px 0 10px 5px;
-}
-
-.forgot-pass a {
-    font-size: 16px;
-    color: #3498db;
-    text-decoration: none;
-    transition: 0.2s;
-}
-
-.forgot-pass:hover a {
-    color: #22638e;
-    
+.filters-sub1
+{
+    margin-top: 3rem;
+    height: 75vh;
 }
