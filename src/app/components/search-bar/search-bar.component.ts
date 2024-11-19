@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms'; 
+import { FormsModule } from '@angular/forms';
 import { ContentService } from '../../services/content.service';
 import { LoaderComponent } from '../loader/loader.component';
 import { NgIf } from '@angular/common';
@@ -16,7 +16,7 @@ export class SearchBarComponent {
   previousTimeout: any;
   loading: boolean = false;
 
-  constructor(private contentService: ContentService) {}
+  constructor(private contentService: ContentService) { }
 
   onInputChange() {
     this.loading = true;
@@ -25,9 +25,9 @@ export class SearchBarComponent {
       await this.onSearch();
     }, 300);
   }
-  
+
   async onSearch() {
-    await this.contentService.syncContentsByFilter(this.searchText, []);
+    await this.contentService.syncContentsByFilter({ filter: this.searchText });
     this.loading = false;
   }
 }

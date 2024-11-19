@@ -9,13 +9,16 @@ import { ServiceCategory } from '../models/service.category';
 })
 export class ContentService {
   contents: Content[] = [];
+  filter: string = '';
   page: number = 1;
   limit: number = 10;
+  categories?: ServiceCategory[];
+
   private contentsSubject = new BehaviorSubject<Content[]>(this.contents);
   private pageSubject = new BehaviorSubject<number>(this.page);
   private limitSubject = new BehaviorSubject<number>(this.limit);
 
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo) { }
 
   async syncAllContents(page: number = 1, limit: number = 10) {
     const result = await this.apollo.query<{ findAllContents: Content[] }>({
@@ -75,10 +78,28 @@ export class ContentService {
     this.contentsSubject.next(this.contents);
   }
 
-  async syncContentsByFilter(filter: string, categories: ServiceCategory[], page: number = 1, limit: number = 10) {
+  async syncContentsByFilter(
+    filter: {
+      filter?: string,
+      categories?: ServiceCategory[],
+      price?: {
+        lessThan?: number,
+        moreThan?: number
+      }
+    },
+    page: number = 1,
+    limit: number = 10
+  ) {
+    if (!filter.categories) {
+      filter.categories = this.categories;
+    }
+    if (!filter.filter) {
+      filter.filter = this.filter;
+    }
+
     const result = await this.apollo.query<{ findContentsByFilter: Content[] }>({
       query: gql`
-        query findContentsByFilter($filter: String, $page: Int, $limit: Int) {
+        query findContentsByFilter($filter: ServiceFilter, $page: Int, $limit: Int) {
           findContentsByFilter(filter: $filter, page: $page, limit: $limit) {
             contentId
             name
@@ -119,7 +140,6 @@ export class ContentService {
       fetchPolicy: 'network-only',
       variables: {
         filter,
-        // categories: categories.map(category => category.name),
         page,
         limit
       }
