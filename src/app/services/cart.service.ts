@@ -7,7 +7,7 @@ import { map } from 'rxjs';
   providedIn: 'root',
 })
 export class CartService {
-  constructor(private apollo: Apollo) {}
+  constructor(private apollo: Apollo) { }
 
   async getCartItems(): Promise<Payment> {
     const result = await this.apollo.query<{ getMyShoppingCart: Payment }>({
@@ -21,13 +21,31 @@ export class CartService {
               price
               description
             }
+            user {
+              name
+              email
+              username
+            }
           }
         }
       `
     }).pipe(
       // Mapear la respuesta al modelo Producto
       map(result => {
-        return result.data.getMyShoppingCart;
+        const info = result.data.getMyShoppingCart;
+        info.services = info.services.map(service => {
+          return {
+            serviceId: service.serviceId,
+            name: service.name,
+            price: service.price,
+            description: service.description,
+            city: service.city,
+            country: service.country,
+            category: service.category,
+            user: info.user
+          }
+        });
+        return info;
       })
     ).toPromise();
 
