@@ -63,8 +63,6 @@ export class CartService {
         serviceId
       }
     }).toPromise();
-
-    console.log(response);
   }
 
   async removeItem(serviceId: string) {
