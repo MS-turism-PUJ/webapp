@@ -32,6 +32,7 @@ export class InfoServiceComponent {
     },
     photo: ''
   };
+  photo: string = '';
 
   cityName: string = '';
 
@@ -70,6 +71,9 @@ export class InfoServiceComponent {
 
     if (contentId) {
       this.fetchContent(contentId);
+      this.contentService.getPhoto(contentId).then((photo) => {
+        this.photo = photo;
+      });
     } else {
       console.error('No se encontró el ID del contenido en la URL.');
     }
