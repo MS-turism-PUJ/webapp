@@ -3,7 +3,7 @@
     <input id="toggleCheckerCart" type="checkbox">
 
     <!-- Botón del Carrito -->
-    <label id="togglerLabel" for="toggleCheckerCart" class="btn-cart" [attr.data-quantity]="dataQuantity">
+    <label id="togglerLabel" for="toggleCheckerCart" class="btn-cart" [attr.data-quantity]="payment.services.length">
         <svg class="icon-cart" viewBox="0 0 24.38 30.52" height="30.52" width="24.38"
             xmlns="http://www.w3.org/2000/svg">
             <title>icon-cart</title>
@@ -27,19 +27,13 @@
             <div class="cart-items-container">
 
                 <tbody class="cart-items-container">
-                    <app-cart-item *ngFor="let item of cartItems;"
-                        [nombre]="item.nombre"
-                        [proveedor]="item.proveedor"
-                        [precio]="item.precio">
-                        (eliminar)="onEliminarItem(item)"
-                    </app-cart-item>
-        
+                    <app-cart-item *ngFor="let service of payment.services;" [service]="service"></app-cart-item>
                 </tbody>
             </div>
 
             <div class="total-container">
                 <span>Total a pagar:</span>
-                <span class="total-amount">{{ totalAmount | currency }}</span>
+                <span class="total-amount">{{ payment.totalAmount | currency }}</span>
             </div>
             
 

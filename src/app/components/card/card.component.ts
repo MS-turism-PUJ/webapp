@@ -16,15 +16,14 @@ import { Content } from '../../models/content';
 export class CardComponent {
   @Input() content!: Content;
 
-  constructor(private cartService: CartService, private router: Router
-  ) { }
+  constructor(private cartService: CartService, private router: Router) {}
 
   addToCart() {
     if (!this.content.service) {
       console.error('No service found');
       return;
     }
-    this.cartService.addToCart(this.content.service);
+    this.cartService.addToCart(this.content.service.serviceId);
   }
 
   goToInfoService() {

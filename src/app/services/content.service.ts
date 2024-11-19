@@ -7,16 +7,18 @@ import { Content } from '../models/content';
   providedIn: 'root'
 })
 export class ContentService {
-  constructor(private apollo: Apollo) { }
+  constructor(private apollo: Apollo) {}
 
   async getContents(page: number = 1, limit: number = 10): Promise<Content[]> {
     const result = await this.apollo.query<{ findAllContents: Content[] }>({
       query: gql`
         query findAllContents($page: Int, $limit: Int) {
           findAllContents(page: $page, limit: $limit) {
+            contentId
             name
             description
             service {
+              serviceId
               price
               name
               city
@@ -39,6 +41,11 @@ export class ContentService {
               drink
               lunch
               dessert
+            }
+            user {
+              name
+              email
+              username
             }
           }
         }

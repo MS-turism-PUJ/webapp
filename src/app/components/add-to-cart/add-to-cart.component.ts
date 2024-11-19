@@ -11,15 +11,12 @@ import { Service } from '../../models/service';
   styleUrl: './add-to-cart.component.css'
 })
 export class AddToCartComponent {
-  @Input() service!: Service;
+  @Input() serviceId: string = '';
 
-  constructor(private cartService: CartService, private sweetAlertService: SweetAlertService,
-  ) {}
+  constructor(private cartService: CartService, private sweetAlertService: SweetAlertService) {}
 
-  addToCart() {
-    this.cartService.addToCart(this.service);
-  }
-  mostrarAlerta() {
+  async addToCart() {
+    await this.cartService.addToCart(this.serviceId);
     this.sweetAlertService.mostrarCorrectamente('Servicio agregado');
   }
 }

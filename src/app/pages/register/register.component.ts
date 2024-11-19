@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
     });
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   goToLogin() {
     this.router.navigate(['/']);
@@ -84,7 +84,6 @@ export class RegisterComponent implements OnInit {
   }
 
   async onSubmit() {
-    console.log(this.registerForm.value);
     if (this.registerForm.valid) {
       if (this.isProveedor()) {
         this.authService.registerProvider(
