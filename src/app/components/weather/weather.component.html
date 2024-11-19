@@ -1,100 +1,98 @@
-
 <body>
     <main>
-        <form>
-            <input type="text" id="name" autocomplete="off">
-            <button>
+        <!-- Formulario para buscar clima por ciudad -->
+        <form (submit)="onSearch(); $event.preventDefault()">
+            <input type="text" id="name" [(ngModel)]="cityName" placeholder="Ingrese una ciudad" autocomplete="off">
+            <button type="submit">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
         </form>
-        <section class="result">
 
+        <section class="result" *ngIf="weatherData">
+            <!-- Información de la ciudad y bandera -->
             <figure class="name">
-                <figcaption>Lo1ndon</figcaption> 
-                <img src="https://flagsapi.com/GB/shiny/32.png">
+                <figcaption>{{ weatherData.city }}</figcaption>
+                <img [src]="'https://flagsapi.com/' + weatherData.country + '/shiny/32.png'"
+                    alt="Bandera de {{ weatherData.country }}">
             </figure>
 
+            <!-- Información de temperatura -->
             <figure class="temperature">
-                <img src="https://openweathermap.org/img/wn/10d@4x.png">
+                <img [src]="'https://openweathermap.org/img/wn/' + weatherData.icon + '@4x.png'" alt="Icono del clima">
                 <figcaption>
-                    <span>31</span>
-                    <sup>o</sup>
-                </figcaption> 
+                    <span>{{ weatherData.temperature }}</span>
+                    <sup>°C</sup>
+                </figcaption>
             </figure>
-            <p class="description">overcast clouds</p>
+            <p class="description">{{ weatherData.description }}</p>
+
+            <!-- Información adicional -->
             <div id="other_infos">
                 <div class="info">
                     <i id="temp_max_icon" class="fa-solid fa-temperature-high"></i>
-
                     <div>
                         <h2>Temp. max</h2>
-
                         <p id="temp_max">
-                            32 <sup>C°</sup>
+                            {{ weatherData.temp_max }} <sup>°C</sup>
                         </p>
                     </div>
                 </div>
 
                 <div class="info">
                     <i id="temp_min_icon" class="fa-solid fa-temperature-low"></i>
-
                     <div>
                         <h2>Temp. min</h2>
-
                         <p id="temp_min">
-                            12 <sup>C°</sup>
+                            {{ weatherData.temp_min }} <sup>°C</sup>
                         </p>
                     </div>
                 </div>
 
                 <div class="info">
                     <i id="humidity_icon" class="fa-solid fa-droplet"></i>
-
                     <div>
-                        <h2>Humidade</h2>
-
+                        <h2>Humedad</h2>
                         <p id="humidity">
-                            50%
+                            {{ weatherData.humidity }}%
                         </p>
                     </div>
                 </div>
 
                 <div class="info">
                     <i id="wind_icon" class="fa-solid fa-wind"></i>
-
                     <div>
-                        <h2>Vento</h2>
-
+                        <h2>Viento</h2>
                         <p id="wind">
-                            50 km/h
+                            {{ weatherData.wind_speed }} km/h
                         </p>
                     </div>
                 </div>
+
                 <div class="info">
                     <i id="pressure_icon" class="fa-solid fa-gauge"></i>
-
                     <div>
-                        <h2>Presion</h2>
-
-                        <p id="humidity">
-                            1011hPa
+                        <h2>Presión</h2>
+                        <p id="pressure">
+                            {{ weatherData.pressure }} hPa
                         </p>
                     </div>
                 </div>
+
                 <div class="info">
                     <i id="cloud_icon" class="fa-solid fa-cloud"></i>
-
                     <div>
                         <h2>Nubes</h2>
-
                         <p id="clouds">
-                            98%
+                            {{ weatherData.clouds }}%
                         </p>
                     </div>
                 </div>
             </div>
         </section>
-    </main>
 
-    <script src="app.js"></script>
+        <!-- Mensaje de error si no hay datos -->
+        <section *ngIf="!weatherData" class="no-data">
+            <p>No se encontraron datos de clima. Intente con otra ciudad.</p>
+        </section>
+    </main>
 </body>

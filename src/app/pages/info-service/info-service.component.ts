@@ -32,6 +32,8 @@ export class InfoServiceComponent {
     }
   };
 
+  cityName: string = '';
+
   week: any = [
     "Lunes",
     "Martes",
@@ -75,6 +77,11 @@ export class InfoServiceComponent {
   async fetchContent(contentId: string): Promise<void> {
     try {
       this.content = await this.contentService.getContentById(contentId) || this.content;
+      if (this.content?.service?.city) {
+        this.cityName = this.content.service.city;
+      } else {
+        console.warn('El contenido no tiene una ciudad asociada.');
+      }
     } catch (error) {
       console.error('Error al obtener el contenido:', error);
     }

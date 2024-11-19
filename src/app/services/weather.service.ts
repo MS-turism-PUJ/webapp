@@ -1,29 +1,52 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
 import { Apollo, gql } from 'apollo-angular';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
+
+export interface WeatherData {
+    city: string;
+    country: string;
+    temperature: number;
+    temp_max: number;
+    temp_min: number;
+    humidity: number;
+    pressure: number;
+    clouds: number;
+    wind_speed: number;
+    description: string;
+    icon: string;
+}
 
 @Injectable({
-    providedIn: 'root'
+    providedIn: 'root',
 })
 export class WeatherService {
-    // URL del backend expuesto por WeatherController
-    private apiUrl = 'http://localhost:8080/api/weather';
-
     constructor(private apollo: Apollo) { }
 
-    async getWeather(city: string): Promise<any> {
-        return this.apollo.query({
-            query: gql`
-                query getWeather(city: $city) {
-                    city
-                    temperature
-                    weather
-                }
-            `,
-            variables: {
-                city: city
-            }
-        }).toPromise();
+    getWeather(city: string): Observable<WeatherData> {
+        const GET_WEATHER = gql`
+      query getWeather($city: String!) {
+        getWeather(city: $city) {
+          city
+          country
+          temperature
+          temp_max
+          temp_min
+          humidity
+          pressure
+          clouds
+          wind_speed
+          description
+          icon
+        }
+      }
+    `;
+
+        return this.apollo
+            .query<{ getWeather: WeatherData }>({
+                query: GET_WEATHER,
+                variables: { city },
+            })
+            .pipe(map((result) => result.data.getWeather));
     }
 }

@@ -23,23 +23,6 @@
         </div>
         <div class="details">
             <div class="placedetails">
-                <!-- <div class="state">
-                    <div class="actual">
-                        <h2>{{ content.service?.country }} - {{ content.service?.capital }} ({{ content.service?.city
-                            }})</h2>
-                        <div>
-                            <h2>Idioma: </h2>
-                            <h2 class="available">{{ content.service?.language }}</h2>
-                        </div>
-                    </div>
-                    <h3>{{ content.service?.officialName }}</h3>
-
-                    <div class="reviews">
-                        <i class="fa-regular fa-star"></i>
-                        <h3>{{ averageRatingReceived | number : "1.1-1" }}</h3>
-                        <h3>{{ reviewsCountReceived }} Reseñas</h3>
-                    </div>
-                </div> -->
 
                 <div class="card">
                     <div class="card-header">
@@ -78,22 +61,24 @@
                 <div class="ownerinfo">
                     <i class="fa-solid fa-user"></i>
                     <div>
-                        <h2>Anfitrión: Laura</h2>
+                        <h2>Proveedor: {{ content.service?.user?.username }}</h2>
                         <h3>10 meses de anfitrionado</h3>
                     </div>
                 </div>
                 <div class="descriptioninfo">
                     <h3>Descripción</h3>
                     <p>
-                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Illo dolores
-                        velit modi mollitia explicabo, similique saepe dolorem, facilis
-                        eligendi asperiores adipisci. Repellendus rerum asperiores fugit
-                        impedit ullam vitae quasi explicabo!
+                        {{ content.service?.description }}
                     </p>
                     <div class="moreinfodescription">
                         <h4>Mostrar más</h4>
                         <i class="fa-solid fa-chevron-right"></i>
                     </div>
+
+                    <h3>Categoría</h3>
+                    <p>
+                        {{ content.service?.category }}
+                    </p>
                 </div>
                 <div class="contenidoSecciones">
                     <div class="dates">
@@ -151,27 +136,27 @@
                             </ol>
                         </div>
                     </div>
-                    <app-weather></app-weather>
+                    <app-weather [cityName]="cityName"></app-weather>
                 </div>
             </div>
             <div class="summary">
                 <h2>Precio noche</h2>
-                <h4>$ 700.000 pesos</h4>
+                <h4>$ {{ content.service?.price }} pesos</h4>
                 <div class="itemsdetails">
                     <div class="eachitem">
-                        <h4>Llegada</h4>
-                        <h5>10/10/2020</h5>
+                        <h4>Salida</h4>
+                        <h5>{{ content.service?.departureDate }}</h5>
                     </div>
                     <div class="eachitem">
-                        <h4>Salida</h4>
-                        <h5>15/10/2020</h5>
+                        <h4>Duración</h4>
+                        <h5>{{ content.service?.duration }} horas </h5>
                     </div>
                     <div class="eachitem">
                         <h4>Huéspedes</h4>
                         <h5>4</h5>
                     </div>
                 </div>
-                <h1>Total: $4.900.000</h1>
+                <h1>Total: $ {{ content.service?.price }} pesos </h1>
                 <div class="reserve">
                     <app-add-to-cart></app-add-to-cart>
                 </div>
