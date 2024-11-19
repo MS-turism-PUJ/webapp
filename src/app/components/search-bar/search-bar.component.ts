@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { ContentService } from '../../services/content.service';
 import { LoaderComponent } from '../loader/loader.component';
 import { NgIf } from '@angular/common';
+import { ServiceCategory } from '../../models/service.category';
 
 @Component({
   selector: 'app-search-bar',
@@ -12,13 +13,25 @@ import { NgIf } from '@angular/common';
   styleUrls: ['./search-bar.component.css']
 })
 export class SearchBarComponent {
-  searchText: string = '';
   previousTimeout: any;
   loading: boolean = false;
+  searchText?: string;
+  categories?: ServiceCategory[];
+  lessThan?: number;
+  moreThan?: number;
 
   constructor(private contentService: ContentService) {
     this.contentService.loadingSubject.subscribe((loading) => {
       this.loading = loading;
+    });
+    this.contentService.categoriesSubject.subscribe((categories) => {
+      this.categories = categories;
+    });
+    this.contentService.lessThanSubject.subscribe((lessThan) => {
+      this.lessThan = lessThan;
+    });
+    this.contentService.moreThanSubject.subscribe((moreThan) => {
+      this.moreThan = moreThan;
     });
   }
 
@@ -31,6 +44,11 @@ export class SearchBarComponent {
   }
 
   async onSearch() {
-    await this.contentService.syncContentsByFilter({ filter: this.searchText });
+    await this.contentService.syncContentsByFilter({
+      filter: this.searchText,
+      categories: this.categories,
+      lessThan: this.lessThan,
+      moreThan: this.moreThan
+    });
   }
 }

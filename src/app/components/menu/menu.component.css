@@ -98,7 +98,6 @@
   position: relative;
   text-align: center;
   display: inline-block;
-  width: auto;
 }
 
 .menu-item.active {

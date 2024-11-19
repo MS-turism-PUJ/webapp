@@ -12,6 +12,8 @@ export class ContentService {
   filterSubject = new BehaviorSubject<string | undefined>(undefined);
   categoriesSubject = new BehaviorSubject<ServiceCategory[] | undefined>(undefined);
   loadingSubject = new BehaviorSubject<boolean>(false);
+  lessThanSubject = new BehaviorSubject<number | undefined>(undefined);
+  moreThanSubject = new BehaviorSubject<number | undefined>(undefined);
 
   constructor(private apollo: Apollo) {}
 
@@ -73,6 +75,8 @@ export class ContentService {
     this.contentsSubject.next(result || []);
     this.filterSubject.next(undefined);
     this.categoriesSubject.next(undefined);
+    this.lessThanSubject.next(undefined);
+    this.moreThanSubject.next(undefined);
     this.loadingSubject.next(false);
   }
 
@@ -80,10 +84,8 @@ export class ContentService {
     filter: {
       filter?: string,
       categories?: ServiceCategory[],
-      price?: {
-        lessThan?: number,
-        moreThan?: number
-      }
+      lessThan?: number,
+      moreThan?: number
     },
     page: number = 1,
     limit: number = 10
@@ -146,6 +148,8 @@ export class ContentService {
     this.contentsSubject.next(result || []);
     this.filterSubject.next(filter.filter);
     this.categoriesSubject.next(filter.categories);
+    this.lessThanSubject.next(filter.lessThan);
+    this.moreThanSubject.next(filter.moreThan);
     this.loadingSubject.next(false);
   }
 

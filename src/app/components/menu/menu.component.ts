@@ -1,16 +1,18 @@
 import { Component } from '@angular/core';
 import { ServiceCategory } from '../../models/service.category';
 import { ContentService } from '../../services/content.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [],
+  imports: [FormsModule],
   templateUrl: './menu.component.html',
   styleUrl: './menu.component.css'
 })
 export class MenuComponent {
   filters: Set<ServiceCategory> = new Set();
+  price: { lessThan?: number, moreThan?: number } = {};
   filter?: string;
   ServiceCategory = ServiceCategory;
 
@@ -32,7 +34,39 @@ export class MenuComponent {
 
     const categories = this.filters.size !== 0 ? Array.from(this.filters) : undefined;
 
-    this.contentService.syncContentsByFilter({ filter: this.filter, categories });
+    this.contentService.syncContentsByFilter({
+      filter: this.filter,
+      categories, lessThan: this.price.lessThan,
+      moreThan: this.price.moreThan
+    });
+  }
+
+  setLessThanPrice() {
+    if (!this.price.lessThan) {
+      delete this.price.lessThan;
+    }
+
+    const categories = this.filters.size !== 0 ? Array.from(this.filters) : undefined;
+    this.contentService.syncContentsByFilter({
+      filter: this.filter,
+      categories,
+      lessThan: this.price.lessThan,
+      moreThan: this.price.moreThan
+    });
+  }
+
+  setMoreThanPrice() {
+    if (!this.price.moreThan) {
+      delete this.price.moreThan;
+    }
+
+    const categories = this.filters.size !== 0 ? Array.from(this.filters) : undefined;
+    this.contentService.syncContentsByFilter({
+      filter: this.filter,
+      categories,
+      lessThan: this.price.lessThan,
+      moreThan: this.price.moreThan
+    });
   }
 
 }
