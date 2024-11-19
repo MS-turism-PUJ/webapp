@@ -3,11 +3,10 @@
     height: 100vh;
     overflow-y: auto;
     /* Permite desplazamiento interno si el contenido lo requiere */
+    min-width: 100vw;
     width: 100%;
     background-color: #e2e2e2;
 }
-
-
 
 .profile,
 .filters {
@@ -82,13 +81,16 @@
 
 }
 
+.wrapper {
+    position: relative;
+}
+
 .wrapper .icon {
     font-size: 17px;
     color: #31344b;
     position: absolute;
     cursor: pointer;
     opacity: 0.7;
-    top: 15px;
     height: 35px;
     width: 35px;
     text-align: center;
@@ -193,8 +195,6 @@
     border-radius: 50%;
 }
 
-
-
 /* Icono de + para subir imagen */
 .upload-icon {
     position: absolute;
@@ -211,6 +211,8 @@
     font-size: 16px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: background 0.3s ease;
+    bottom: 0;
+    right: 0;
 }
 
 .upload-icon:hover {

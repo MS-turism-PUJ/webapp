@@ -3,7 +3,7 @@
   <div class="card-content-front">
     <h1 class="card-title">{{ content.name }}</h1> <!-- Nombre del contenido -->
     <!-- <h2>{{ content.categoria || 'Sin categoría' }}</h2> Categoría -->
-    <img src="./assets/food-service.png" alt="Imagen del servicio" class="card-image">
+    <img [src]="photo || './assets/no-content.jpg'" alt="Imagen del servicio" class="card-image max-h-60 object-cover">
     <p class="card-description">
       {{ content.description || 'Descripción no disponible.' }}
     </p>

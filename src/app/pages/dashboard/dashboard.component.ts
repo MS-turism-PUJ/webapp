@@ -21,12 +21,14 @@ import { Content } from '../../models/content';
   styleUrls: ['./dashboard.component.css'],
 })
 export class DashboardComponent implements OnInit {
-  contents: Content[] = []; // Cambiar `contents` a `contents` y usar el tipo Producto
+  contents: Content[] = [];
 
   constructor(private contentService: ContentService) {}
 
   async ngOnInit(): Promise<void> {
-    // Llamar al servicio actualizado para obtener la lista de contenidos como contents
-    this.contents = await this.contentService.getContents(1, 10);
+    this.contentService.contentsSubject.subscribe((contents) => {
+      this.contents = contents;
+    });
+    await this.contentService.syncAllContents();
   }
 }

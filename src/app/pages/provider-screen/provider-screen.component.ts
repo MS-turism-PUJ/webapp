@@ -31,7 +31,7 @@ export class ProviderScreenComponent implements OnInit {
     this.isPopupVisible = false;
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 
   goToLogin() {
     this.router.navigate(['/']);

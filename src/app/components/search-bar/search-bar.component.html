@@ -1,12 +1,17 @@
 <div class="search">
-    <form class="search-form">
+    <form class="search-form" (submit)="onSearch()">
         <div class="search-input-container">
             <input type="text" class="search-input" [(ngModel)]="searchText" name="searchInput"
                 (input)="onInputChange()" />
-            <div class="loader" [class.hidden]="searchText.length > 0">
+            <div class="loader" [class.hidden]="searchText && searchText.length > 0">
                 <span class="loader-text">Buscar...</span>
             </div>
         </div>
-        <i class="fas fa-search search-icon" (click)="onSearch()"></i>
+        <button *ngIf="loading" class="mr-2">
+            <app-loader></app-loader>
+        </button>
+        <button type="submit" class="search-button">
+            <i class="fas fa-search search-icon"></i>
+        </button>
     </form>
 </div>

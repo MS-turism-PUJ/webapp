@@ -10,22 +10,32 @@
       <div class="line-3"></div>
     </div>
   </label>
-  
+
   <div class="side_bar">
     <div class="title">
       <div class="logo">Categorías</div>
-      <label class="button cancel" for="toggleChecker">
+      <label class="button cancel bg-blue-100" for="toggleChecker">
         <i class="fas fa-times"></i>
       </label>
     </div>
+    
+    <button class="menu-item bg-blue-100" [class.active]="filters.has(ServiceCategory.ALIMENTATION)" (click)="onClickFilter(ServiceCategory.ALIMENTATION)">Alimentación</button>
+    <button class="menu-item bg-blue-100" [class.active]="filters.has(ServiceCategory.HOUSING)" (click)="onClickFilter(ServiceCategory.HOUSING)">Alojamiento</button>
+    <button class="menu-item bg-blue-100" [class.active]="filters.has(ServiceCategory.TRANSPORT)" (click)="onClickFilter(ServiceCategory.TRANSPORT)">Transport</button>
+    <button class="menu-item bg-blue-100" [class.active]="filters.has(ServiceCategory.ECO_WALK)" (click)="onClickFilter(ServiceCategory.ECO_WALK)">Paseo Ecológico</button>
 
-    <div class="menu-item">Dashboard</div>
-    <div class="menu-item">Shortcuts</div>
-    <div class="menu-item">Overview</div>
-    <div class="menu-item">Events</div>
-    <div class="menu-item">About</div>
-    <div class="menu-item">Services</div>
-    <div class="menu-item">Contact</div>
-    <div class="menu-item">Feedback</div>
+    <div class="title mt-4">
+      <div class="logo">Precios</div>
+    </div>
+    <div>
+      <div class="flex gap-2 items-center justify-between">
+        <label for="lessThan" class="text-xl">Menos que:</label>
+        <input id="lessThan" type="number" class="bg-blue-100 w-40 p-2 menu-item focus:outline-none" [(ngModel)]="price.lessThan" (input)="setLessThanPrice()">
+      </div>
+      <div class="flex gap-2 items-center justify-between">
+        <label for="moreThan" class="text-xl">Más que:</label>
+        <input id="lessThan" type="number" class="bg-blue-100 w-40 p-2 menu-item focus:outline-none" [(ngModel)]="price.moreThan" (input)="setMoreThanPrice()">
+      </div>
+    </div>
   </div>
 </div>

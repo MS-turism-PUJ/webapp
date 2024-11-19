@@ -25,21 +25,6 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  async goToDashboard() {
-    try {
-      await this.authService.login(this.loginForm.value.emailOrUsername, this.loginForm.value.password);
-
-      this.router.navigate(['/dashboard']);
-    } catch (error) {
-      Swal.fire({
-        icon: 'error',
-        title: 'Error',
-        text: 'Usuario o contraseña incorrectos',
-      });
-      console.error('Error en el login:', error);
-    }
-  }
-
   goToRegistry() {
     this.router.navigate(['/register']);
   }
@@ -61,7 +46,7 @@ export class LoginComponent implements OnInit {
           this.router.navigate(['/dashboard'])
 
         } else if (role === Role.PROVIDER) {
-          this.router.navigate(['/dashboard']) // TODO: Cambiar a la vista de proveedor
+          this.router.navigate(['/provider'])
 
         } else {
           console.error('Error en el login:', 'No se reconoce el rol del usuario');
