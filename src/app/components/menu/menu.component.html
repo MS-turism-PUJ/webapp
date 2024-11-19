@@ -19,13 +19,9 @@
       </label>
     </div>
 
-    <div class="menu-item">Dashboard</div>
-    <div class="menu-item">Shortcuts</div>
-    <div class="menu-item">Overview</div>
-    <div class="menu-item">Events</div>
-    <div class="menu-item">About</div>
-    <div class="menu-item">Services</div>
-    <div class="menu-item">Contact</div>
-    <div class="menu-item">Feedback</div>
+    <button class="menu-item" [class.active]="filters.has(ServiceCategory.ALIMENTATION)" (click)="onClickFilter(ServiceCategory.ALIMENTATION)">Alimentación</button>
+    <button class="menu-item" [class.active]="filters.has(ServiceCategory.HOUSING)" (click)="onClickFilter(ServiceCategory.HOUSING)">Alojamiento</button>
+    <button class="menu-item" [class.active]="filters.has(ServiceCategory.TRANSPORT)" (click)="onClickFilter(ServiceCategory.TRANSPORT)">Transport</button>
+    <button class="menu-item" [class.active]="filters.has(ServiceCategory.ECO_WALK)" (click)="onClickFilter(ServiceCategory.ECO_WALK)">Paseo Ecológico</button>
   </div>
 </div>

@@ -37,6 +37,7 @@
     font-size: 30px;
     font-weight: 700;
     background: linear-gradient(to right, #acacac, #acacac);
+    background-clip: text;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: 3px;

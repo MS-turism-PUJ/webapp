@@ -101,24 +101,25 @@
   width: auto;
 }
 
-.menu-item:hover {
-  transform: translateY(-3px);
+.menu-item.active {
   box-shadow:
     0 10px 20px rgba(0, 0, 0, 0.2); 
 }
 
-/* Hover para cambiar la sombra del borde interior */
-.menu-item:hover::before {
-  position: absolute;
-  content: '';
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  box-shadow:
-    inset -3px -3px 7px #ffffff,
-    inset 3px 3px 5px #ceced1;
-  border-radius: 20px;
+.menu-item:hover {
+  transform: translateY(-3px);
+  &::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    box-shadow:
+      inset -3px -3px 7px #ffffff,
+      inset 3px 3px 5px #ceced1;
+    border-radius: 20px;
+  }
 }
 
 

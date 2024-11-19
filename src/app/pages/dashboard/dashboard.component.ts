@@ -26,7 +26,9 @@ export class DashboardComponent implements OnInit {
   constructor(private contentService: ContentService) {}
 
   async ngOnInit(): Promise<void> {
-    // Llamar al servicio actualizado para obtener la lista de contenidos como contents
-    this.contents = await this.contentService.getContents(1, 10);
+    this.contentService.getContents().subscribe((contents) => {
+      this.contents = contents;
+    });
+    await this.contentService.syncAllContents();
   }
 }
