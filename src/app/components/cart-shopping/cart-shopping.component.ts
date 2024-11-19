@@ -29,11 +29,13 @@ export class CartShoppingComponent implements OnInit {
 
   constructor(private cartService: CartService) {}
 
-  async ngOnInit() {
-    this.payment = await this.cartService.getCartItems()
+  ngOnInit() {
+    this.cartService.getCart().subscribe((payment) => {
+      this.payment = payment
+    })
   }
 
-  onEliminarItem(item: Service) {
-    this.cartService.removeItem(item.serviceId)
+  async onEliminarItem(item: Service) {
+    await this.cartService.removeItem(item.serviceId)
   }
 }

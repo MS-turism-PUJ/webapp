@@ -29,8 +29,8 @@ export class CartItemComponent {
 
   constructor(private cartService: CartService, private sweetAlertService: SweetAlertService) {}
   
-  onEliminar() {
-    this.cartService.removeItem(this.service.serviceId);
+  async onEliminar() {
+    await this.cartService.removeItem(this.service.serviceId);
     this.sweetAlertService.mostrarCorrectamente('Producto eliminado');
   }
 }

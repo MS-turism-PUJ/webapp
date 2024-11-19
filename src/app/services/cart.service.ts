@@ -1,39 +1,57 @@
 import { Injectable } from '@angular/core';
 import { Apollo, gql } from 'apollo-angular';
 import { Payment } from '../models/payment';
-import { map } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class CartService {
-  constructor(private apollo: Apollo) { }
+  payment: Payment = {
+    paymentId: '',
+    totalAmount: 0,
+    user: {
+      userId: 0,
+      name: '',
+      email: '',
+      username: ''
+    },
+    paid: false,
+    services: []
+  };
 
-  async getCartItems(): Promise<Payment> {
+  private cartSubject = new BehaviorSubject<Payment>(this.payment);
+
+  constructor(private apollo: Apollo) {
+    this.syncCart();
+  }
+
+  private async syncCart() {
     const result = await this.apollo.query<{ getMyShoppingCart: Payment }>({
       query: gql`
-        query getMyShoppingCart {
-          getMyShoppingCart {
-            totalAmount
-            paid
-            services {
-              name
-              price
-              description
-            }
-            user {
-              name
-              email
-              username
-            }
+      query getMyShoppingCart {
+        getMyShoppingCart {
+          totalAmount
+          paid
+          services {
+            serviceId
+            name
+            price
+            description
+          }
+          user {
+            name
+            email
+            username
           }
         }
-      `
+      }
+      `,
+      fetchPolicy: 'network-only'
     }).pipe(
-      // Mapear la respuesta al modelo Producto
       map(result => {
         const info = result.data.getMyShoppingCart;
-        info.services = info.services.map(service => {
+        const services = info.services.map(service => {
           return {
             serviceId: service.serviceId,
             name: service.name,
@@ -45,15 +63,21 @@ export class CartService {
             user: info.user
           }
         });
-        return info;
+        return { ...info, services };
       })
     ).toPromise();
 
-    return result || new Payment('', 0, { userId: 0, name: '', email: '', username: '' }, false, []);
+    result && (this.payment = result);
+
+    this.cartSubject.next(this.payment);
+  }
+
+  getCart(): Observable<Payment> {
+    return this.cartSubject.asObservable();
   }
 
   async addToCart(serviceId: string) {
-    const response = await this.apollo.mutate({
+    await this.apollo.mutate({
       mutation: gql`
         mutation addToMyShoppingCart($serviceId: ID!) {
           addToMyShoppingCart(serviceId: $serviceId)
@@ -63,6 +87,8 @@ export class CartService {
         serviceId
       }
     }).toPromise();
+
+    this.syncCart();
   }
 
   async removeItem(serviceId: string) {
@@ -76,5 +102,7 @@ export class CartService {
         serviceId
       }
     }).toPromise();
+
+    this.syncCart();
   }
 }

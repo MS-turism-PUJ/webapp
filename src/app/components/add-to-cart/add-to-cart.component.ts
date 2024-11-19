@@ -16,7 +16,6 @@ export class AddToCartComponent {
   constructor(private cartService: CartService, private sweetAlertService: SweetAlertService) {}
 
   async addToCart() {
-    console.log('serviceId', this.serviceId);
     await this.cartService.addToCart(this.serviceId);
     this.sweetAlertService.mostrarCorrectamente('Servicio agregado');
   }
