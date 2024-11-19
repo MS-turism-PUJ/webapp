@@ -16,7 +16,11 @@ export class SearchBarComponent {
   previousTimeout: any;
   loading: boolean = false;
 
-  constructor(private contentService: ContentService) { }
+  constructor(private contentService: ContentService) {
+    this.contentService.loadingSubject.subscribe((loading) => {
+      this.loading = loading;
+    });
+  }
 
   onInputChange() {
     this.loading = true;
@@ -28,6 +32,5 @@ export class SearchBarComponent {
 
   async onSearch() {
     await this.contentService.syncContentsByFilter({ filter: this.searchText });
-    this.loading = false;
   }
 }

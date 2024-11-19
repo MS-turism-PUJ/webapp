@@ -26,7 +26,7 @@ export class DashboardComponent implements OnInit {
   constructor(private contentService: ContentService) {}
 
   async ngOnInit(): Promise<void> {
-    this.contentService.getContents().subscribe((contents) => {
+    this.contentService.contentsSubject.subscribe((contents) => {
       this.contents = contents;
     });
     await this.contentService.syncAllContents();

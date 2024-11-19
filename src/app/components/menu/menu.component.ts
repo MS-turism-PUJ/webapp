@@ -11,9 +11,17 @@ import { ContentService } from '../../services/content.service';
 })
 export class MenuComponent {
   filters: Set<ServiceCategory> = new Set();
+  filter?: string;
   ServiceCategory = ServiceCategory;
 
-  constructor(private contentService: ContentService) {}
+  constructor(private contentService: ContentService) {
+    this.contentService.filterSubject.subscribe(filter => {
+      this.filter = filter;
+    });
+    this.contentService.categoriesSubject.subscribe(categories => {
+      this.filters = new Set(categories || []);
+    });
+  }
 
   onClickFilter(filter: ServiceCategory) {
     if (this.filters.has(filter)) {
@@ -22,7 +30,9 @@ export class MenuComponent {
       this.filters.add(filter);
     }
 
-    this.contentService.syncContentsByFilter({ categories: Array.from(this.filters) });
+    const categories = this.filters.size !== 0 ? Array.from(this.filters) : undefined;
+
+    this.contentService.syncContentsByFilter({ filter: this.filter, categories });
   }
 
 }

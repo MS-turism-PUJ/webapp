@@ -8,19 +8,16 @@ import { ServiceCategory } from '../models/service.category';
   providedIn: 'root'
 })
 export class ContentService {
-  contents: Content[] = [];
-  filter: string = '';
-  page: number = 1;
-  limit: number = 10;
-  categories?: ServiceCategory[];
+  contentsSubject = new BehaviorSubject<Content[]>([]);
+  filterSubject = new BehaviorSubject<string | undefined>(undefined);
+  categoriesSubject = new BehaviorSubject<ServiceCategory[] | undefined>(undefined);
+  loadingSubject = new BehaviorSubject<boolean>(false);
 
-  private contentsSubject = new BehaviorSubject<Content[]>(this.contents);
-  private pageSubject = new BehaviorSubject<number>(this.page);
-  private limitSubject = new BehaviorSubject<number>(this.limit);
-
-  constructor(private apollo: Apollo) { }
+  constructor(private apollo: Apollo) {}
 
   async syncAllContents(page: number = 1, limit: number = 10) {
+    this.loadingSubject.next(true);
+
     const result = await this.apollo.query<{ findAllContents: Content[] }>({
       query: gql`
         query findAllContents($page: Int, $limit: Int) {
@@ -73,9 +70,10 @@ export class ContentService {
       })
     ).toPromise();
 
-    this.contents = result || [];
-
-    this.contentsSubject.next(this.contents);
+    this.contentsSubject.next(result || []);
+    this.filterSubject.next(undefined);
+    this.categoriesSubject.next(undefined);
+    this.loadingSubject.next(false);
   }
 
   async syncContentsByFilter(
@@ -90,12 +88,7 @@ export class ContentService {
     page: number = 1,
     limit: number = 10
   ) {
-    if (!filter.categories) {
-      filter.categories = this.categories;
-    }
-    if (!filter.filter) {
-      filter.filter = this.filter;
-    }
+    this.loadingSubject.next(true);
 
     const result = await this.apollo.query<{ findContentsByFilter: Content[] }>({
       query: gql`
@@ -150,13 +143,10 @@ export class ContentService {
       })
     ).toPromise();
 
-    this.contents = result || [];
-
-    this.contentsSubject.next(this.contents);
-  }
-
-  getContents(): Observable<Content[]> {
-    return this.contentsSubject.asObservable();
+    this.contentsSubject.next(result || []);
+    this.filterSubject.next(filter.filter);
+    this.categoriesSubject.next(filter.categories);
+    this.loadingSubject.next(false);
   }
 
   async getContentById(contentId: string): Promise<Content | null> {
