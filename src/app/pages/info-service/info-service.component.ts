@@ -2,13 +2,14 @@ import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import moment from 'moment';
 import { WeatherComponent } from '../../components/weather/weather.component';
-import { SweetAlertService } from '../../services/sweet-alert.service';
 import { AddToCartComponent } from '../../components/add-to-cart/add-to-cart.component';
 import { GoogleMapsComponent } from '../../components/google-maps/google-maps.component';
 import { GoToDashboardComponent } from '../../components/go-to-dashboard/go-to-dashboard.component';
 import { ActivatedRoute } from '@angular/router';
 import { ContentService } from '../../services/content.service';
 import { Content } from '../../models/content';
+import { RatingService } from '../../services/rating.service';
+import { Rating } from '../../models/rating';
 
 
 
@@ -33,6 +34,11 @@ export class InfoServiceComponent {
     photo: ''
   };
   photo: string = '';
+
+  myRating: Rating = {
+    rating: 0,
+    comment: ''
+  };
 
   cityName: string = '';
 
@@ -59,21 +65,32 @@ export class InfoServiceComponent {
   averageRatingReceived: number = 0;
   constructor(
     private route: ActivatedRoute,
-    private contentService: ContentService
-  ) { }
+    private contentService: ContentService,
+    private ratingService: RatingService,
+  ) {}
 
 
-  ngOnInit(): void {
+  async ngOnInit(): Promise<void> {
     this.getDaysFromDate(4, 2024)
     this.getDaysFromDateExit(4, 2024)
 
     const contentId = this.route.snapshot.paramMap.get('contentId');
 
     if (contentId) {
-      this.fetchContent(contentId);
       this.contentService.getPhoto(contentId).then((photo) => {
         this.photo = photo;
       });
+      await this.fetchContent(contentId);
+      this.ratingService.getAverageRating(this.content.service?.serviceId || '').then((averageRating) => {
+        this.averageRatingReceived = averageRating;
+      });
+      this.ratingService.getMyRating(this.content.service?.serviceId || '').then((myRating) => {
+        this.myRating = myRating;
+      });
+      this.ratingService.getQuantityRating(this.content.service?.serviceId || '').then((quantityRating) => {
+        this.reviewsCountReceived = quantityRating;
+      });
+
     } else {
       console.error('No se encontró el ID del contenido en la URL.');
     }
@@ -174,10 +191,28 @@ export class InfoServiceComponent {
     const parse = `${monthYear}-${day.value}`
     const objectDate = moment(parse)
     this.dateValueExit = objectDate;
-
   }
 
+  setChecked(value: number) {
+    if (!this.content.service) {
+      return;
+    }
+    this.myRating = new Rating(value, this.myRating.comment);
 
+    this.ratingService.rateService(this.content.service?.serviceId, this.myRating);
+  }
+
+  async onChangeComment() {
+    const target = document.getElementById('comment') as HTMLInputElement;
+
+    if (!this.content.service) {
+      return;
+    }
+
+    this.myRating = new Rating(this.myRating.rating, target.value);
+
+    this.ratingService.rateService(this.content.service?.serviceId, this.myRating);
+  }
 
 }
 
