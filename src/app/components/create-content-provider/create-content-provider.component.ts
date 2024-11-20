@@ -41,8 +41,8 @@ export class CreateContentProviderComponent {
 
       // Campos específicos según el tipo de servicio
       latitude: [{ value: '', disabled: this.areCoordinatesManagedByMap }], // Inicialmente deshabilitado
-      longitude: [{ value: '', disabled: this.areCoordinatesManagedByMap }], 
-      arrivalLatitude: [{ value: '', disabled: this.areCoordinatesManagedByMap }], 
+      longitude: [{ value: '', disabled: this.areCoordinatesManagedByMap }],
+      arrivalLatitude: [{ value: '', disabled: this.areCoordinatesManagedByMap }],
       arrivalLongitude: [{ value: '', disabled: this.areCoordinatesManagedByMap }],
       departureDate: [''], // Opcional
       duration: [''], // Opcional
@@ -160,7 +160,8 @@ export class CreateContentProviderComponent {
 
   private buildContentData(): any {
     const formValues = this.contentForm.value;
-    if (this.selectedService == "TRANSPORT" || this.selectedService == "ECO_WALK" || this.selectedService == "ALIMENTATION") {
+    if (this.selectedService == "TRANSPORT") {
+      console.log("LATITUD Y LONGITUD", formValues.latitude, formValues.longitude);
       const content = {
         name: formValues.name,
         description: formValues.description || '',
@@ -173,12 +174,79 @@ export class CreateContentProviderComponent {
             city: formValues.city,
             country: formValues.country,
             departure: {
-              latitude: formValues.latitude || null,
-              longitude: formValues.longitude || null,
+              latitude: (document.getElementById("latitude") as HTMLInputElement).value || null,
+              longitude: (document.getElementById("longitude") as HTMLInputElement).value || null,
             },
             arrival: {
-              latitude: formValues.arrivalLatitude || null,
-              longitude: formValues.arrivalLongitude || null
+              latitude: (document.getElementById("arrivalLatitude") as HTMLInputElement).value || null,
+              longitude: (document.getElementById("arrivalLongitude") as HTMLInputElement).value || null
+            },
+            departureDate: formValues.departureDate || null,
+            duration: formValues.duration || null,
+            transportType: formValues.transportType || null,
+            drink: formValues.drink || null,
+            lunch: formValues.lunch || null,
+            dessert: formValues.dessert || null,
+            category: formValues.serviceType
+          }
+          : null
+      };
+      console.log('contenido antes de enviar', content);
+      return content;
+    }
+    else if (this.selectedService == "ECO_WALK") {
+      console.log("DATE", formValues.departureDate);
+      const content = {
+        name: formValues.name,
+        description: formValues.description || '',
+        photo: formValues.photo,
+        service: this.hasService
+          ? {
+            name: formValues.nameService,
+            description: formValues.descriptionService,
+            price: formValues.price,
+            city: formValues.city,
+            country: formValues.country,
+            departure: {
+              latitude: (document.getElementById("latitude") as HTMLInputElement).value || null,
+              longitude: (document.getElementById("longitude") as HTMLInputElement).value || null,
+            },
+            arrival: {
+              latitude: (document.getElementById("arrivalLatitude") as HTMLInputElement).value || null,
+              longitude: (document.getElementById("arrivalLongitude") as HTMLInputElement).value || null
+            },
+            date: formValues.departureDate || null,
+            duration: formValues.duration || null,
+            transportType: formValues.transportType || null,
+            drink: formValues.drink || null,
+            lunch: formValues.lunch || null,
+            dessert: formValues.dessert || null,
+            category: formValues.serviceType
+          }
+          : null
+      };
+      console.log('contenido antes de enviar', content);
+      return content;
+    }
+    else if (this.selectedService == "ALIMENTATION") {
+      const content = {
+        name: formValues.name,
+        description: formValues.description || '',
+        photo: formValues.photo,
+        service: this.hasService
+          ? {
+            name: formValues.nameService,
+            description: formValues.descriptionService,
+            price: formValues.price,
+            city: formValues.city,
+            country: formValues.country,
+            departure: {
+              latitude: 0,
+              longitude: 0,
+            },
+            arrival: {
+              latitude: 0,
+              longitude: 0
             },
             departureDate: formValues.departureDate || null,
             duration: formValues.duration || null,
@@ -206,8 +274,8 @@ export class CreateContentProviderComponent {
             city: formValues.city,
             country: formValues.country,
             place: {
-              latitude: formValues.latitude || null,
-              longitude: formValues.longitude || null,
+              latitude: (document.getElementById("latitude") as HTMLInputElement).value || null,
+              longitude: (document.getElementById("longitude") as HTMLInputElement).value || null,
             },
             date: formValues.departureDate || null,
             duration: formValues.duration || null,

@@ -201,7 +201,7 @@
                         <div class="service-grid-content">
                             <div class="service-inputs-container">
                                 <div class="field">
-                                    <input type="text" formControlName="latitude" placeholder=" "
+                                    <input id="latitude" type="text" formControlName="latitude" placeholder=" "
                                         [class.invalid]="contentForm.get('latitude')?.invalid && contentForm.get('latitude')?.touched">
                                     <span class="fa-solid fa-ruler-horizontal"></span>
                                     <label>Latitud *</label>
@@ -229,7 +229,7 @@
                             </div>
                             <div class="service-variable-container">
                                 <div class="field">
-                                    <input type="text" formControlName="longitude" placeholder=" "
+                                    <input id="longitude" type="text" formControlName="longitude" placeholder=" "
                                         [class.invalid]="contentForm.get('longitude')?.invalid && contentForm.get('longitude')?.touched">
                                     <span class="fa-solid fa-ruler-vertical"></span>
                                     <label>Longitud *</label>
@@ -267,7 +267,7 @@
                             <div class="service-inputs-container">
                                 <!-- Latitud -->
                                 <div class="field">
-                                    <input type="text" formControlName="latitude" placeholder=" "
+                                    <input id="latitude" type="text" formControlName="latitude" placeholder=" "
                                         [class.invalid]="contentForm.get('latitude')?.invalid && contentForm.get('latitude')?.touched">
                                     <span class="fa-solid fa-ruler-horizontal"></span>
                                     <label>Latitud *</label>
@@ -279,7 +279,8 @@
 
                                 <!-- Latitud de Llegada -->
                                 <div class="field">
-                                    <input type="text" formControlName="arrivalLatitude" placeholder=" "
+                                    <input id="arrivalLatitude" type="text" formControlName="arrivalLatitude"
+                                        placeholder=" "
                                         [class.invalid]="contentForm.get('arrivalLatitude')?.invalid && contentForm.get('arrivalLatitude')?.touched">
                                     <span class="fa-solid fa-ruler-horizontal"></span>
                                     <label>Latitud de Llegada *</label>
@@ -307,7 +308,7 @@
                             <div class="service-variable-container">
                                 <!-- Longitud -->
                                 <div class="field">
-                                    <input type="text" formControlName="longitude" placeholder=" "
+                                    <input id="longitude" type="text" formControlName="longitude" placeholder=" "
                                         [class.invalid]="contentForm.get('longitude')?.invalid && contentForm.get('longitude')?.touched">
                                     <span class="fa-solid fa-ruler-vertical"></span>
                                     <label>Longitud *</label>
@@ -319,7 +320,8 @@
 
                                 <!-- Longitud de Llegada -->
                                 <div class="field">
-                                    <input type="text" formControlName="arrivalLongitude" placeholder=" "
+                                    <input id="arrivalLongitude" type="text" formControlName="arrivalLongitude"
+                                        placeholder=" "
                                         [class.invalid]="contentForm.get('arrivalLongitude')?.invalid && contentForm.get('arrivalLongitude')?.touched">
                                     <span class="fa-solid fa-ruler-vertical"></span>
                                     <label>Longitud de Llegada *</label>
@@ -370,7 +372,7 @@
                             <div class="service-inputs-container">
                                 <!-- Latitud -->
                                 <div class="field">
-                                    <input type="text" formControlName="latitude" placeholder=" "
+                                    <input id="latitude" type="text" formControlName="latitude" placeholder=" "
                                         [class.invalid]="contentForm.get('latitude')?.invalid && contentForm.get('latitude')?.touched">
                                     <span class="fa-solid fa-ruler-horizontal"></span>
                                     <label>Latitud *</label>
@@ -382,7 +384,8 @@
 
                                 <!-- Latitud de Llegada -->
                                 <div class="field">
-                                    <input type="text" formControlName="arrivalLatitude" placeholder=" "
+                                    <input id="arrivalLatitude" type="text" formControlName="arrivalLatitude"
+                                        placeholder=" "
                                         [class.invalid]="contentForm.get('arrivalLatitude')?.invalid && contentForm.get('arrivalLatitude')?.touched">
                                     <span class="fa-solid fa-ruler-horizontal"></span>
                                     <label>Latitud de Llegada *</label>
@@ -410,7 +413,7 @@
                             <div class="service-variable-container">
                                 <!-- Longitud -->
                                 <div class="field">
-                                    <input type="text" formControlName="longitude" placeholder=" "
+                                    <input id="longitude" type="text" formControlName="longitude" placeholder=" "
                                         [class.invalid]="contentForm.get('longitude')?.invalid && contentForm.get('longitude')?.touched">
                                     <span class="fa-solid fa-ruler-vertical"></span>
                                     <label>Longitud *</label>
@@ -422,7 +425,8 @@
 
                                 <!-- Longitud de Llegada -->
                                 <div class="field">
-                                    <input type="text" formControlName="arrivalLongitude" placeholder=" "
+                                    <input id="arrivalLongitude" type="text" formControlName="arrivalLongitude"
+                                        placeholder=" "
                                         [class.invalid]="contentForm.get('arrivalLongitude')?.invalid && contentForm.get('arrivalLongitude')?.touched">
                                     <span class="fa-solid fa-ruler-vertical"></span>
                                     <label>Longitud de Llegada *</label>
