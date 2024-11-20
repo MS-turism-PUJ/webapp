@@ -123,6 +123,10 @@ export class AuthService {
     return this.token
   }
 
+  public getRole(): Role | null {
+    return this.role
+  }
+
   public hasRole(...roles: Role[]): boolean {
     if (!this.role) {
       return false

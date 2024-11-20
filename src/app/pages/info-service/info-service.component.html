@@ -268,7 +268,7 @@
             <div class="eachitem"></div>
           </div>
           <h1>Total: $ {{ content.service?.price }} pesos</h1>
-          <div class="reserve">
+          <div class="reserve" *ngIf="role !== 'PROVIDER'">
             <app-add-to-cart [serviceId]="content.service?.serviceId || ''"></app-add-to-cart>
           </div>
         </div>

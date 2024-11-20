@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from '../../services/auth.service';
 
 @Component({
   selector: 'app-go-to-dashboard',
@@ -10,10 +11,13 @@ import { Router } from '@angular/router';
 })
 export class GoToDashboardComponent {
 
-  constructor(private router: Router) {
-  }
-  goToDashboard() {
-    this.router.navigate(['/dashboard']);
+  constructor(private router: Router, private authService: AuthService) { }
 
+  goToDashboard() {
+    if (this.authService.getRole() === "PROVIDER") {
+      this.router.navigate(['/provider']);
+    } else {
+      this.router.navigate(['/dashboard']);
+    }
   }
 }

@@ -6,6 +6,8 @@ import { Router } from '@angular/router';
 
 import { Content } from '../../models/content';
 import { ContentService } from '../../services/content.service';
+import { AuthService } from '../../services/auth.service';
+import { Role } from '../../models/role';
 
 @Component({
   selector: 'app-card',
@@ -30,12 +32,15 @@ export class CardComponent {
 
   photo: string = '';
 
-  constructor(private cartService: CartService, private router: Router, private contentService: ContentService) {}
+  role: Role | null = null;
+
+  constructor(private cartService: CartService, private router: Router, private contentService: ContentService, private authService: AuthService) {}
   
   ngOnInit(): void {
     this.contentService.getPhoto(this.content.contentId).then((photo) => {
       this.photo = photo;
     });
+    this.role = this.authService.getRole();
   }
 
   addToCart() {

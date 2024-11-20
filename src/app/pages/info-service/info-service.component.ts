@@ -13,6 +13,8 @@ import { Rating } from '../../models/rating';
 import { QuestionService } from '../../services/question.service';
 import { Question } from '../../models/question';
 import { StarsComponent } from '../../components/stars/stars.component';
+import { AuthService } from '../../services/auth.service';
+import { Role } from '../../models/role';
 
 
 
@@ -51,6 +53,8 @@ export class InfoServiceComponent {
 
   cityName: string = '';
 
+  role: Role | null = null;
+
   showRatingsPopup: boolean = false;
 
   week: any = [
@@ -78,13 +82,16 @@ export class InfoServiceComponent {
     private route: ActivatedRoute,
     private contentService: ContentService,
     private ratingService: RatingService,
-    private questionService: QuestionService
+    private questionService: QuestionService,
+    private authService: AuthService
   ) {}
 
 
   async ngOnInit(): Promise<void> {
     this.getDaysFromDate(4, 2024)
     this.getDaysFromDateExit(4, 2024)
+
+    this.role = this.authService.getRole();
 
     this.contentId = this.route.snapshot.paramMap.get('contentId') || '';
 
