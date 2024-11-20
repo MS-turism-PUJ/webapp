@@ -6,7 +6,7 @@ export class User {
     public username: string,
     public phone?: number,
     public age?: number,
-    public webpage?: string,
+    public webPage?: string,
     public description?: string,
     public socialmedia?: string,
 

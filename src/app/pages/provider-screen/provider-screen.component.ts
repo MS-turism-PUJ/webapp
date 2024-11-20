@@ -36,7 +36,7 @@ export class ProviderScreenComponent implements OnInit {
     username: '',
     phone: 0,
     age: 0,
-    webpage: '',
+    webPage: '',
     description: '',
     socialmedia: ''
   }
