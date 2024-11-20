@@ -6,6 +6,8 @@ import { ContentService } from '../../services/content.service';
 import { Content } from '../../models/content';
 import { CardComponent } from '../../components/card/card.component';
 import { CreateContentProviderComponent } from '../../components/create-content-provider/create-content-provider.component';
+import { UserService } from '../../services/user.service';
+import { User } from '../../models/user';
 
 @Component({
   selector: 'app-provider-screen',
@@ -24,12 +26,24 @@ export class ProviderScreenComponent implements OnInit {
   file?: File;
   isPopupVisible: boolean = false;
 
-  contents: Content[] = []; // Arreglo para almacenar las tarjetas
+  contents: Content[] = []; 
+  user:User = {
+    userId: 0,
+    name: '',
+    email: '',
+    username: '',
+    phone: 0,
+    age: 0,
+    webpage: '',
+    description: '',
+    socialmedia: ''
+  } 
 
   constructor(
     private router: Router,
     private authService: AuthService,
-    private contentService: ContentService // Servicio para obtener los contenidos
+    private contentService: ContentService,
+    private userService: UserService
   ) { }
 
   async ngOnInit(): Promise<void> {
@@ -39,7 +53,14 @@ export class ProviderScreenComponent implements OnInit {
     });
 
     // Sincronizar contenidos
-    await this.contentService.syncAllContents();
+
+
+    this.userService.getMyInfo().then((user) => {
+      this.user = user;
+      console.log('user', user);
+      
+    } );
+
   }
 
   openPopup() {

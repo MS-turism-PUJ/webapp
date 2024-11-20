@@ -25,41 +25,36 @@
         <div class="step">
             <div class="data-provider">
                 <span class="fas fa-user"></span>
-                <label>Nombre</label>
+                <label>{{ user.name || 'Nombre' }}</label>
             </div>
             <div class="data-provider">
                 <span class="fas fa-user-circle"></span>
-                <label>Usuario</label>
+                <label>{{ user.username || 'Nombre de usuario' }}</label>
             </div>
             <div class="data-provider">
                 <span class="fas fa-envelope"></span>
-                <label>Email</label>
+                <label>{{ user.email || 'Email' }}</label>
             </div>
-
             <div class="data-provider">
                 <span class="fas fa-phone"></span>
-                <label>Número de Teléfono</label>
+                <label>{{ user.phone || 'Telefono' }}</label>
             </div>
             <div class="data-provider">
                 <span class="fas fa-birthday-cake"></span>
-                <label>Edad</label>
+                <label>{{ user.age || 'Edad' }}</label>
             </div>
-
             <div class="data-provider">
                 <span class="fas fa-globe"></span>
-                <label>Página web</label>
+                <label>{{ user.webpage || 'Pagina web' }}</label>
             </div>
-
-
             <div class="data-provider">
                 <span class="fa-solid fa-square-pen"></span>
-                <label>Descripción</label>
+                <label>{{ user.description || 'Descripcion' }}</label>
             </div>
             <div class="data-provider">
                 <span class="fas fa-share-alt"></span>
-                <label>Redes sociales</label>
+                <label>{{ user.socialmedia || 'Redes sociales' }}</label>
             </div>
-
         </div>
 
     </div>

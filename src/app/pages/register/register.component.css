@@ -70,6 +70,8 @@ body {
     
 }
 
+
+
 .wrapper .img-area {
     height: 150px;
     width: 150px;
@@ -195,13 +197,16 @@ body {
     border-radius: 50%;
 }
 
+.wrapper {
+    position: relative;
+}
 
 
 /* Icono de + para subir imagen */
 .upload-icon {
     position: absolute;
     bottom: 0;
-    right: 165px;
+    right: 15px;
     background: #a2a2a2;
     color: white;
     padding: 0.6rem;
