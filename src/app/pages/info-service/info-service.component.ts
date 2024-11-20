@@ -10,6 +10,8 @@ import { ContentService } from '../../services/content.service';
 import { Content } from '../../models/content';
 import { RatingService } from '../../services/rating.service';
 import { Rating } from '../../models/rating';
+import { QuestionService } from '../../services/question.service';
+import { Question } from '../../models/question';
 
 
 
@@ -40,6 +42,10 @@ export class InfoServiceComponent {
     comment: ''
   };
 
+  contentId: string = '';
+
+  questions: Question[] = [];
+
   cityName: string = '';
 
   week: any = [
@@ -67,6 +73,7 @@ export class InfoServiceComponent {
     private route: ActivatedRoute,
     private contentService: ContentService,
     private ratingService: RatingService,
+    private questionService: QuestionService
   ) {}
 
 
@@ -74,13 +81,13 @@ export class InfoServiceComponent {
     this.getDaysFromDate(4, 2024)
     this.getDaysFromDateExit(4, 2024)
 
-    const contentId = this.route.snapshot.paramMap.get('contentId');
+    this.contentId = this.route.snapshot.paramMap.get('contentId') || '';
 
-    if (contentId) {
-      this.contentService.getPhoto(contentId).then((photo) => {
+    if (this.contentId) {
+      this.contentService.getPhoto(this.contentId).then((photo) => {
         this.photo = photo;
       });
-      await this.fetchContent(contentId);
+      await this.fetchContent(this.contentId);
       this.ratingService.getAverageRating(this.content.service?.serviceId || '').then((averageRating) => {
         this.averageRatingReceived = averageRating;
       });
@@ -89,6 +96,9 @@ export class InfoServiceComponent {
       });
       this.ratingService.getQuantityRating(this.content.service?.serviceId || '').then((quantityRating) => {
         this.reviewsCountReceived = quantityRating;
+      });
+      this.questionService.getQuestions(this.contentId || '').then((questions) => {
+        this.questions = questions;
       });
 
     } else {
@@ -215,6 +225,20 @@ export class InfoServiceComponent {
     this.myRating = new Rating(this.myRating.rating, target.value);
 
     this.ratingService.rateService(this.content.service?.serviceId, this.myRating);
+  }
+
+  publishQuestion() {
+    if (!this.content.service) {
+      return;
+    }
+
+    const input = document.getElementById('question') as HTMLInputElement;
+
+    const question = new Question(input.value);
+
+    this.questionService.createQuestion(this.contentId, question).then(() => {
+      this.questions.push(question);
+    });
   }
 
 }

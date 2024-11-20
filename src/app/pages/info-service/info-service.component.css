@@ -111,13 +111,12 @@ h1,
 
 .details {
     display: flex;
-    gap: 15rem;
+    justify-content: space-between;
     padding: 2.5rem 0rem 2.5rem 0rem;
 }
 
 .details>.placedetails {
-    flex: 2.5;
-
+    width: 40%;
 }
 
 
@@ -178,11 +177,9 @@ h1,
     text-decoration: underline;
 }
 
-.rentalapplication>.details>.summary {
-    flex: 1;
-    height: 100%;
-    padding: 2rem 2rem 2rem 2rem;
-
+.summary {
+    width: 100%;
+    padding: 1rem 2rem;
     border-radius: 10px;
     background: #e2e2e2;
     border-radius: 10px;
@@ -190,7 +187,7 @@ h1,
         2px 2px 5px rgba(94, 104, 121, 0.288);
 }
 
-.rentalapplication>.details>.summary>.itemsdetails {
+.summary>.itemsdetails {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
 
@@ -202,7 +199,7 @@ h1,
     margin: 2rem 0 2rem 0;
 }
 
-.rentalapplication>.details>.summary>.itemsdetails>.eachitem {
+.summary>.itemsdetails>.eachitem {
     padding: 1rem;
 
     background-color: #e2e2e2;
@@ -210,25 +207,25 @@ h1,
 
 }
 
-.rentalapplication>.details>.summary>.itemsdetails>.eachitem>h5 {
+.summary>.itemsdetails>.eachitem>h5 {
     color: gray;
 }
 
-.rentalapplication>.details>.summary>.itemsdetails>.eachitem:nth-child(3) {
+.summary>.itemsdetails>.eachitem:nth-child(3) {
     grid-column: 1 / -1;
     /* Ocupar ambas columnas */
 
     /* Borde superior para separar de las fechas */
 }
 
-.rentalapplication>.details>.summary>.itemsdetails>.eachitem:nth-child(2) {
+.summary>.itemsdetails>.eachitem:nth-child(2) {
 
 
     border-top-right-radius: 10px;
     /* Borde superior para separar de las fechas */
 }
 
-.rentalapplication>.details>.summary>.itemsdetails>.eachitem:nth-child(1) {
+.summary>.itemsdetails>.eachitem:nth-child(1) {
 
 
     border-top-left-radius: 10px;
@@ -236,13 +233,13 @@ h1,
 }
 
 /* Agregar un estilo más específico para el borde inferior del último elemento de la cuadrícula */
-.rentalapplication>.details>.summary>.itemsdetails>.eachitem:last-child {
+.summary>.itemsdetails>.eachitem:last-child {
     border-bottom-left-radius: 10px;
     border-bottom-right-radius: 10px;
 
 }
 
-.rentalapplication>.details>.summary>.reserve {
+.summary>.reserve {
     margin-top: 1rem;
     justify-content: center;
     align-items: center;
