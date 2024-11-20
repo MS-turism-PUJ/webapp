@@ -1,5 +1,5 @@
 <div class="rating">
-  <div [class.active]="rating <= 1">
+  <div [class.active]="rating >= 5">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <path
         pathLength="360"
@@ -7,7 +7,7 @@
       ></path>
     </svg>
   </div>
-  <div [class.active]="rating <= 2">
+  <div [class.active]="rating >= 4">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <path
         pathLength="360"
@@ -15,7 +15,7 @@
       ></path>
     </svg>
   </div>
-  <div [class.active]="rating <= 3">
+  <div [class.active]="rating >= 3">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <path
         pathLength="360"
@@ -23,7 +23,7 @@
       ></path>
     </svg>
   </div>
-  <div [class.active]="rating <= 4">
+  <div [class.active]="rating >= 2">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <path
         pathLength="360"
@@ -31,7 +31,7 @@
       ></path>
     </svg>
   </div>
-  <div [class.active]="rating <= 5">
+  <div [class.active]="rating >= 1">
     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
       <path
         pathLength="360"
