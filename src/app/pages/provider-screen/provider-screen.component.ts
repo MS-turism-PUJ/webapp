@@ -39,6 +39,7 @@ export class ProviderScreenComponent implements OnInit {
     socialmedia: ''
   } 
 
+  photo: string = '';
   constructor(
     private router: Router,
     private authService: AuthService,
@@ -57,8 +58,10 @@ export class ProviderScreenComponent implements OnInit {
 
     this.userService.getMyInfo().then((user) => {
       this.user = user;
-      console.log('user', user);
-      
+    } );
+
+    this.userService.getMyphoto().then((photo) => {
+      this.photo = photo;
     } );
 
   }

@@ -24,4 +24,15 @@ export class UserService {
     const result = await this.axiosInstance.get("/");
     return result.data;
   }
+
+
+  async getMyphoto(): Promise<string>
+  {
+    const result = await this.axiosInstance.get("/photo",{ responseType: 'blob',});
+    
+    return URL.createObjectURL(result.data);
+  }
+
+
+
 }
