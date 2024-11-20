@@ -6,6 +6,7 @@ import { ServiceCategory } from '../models/service.category';
 import axios, { AxiosInstance } from 'axios';
 import { API_URL } from '../config/environment/urls';
 import { AuthService } from './auth.service';
+import { ServiceService } from './service.service';
 
 @Injectable({
   providedIn: 'root'
@@ -20,7 +21,7 @@ export class ContentService {
 
   axiosInstance: AxiosInstance
 
-  constructor(private apollo: Apollo, private authService: AuthService) {
+  constructor(private apollo: Apollo, private authService: AuthService, private serviceService: ServiceService) {
     this.axiosInstance = axios.create({
       baseURL: `${API_URL}/services/contents`,
       headers: {
@@ -239,6 +240,51 @@ export class ContentService {
     } catch (error) {
       this.loadingSubject.next(false);
       console.error('Error fetching blob:', error);
+      throw error;
+    }
+  }
+
+  async getMyContents(): Promise<Content[]> {
+    const response = await this.axiosInstance.get(``);
+    return response.data
+  }
+
+  async createContentWithService(contentData: any): Promise<Content> {
+    try {
+      let serviceId: string | undefined = undefined;
+
+      if (contentData.service) {
+        serviceId = await this.serviceService.createService(contentData.service, contentData.service.category);
+      }
+
+      const contentPayload = {
+        ...contentData,
+        serviceId: serviceId || '',
+      };
+
+      return await this.createContent(contentPayload);
+    } catch (error) {
+      console.error('Error creating content with service:', error);
+      throw error;
+    }
+  }
+
+  async createContent(contentData: any): Promise<Content> {
+    const formData = new FormData();
+
+    formData.append('name', contentData.name);
+    formData.append('description', contentData.description || '');
+    formData.append('serviceId', contentData.serviceId || '');
+
+    if (contentData.photo) {
+      formData.append('photo', contentData.photo);
+    }
+
+    try {
+      const response = await this.axiosInstance.post(``, formData);
+      return response.data;
+    } catch (error) {
+      console.error('Error creating content:', error);
       throw error;
     }
   }

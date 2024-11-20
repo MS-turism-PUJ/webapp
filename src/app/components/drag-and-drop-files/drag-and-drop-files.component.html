@@ -1,15 +1,10 @@
-<div
-  class="drag-area"
-  #dropArea
-  (dragover)="onDragOver($event)"
-  (dragleave)="onDragLeave($event)"
-  (drop)="onDrop($event)"
->
+<div class="drag-area" #dropArea (dragover)="onDragOver($event)" (dragleave)="onDragLeave($event)"
+  (drop)="onDrop($event)">
   <ng-container *ngIf="!previewUrl; else imagePreview">
     <div class="icon"><i class="fas fa-cloud-upload-alt"></i></div>
     <header>{{ dragText }}</header>
     <span>OR</span>
-    <button (click)="onButtonClick()">Browse File</button>
+    <button type="button" (click)="onButtonClick()">Browse File</button>
     <input #fileInput type="file" hidden (change)="onFileChange($event)" />
   </ng-container>
 
@@ -19,6 +14,6 @@
       <img [src]="previewUrl" alt="Uploaded Image" />
     </div>
     <!-- Botón opcional para eliminar o cambiar la imagen -->
-    <button class="remove-btn" (click)="reset()">Remove Image</button>
+    <button type="button" class="remove-btn" (click)="reset()">Remove Image</button>
   </ng-template>
 </div>

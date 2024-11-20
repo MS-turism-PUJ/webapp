@@ -9,7 +9,7 @@ import { User } from '../models/user';
 })
 export class UserService {
 
-  constructor(private authService: AuthService) { 
+  constructor(private authService: AuthService) {
     this.axiosInstance = axios.create({
       baseURL: `${API_URL}/users`,
       headers: {
@@ -19,8 +19,7 @@ export class UserService {
   }
   axiosInstance: AxiosInstance
 
-  async getMyInfo(): Promise<User>
-  {
+  async getMyInfo(): Promise<User> {
     const result = await this.axiosInstance.get("/");
     return result.data;
   }
