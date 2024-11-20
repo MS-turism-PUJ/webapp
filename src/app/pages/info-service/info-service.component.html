@@ -207,7 +207,7 @@
             </div>
             <h1>Total: $ {{ content.service?.price }} pesos </h1>
             <div class="reserve">
-                <app-add-to-cart></app-add-to-cart>
+                <app-add-to-cart [serviceId]="content.service?.serviceId || ''"></app-add-to-cart>
             </div>
 
         </div>

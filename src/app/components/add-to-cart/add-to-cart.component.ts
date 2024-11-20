@@ -1,7 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CartService } from '../../services/cart.service';
 import { SweetAlertService } from '../../services/sweet-alert.service';
-import { Service } from '../../models/service';
 
 @Component({
   selector: 'app-add-to-cart',
