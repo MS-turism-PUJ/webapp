@@ -3,12 +3,17 @@ import axios, { AxiosInstance } from 'axios';
 import { AuthService } from './auth.service';
 import { API_URL } from '../config/environment/urls';
 import { Rating } from '../models/rating';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class RatingService {
   axiosInstance: AxiosInstance;
+
+  averageRatingSubject = new BehaviorSubject<number>(0);
+  ratingsSubject = new BehaviorSubject<Rating[]>([]);
+  quantityRatingSubject = new BehaviorSubject<number>(0);
 
   constructor(private authService: AuthService) {
     this.axiosInstance = axios.create({
@@ -19,22 +24,34 @@ export class RatingService {
     });
   }
 
-  async getAverageRating(serviceId: string): Promise<number> {
+  async syncAverageRating(serviceId: string): Promise<void> {
     const response = await this.axiosInstance.get(`/average/${serviceId}`);
 
-    return response.data;
+    this.averageRatingSubject.next(response.data);
   }
 
-  async getQuantityRating(serviceId: string): Promise<number> {
+  getAverageRating(): Observable<number> {
+    return this.averageRatingSubject.asObservable();
+  }
+
+  async syncQuantityRating(serviceId: string): Promise<void> {
     const response = await this.axiosInstance.get(`/quantity/${serviceId}`);
 
-    return response.data;
+    this.quantityRatingSubject.next(response.data);
   }
 
-  async getRatings(serviceId: string): Promise<Rating[]> {
+  getQuantityRating(): Observable<number> {
+    return this.quantityRatingSubject.asObservable();
+  }
+
+  async syncRatings(serviceId: string): Promise<void> {
     const response = await this.axiosInstance.get(`/${serviceId}`);
 
-    return response.data.ratings;
+    this.ratingsSubject.next(response.data.ratings);
+  }
+
+  getRatings(): Observable<Rating[]> {
+    return this.ratingsSubject.asObservable();
   }
 
   async getMyRating(serviceId: string): Promise<Rating> {
@@ -45,5 +62,6 @@ export class RatingService {
 
   async rateService(serviceId: string, rating: Rating): Promise<void> {
     await this.axiosInstance.post(`/rate/${serviceId}`, rating);
+    this.syncAverageRating(serviceId);
   }
 }

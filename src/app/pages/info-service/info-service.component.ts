@@ -93,21 +93,24 @@ export class InfoServiceComponent {
         this.photo = photo;
       });
       await this.fetchContent(this.contentId);
-      this.ratingService.getAverageRating(this.content.service?.serviceId || '').then((averageRating) => {
+      this.ratingService.getAverageRating().subscribe((averageRating) => {
         this.averageRatingReceived = averageRating;
       });
+      this.ratingService.syncAverageRating(this.content.service?.serviceId || '');
       this.ratingService.getMyRating(this.content.service?.serviceId || '').then((myRating) => {
         this.myRating = myRating;
       });
-      this.ratingService.getQuantityRating(this.content.service?.serviceId || '').then((quantityRating) => {
+      this.ratingService.getQuantityRating().subscribe((quantityRating) => {
         this.reviewsCountReceived = quantityRating;
       });
+      this.ratingService.syncQuantityRating(this.content.service?.serviceId || '');
       this.questionService.getQuestions(this.contentId || '').then((questions) => {
         this.questions = questions;
       });
-      this.ratingService.getRatings(this.content.service?.serviceId || '').then((ratings) => {
+      this.ratingService.getRatings().subscribe((ratings) => {
         this.ratings = ratings;
       });
+      this.ratingService.syncRatings(this.content.service?.serviceId || '');
 
     } else {
       console.error('No se encontró el ID del contenido en la URL.');
@@ -218,9 +221,8 @@ export class InfoServiceComponent {
     this.myRating = new Rating(value, this.myRating.comment);
 
     this.ratingService.rateService(this.content.service?.serviceId, this.myRating);
-    this.ratingService.getAverageRating(this.content.service?.serviceId || '').then((averageRating) => {
-      this.averageRatingReceived = averageRating;
-    });
+
+    this.ratingService.syncQuantityRating(this.content.service?.serviceId || '');
   }
 
   async onChangeComment() {
