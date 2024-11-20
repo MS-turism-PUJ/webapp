@@ -198,6 +198,11 @@ export class ContentService {
                 lunch
                 dessert
               }
+              user {
+                name
+                email
+                username
+              }
             }
           }
         `,
