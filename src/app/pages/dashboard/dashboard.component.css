@@ -1,4 +1,4 @@
-/* Estilos para el scrollbar */
+/*
 * {
     scrollbar-width: inherit;
     scrollbar-color: black transparent;
@@ -7,3 +7,4 @@
 *::-webkit-scrollbar-track {
     background: transparent;    
 }
+*/

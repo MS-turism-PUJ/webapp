@@ -160,22 +160,23 @@
 .service-grid-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 18px;
+  gap: 1.4rem;
   align-items: start;
+  margin-top: 1%;
 }
 
 /* Lado izquierdo: Campos comunes */
 .service-inputs-container {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 1.4rem;
 }
 
 /* Lado derecho: Campos variables */
 .service-variable-container {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 1.4rem;
 
 }
 
