@@ -197,9 +197,12 @@ export class InfoServiceComponent {
     if (!this.content.service) {
       return;
     }
-    this.myRating = new Rating(value, this.myRating.comment);
+      this.myRating = new Rating(value, this.myRating.comment);
 
     this.ratingService.rateService(this.content.service?.serviceId, this.myRating);
+    this.ratingService.getAverageRating(this.content.service?.serviceId || '').then((averageRating) => {
+      this.averageRatingReceived = averageRating;
+    });
   }
 
   async onChangeComment() {

@@ -59,8 +59,7 @@
                     <span
                         class="flex flex-col gap-2 items-center absolute -translate-y-[calc(125%)] left-1/2 z-20 origin-bottom -translate-x-1/2 scale-0 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-black shadow-md transition-all duration-300 ease-in-out group-hover:scale-100">
                         <div class="rating">
-                            <input type="radio" id="star-1" name="star-radio" value="star-1" (change)="setChecked(5)"
-                                [checked]="myRating.rating === 5">
+                            <input type="radio" id="star-1" name="star-radio" value="star-1" (click)="setChecked(5)" [checked]="myRating.rating === 5">
                             <label for="star-1">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <path pathLength="360"
@@ -68,8 +67,7 @@
                                     </path>
                                 </svg>
                             </label>
-                            <input type="radio" id="star-2" name="star-radio" value="star-1" (change)="setChecked(4)"
-                                [checked]="myRating.rating === 4">
+                            <input type="radio" id="star-2" name="star-radio" value="star-1" (click)="setChecked(4)" [checked]="myRating.rating === 4">
                             <label for="star-2">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <path pathLength="360"
@@ -77,8 +75,7 @@
                                     </path>
                                 </svg>
                             </label>
-                            <input type="radio" id="star-3" name="star-radio" value="star-1" (change)="setChecked(3)"
-                                [checked]="myRating.rating === 3">
+                            <input type="radio" id="star-3" name="star-radio" value="star-1" (click)="setChecked(3)" [checked]="myRating.rating === 3">
                             <label for="star-3">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <path pathLength="360"
@@ -86,8 +83,7 @@
                                     </path>
                                 </svg>
                             </label>
-                            <input type="radio" id="star-4" name="star-radio" value="star-1" (change)="setChecked(2)"
-                                [checked]="myRating.rating === 2">
+                            <input type="radio" id="star-4" name="star-radio" value="star-1" (click)="setChecked(2)" [checked]="myRating.rating === 2">
                             <label for="star-4">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <path pathLength="360"
@@ -95,8 +91,7 @@
                                     </path>
                                 </svg>
                             </label>
-                            <input type="radio" id="star-5" name="star-radio" value="star-1" (change)="setChecked(1)"
-                                [checked]="myRating.rating === 1">
+                            <input type="radio" id="star-5" name="star-radio" value="star-1" (click)="setChecked(1)" [checked]="myRating.rating === 1">
                             <label for="star-5">
                                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
                                     <path pathLength="360"
