@@ -1,18 +1,22 @@
-import { Component, OnInit  } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { AuthService } from '../../services/auth.service';
+import { ContentService } from '../../services/content.service';
+import { Content } from '../../models/content';
 import { CardComponent } from '../../components/card/card.component';
-import { GoToDashboardComponent } from '../../components/go-to-dashboard/go-to-dashboard.component';
 import { CreateContentProviderComponent } from '../../components/create-content-provider/create-content-provider.component';
-
 
 @Component({
   selector: 'app-provider-screen',
   standalone: true,
-  imports: [CommonModule,CardComponent, GoToDashboardComponent, CreateContentProviderComponent],
+  imports: [
+    CommonModule,
+    CardComponent,
+    CreateContentProviderComponent,
+  ],
   templateUrl: './provider-screen.component.html',
-  styleUrl: './provider-screen.component.css'
+  styleUrls: ['./provider-screen.component.css'],
 })
 export class ProviderScreenComponent implements OnInit {
   defaultAvatar: string = 'assets/avatar.svg';
@@ -20,8 +24,24 @@ export class ProviderScreenComponent implements OnInit {
   file?: File;
   isPopupVisible: boolean = false;
 
-  constructor( private router: Router, private authService: AuthService) {
+  contents: Content[] = []; // Arreglo para almacenar las tarjetas
+
+  constructor(
+    private router: Router,
+    private authService: AuthService,
+    private contentService: ContentService // Servicio para obtener los contenidos
+  ) { }
+
+  async ngOnInit(): Promise<void> {
+    // Suscripción a los contenidos
+    this.contentService.contentsSubject.subscribe((contents) => {
+      this.contents = contents;
+    });
+
+    // Sincronizar contenidos
+    await this.contentService.syncAllContents();
   }
+
   openPopup() {
     this.isPopupVisible = true;
     console.log('openPopup');
@@ -30,8 +50,6 @@ export class ProviderScreenComponent implements OnInit {
   closePopup() {
     this.isPopupVisible = false;
   }
-
-  ngOnInit(): void {}
 
   goToLogin() {
     this.router.navigate(['/']);
@@ -47,8 +65,4 @@ export class ProviderScreenComponent implements OnInit {
       reader.readAsDataURL(this.file);
     }
   }
-
-  
-
 }
-

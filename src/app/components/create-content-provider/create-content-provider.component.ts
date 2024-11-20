@@ -23,31 +23,31 @@ export class CreateContentProviderComponent {
     this.contentForm = this.fb.group({
       // Campos generales del contenido
       name: ['', Validators.required],
-      description: ['', Validators.required],
-      link: ['', [Validators.required, Validators.pattern('https?://.+')]],
+      description: [''], // Opcional
+      link: ['', [Validators.pattern('https?://.+')]], // Opcional
       photo: ['', Validators.required],
       photoExtension: ['', Validators.required],
-      hasService: [''], // Indica si tiene un servicio
-      serviceType: [''], // Tipo de servicio seleccionado
+      hasService: ['', Validators.required], // Obligatorio
+      serviceType: ['', Validators.required], // Obligatorio cuando hasService es true
 
       // Campos comunes a todos los servicios
-      nameService: [''], // Se agregan dinámicamente si se selecciona un servicio
-      descriptionService: [''],
-      price: [''],
-      city: [''],
-      country: [''],
+      nameService: ['', Validators.required],
+      descriptionService: ['', Validators.required],
+      price: ['', Validators.required],
+      city: ['', Validators.required],
+      country: ['', Validators.required],
 
       // Campos específicos según el tipo de servicio
-      latitude: [''], // Para HOUSING, TRANSPORT, ECO_WALK
-      longitude: [''], // Para HOUSING, TRANSPORT, ECO_WALK
-      arrivalLatitude: [''], // Para TRANSPORT, ECO_WALK
-      arrivalLongitude: [''], // Para TRANSPORT, ECO_WALK
-      departureDate: [''], // Para TRANSPORT, ECO_WALK, HOUSING
-      duration: [''], // Para TRANSPORT, HOUSING
-      transportType: [''], // Para TRANSPORT
-      drink: [''], // Para ALIMENTATION
-      lunch: [''], // Para ALIMENTATION
-      dessert: [''] // Para ALIMENTATION
+      latitude: [''], // Opcional
+      longitude: [''], // Opcional
+      arrivalLatitude: [''], // Opcional
+      arrivalLongitude: [''], // Opcional
+      departureDate: [''], // Opcional
+      duration: [''], // Opcional
+      transportType: [''], // Opcional
+      drink: [''], // Opcional
+      lunch: [''], // Opcional
+      dessert: [''] // Opcional
     });
   }
 
@@ -112,8 +112,13 @@ export class CreateContentProviderComponent {
     });
   }
 
+  // Nuevo: Verifica si el formulario es válido dinámicamente
+  isFormValid(): boolean {
+    return this.contentForm.valid;
+  }
+
   onSubmit(): void {
-    if (!this.contentForm.valid) {
+    if (!this.isFormValid()) {
       console.error('Formulario inválido:', this.contentForm.value);
       return;
     }
@@ -131,5 +136,10 @@ export class CreateContentProviderComponent {
     if (dateInput) {
       dateInput.showPicker(); // Abre manualmente el menú del calendario
     }
+  }
+
+  // Nuevo: Controlar intento de clic en botón deshabilitado
+  onDisabledButtonClick(): void {
+    console.log('Intento de clic en el botón, pero está deshabilitado.');
   }
 }

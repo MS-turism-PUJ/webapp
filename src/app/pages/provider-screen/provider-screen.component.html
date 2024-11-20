@@ -64,11 +64,11 @@
 
     </div>
     <div class="main">
-        <!-- <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card>
-        <app-card></app-card> -->
+        <!-- Generar tarjetas dinámicamente -->
+        <app-card *ngFor="let content of contents" [content]="content" class="content-card">
+        </app-card>
     </div>
+
     <div class="filters">
         <div class="text">
             Filtros

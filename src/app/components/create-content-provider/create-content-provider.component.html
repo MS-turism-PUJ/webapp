@@ -3,7 +3,8 @@
     <div class="popup-container">
         <header>
             <div class="text">Crear Contenido</div>
-            <button type="button" class="submit-button" (click)="closePopup()"><i class="fa-solid fa-xmark  fa-2x"></i></button>
+            <button type="button" class="submit-button" (click)="closePopup()"><i
+                    class="fa-solid fa-xmark  fa-2x"></i></button>
         </header>
         <form [formGroup]="contentForm" (ngSubmit)="onSubmit()">
             <!-- Contenedor en forma de grid -->
@@ -11,15 +12,28 @@
                 <!-- Inputs del lado izquierdo -->
                 <div class="inputs-container">
                     <div class="field">
-                        <input type="text" formControlName="name" placeholder=" ">
+                        <input type="text" formControlName="name" placeholder=" "
+                            [class.invalid]="contentForm.get('name')?.invalid && contentForm.get('name')?.touched">
                         <span class="fa-solid fa-square-pen"></span>
-                        <label>Nombre del Contenido</label>
+                        <label>Nombre del Contenido *</label>
+                        <!-- Mensaje de error -->
+                        <div class="error" *ngIf="contentForm.get('name')?.invalid && contentForm.get('name')?.touched">
+                            El nombre del contenido es obligatorio.
+                        </div>
                     </div>
                     <div class="field">
-                        <input type="text" formControlName="link" placeholder=" ">
+                        <input type="text" formControlName="link" placeholder=" "
+                            [class.invalid]="contentForm.get('link')?.invalid && contentForm.get('link')?.touched">
                         <span class="fas fa-globe"></span>
                         <label>Link</label>
+                        <div class="error" *ngIf="contentForm.get('link')?.touched && contentForm.get('link')?.invalid">
+                            <!-- Validación: Patrón inválido -->
+                            <div *ngIf="contentForm.get('link')?.errors?.['pattern']">
+                                El link debe empezar con http:// o https://.
+                            </div>
+                        </div>
                     </div>
+
                     <div class="field">
                         <textarea formControlName="description" maxlength="300" placeholder=""></textarea>
                         <label>Descripción del Contenido (máx. 300 caracteres)</label>
@@ -33,20 +47,28 @@
             </div>
 
             <!-- ¿Tiene servicio? -->
-            <div class="grid gap-4 mb-4" >
+            <div class="grid gap-4 mb-4">
                 <div class="field">
-                    <select formControlName="hasService" (change)="onHasServiceChange()">
-                        <option value="" disabled>¿Tiene Servicio?</option>
+                    <select formControlName="hasService" (change)="onHasServiceChange()"
+                        [class.invalid]="contentForm.get('hasService')?.invalid && contentForm.get('hasService')?.touched">
+                        <option value="" disabled>¿Tiene Servicio? *</option>
                         <option value="false">No</option>
                         <option value="true">Sí</option>
                     </select>
                     <span class="fa-solid fa-bell-concierge"></span>
+                    <!-- Mensaje de error -->
+                    <div class="error"
+                        *ngIf="contentForm.get('hasService')?.touched && contentForm.get('hasService')?.invalid">
+                        Debe seleccionar una opción.
+                    </div>
                 </div>
+
 
                 <!-- Selección del Tipo de Servicio -->
                 <div *ngIf="hasService" class="field">
-                    <select formControlName="serviceType" (change)="onServiceTypeChange()">
-                        <option value="">Seleccione un tipo de servicio</option>
+                    <select formControlName="serviceType" (change)="onServiceTypeChange()"
+                        [class.invalid]="contentForm.get('serviceType')?.invalid && contentForm.get('serviceType')?.touched">
+                        <option value="">Seleccione un tipo de servicio *</option>
                         <option value="ALIMENTATION">ALIMENTATION</option>
                         <option value="HOUSING">HOUSING</option>
                         <option value="ECO_WALK">ECO_WALK</option>
@@ -54,7 +76,13 @@
                     </select>
                     <label>Tipo de Servicio</label>
                     <span class="fa-solid fa-list"></span>
+                    <!-- Mensaje de error -->
+                    <div class="error"
+                        *ngIf="contentForm.get('serviceType')?.touched && contentForm.get('serviceType')?.invalid">
+                        Debe seleccionar un tipo de servicio.
+                    </div>
                 </div>
+
             </div>
 
             <!-- Contenedor Principal del Grid para el Servicio -->
@@ -62,33 +90,62 @@
                 <!-- Lado Izquierdo: Campos Comunes -->
                 <div class="service-inputs-container">
                     <div class="field">
-                        <input type="text" formControlName="nameService" placeholder=" ">
+                        <input type="text" formControlName="nameService" placeholder=" "
+                            [class.invalid]="contentForm.get('nameService')?.invalid && contentForm.get('nameService')?.touched">
                         <span class="fa-solid fa-square-pen"></span>
-                        <label>Nombre del Servicio</label>
+                        <label>Nombre del Servicio *</label>
+                        <div class="error"
+                            *ngIf="contentForm.get('nameService')?.touched && contentForm.get('nameService')?.invalid">
+                            El nombre del servicio es obligatorio.
+                        </div>
                     </div>
 
-                    <div class="field">
-                        <textarea formControlName="descriptionService" maxlength="300" placeholder=""></textarea>
-                        <label>Descripción del Servicio</label>
-                    </div>
 
                     <div class="field">
-                        <input type="number" formControlName="price" placeholder=" ">
+                        <textarea formControlName="descriptionService" maxlength="300" placeholder=""
+                            [class.invalid]="contentForm.get('descriptionService')?.invalid && contentForm.get('descriptionService')?.touched"></textarea>
+                        <label>Descripción del Servicio *</label>
+                        <div class="error-decription"
+                            *ngIf="contentForm.get('descriptionService')?.touched && contentForm.get('descriptionService')?.invalid">
+                            La descripción del servicio es obligatoria.
+                        </div>
+                    </div>
+
+
+                    <div class="field">
+                        <input type="number" formControlName="price" placeholder=" "
+                            [class.invalid]="contentForm.get('price')?.invalid && contentForm.get('price')?.touched">
                         <span class="fa-solid fa-dollar-sign"></span>
-                        <label>Precio</label>
+                        <label>Precio *</label>
+                        <div class="error"
+                            *ngIf="contentForm.get('price')?.touched && contentForm.get('price')?.invalid">
+                            El precio es obligatorio.
+                        </div>
                     </div>
 
+
                     <div class="field">
-                        <input type="text" formControlName="city" placeholder=" ">
+                        <input type="text" formControlName="city" placeholder=" "
+                            [class.invalid]="contentForm.get('city')?.invalid && contentForm.get('city')?.touched">
                         <span class="fa-solid fa-city"></span>
-                        <label>Ciudad</label>
+                        <label>Ciudad *</label>
+                        <div class="error" *ngIf="contentForm.get('city')?.touched && contentForm.get('city')?.invalid">
+                            La ciudad es obligatoria.
+                        </div>
                     </div>
 
+
                     <div class="field">
-                        <input type="text" formControlName="country" placeholder=" ">
+                        <input type="text" formControlName="country" placeholder=" "
+                            [class.invalid]="contentForm.get('country')?.invalid && contentForm.get('country')?.touched">
                         <span class="fa-solid fa-map"></span>
-                        <label>País</label>
+                        <label>País *</label>
+                        <div class="error"
+                            *ngIf="contentForm.get('country')?.touched && contentForm.get('country')?.invalid">
+                            El país es obligatorio.
+                        </div>
                     </div>
+
                 </div>
 
                 <!-- Lado Derecho: Campos Variables -->
@@ -96,20 +153,38 @@
                     <!-- ALIMENTATION -->
                     <div *ngIf="selectedService === 'ALIMENTATION'" class="service-variable-container">
                         <div class="field">
-                            <input type="text" formControlName="drink" placeholder=" ">
+                            <input type="text" formControlName="drink" placeholder=" "
+                                [class.invalid]="contentForm.get('drink')?.invalid && contentForm.get('drink')?.touched">
                             <span class="fa-solid fa-wine-glass"></span>
-                            <label>Bebida</label>
+                            <label>Bebida *</label>
+                            <div class="error"
+                                *ngIf="contentForm.get('drink')?.touched && contentForm.get('drink')?.invalid">
+                                La bebida es obligatoria.
+                            </div>
                         </div>
+
                         <div class="field">
-                            <input type="text" formControlName="lunch" placeholder=" ">
+                            <input type="text" formControlName="lunch" placeholder=" "
+                                [class.invalid]="contentForm.get('lunch')?.invalid && contentForm.get('lunch')?.touched">
                             <span class="fa-solid fa-utensils"></span>
-                            <label>Almuerzo</label>
+                            <label>Almuerzo *</label>
+                            <div class="error"
+                                *ngIf="contentForm.get('lunch')?.touched && contentForm.get('lunch')?.invalid">
+                                El almuerzo es obligatorio.
+                            </div>
                         </div>
+
                         <div class="field">
-                            <input type="text" formControlName="dessert" placeholder=" ">
-                            <span class="fa-solid fa-ice-cream"> </span>
-                            <label>Postre</label>
+                            <input type="text" formControlName="dessert" placeholder=" "
+                                [class.invalid]="contentForm.get('dessert')?.invalid && contentForm.get('dessert')?.touched">
+                            <span class="fa-solid fa-ice-cream"></span>
+                            <label>Postre *</label>
+                            <div class="error"
+                                *ngIf="contentForm.get('dessert')?.touched && contentForm.get('dessert')?.invalid">
+                                El postre es obligatorio.
+                            </div>
                         </div>
+
                     </div>
 
                     <!-- HOUSING -->
@@ -120,28 +195,52 @@
                         <div class="service-grid-content">
                             <div class="service-inputs-container">
                                 <div class="field">
-                                    <input type="text" formControlName="latitude" placeholder=" ">
+                                    <input type="text" formControlName="latitude" placeholder=" "
+                                        [class.invalid]="contentForm.get('latitude')?.invalid && contentForm.get('latitude')?.touched">
                                     <span class="fa-solid fa-ruler-horizontal"></span>
-                                    <label>Latitud</label>
+                                    <label>Latitud *</label>
+                                    <div class="error"
+                                        *ngIf="contentForm.get('latitude')?.touched && contentForm.get('latitude')?.invalid">
+                                        La latitud es obligatoria.
+                                    </div>
                                 </div>
+
                                 <div class="field">
-                                    <input type="text" formControlName="longitude" placeholder=" ">
+                                    <input type="text" formControlName="longitude" placeholder=" "
+                                        [class.invalid]="contentForm.get('longitude')?.invalid && contentForm.get('longitude')?.touched">
                                     <span class="fa-solid fa-ruler-vertical"></span>
-                                    <label>Longitud</label>
+                                    <label>Longitud *</label>
+                                    <div class="error"
+                                        *ngIf="contentForm.get('longitude')?.touched && contentForm.get('longitude')?.invalid">
+                                        La longitud es obligatoria.
+                                    </div>
                                 </div>
+
                             </div>
                             <div class="service-variable-container">
                                 <div class="fecha-salida" (click)="triggerDatePicker('departureDate')">
                                     <span class="fa-solid fa-calendar-days"></span>
-                                    <label for="departureDate">Fecha de Salida</label>
-                                    <div class=" date-picker">
-                                        <input type="date" formControlName="departureDate" id="departureDate" placeholder=" ">
+                                    <label for="departureDate">Fecha de Salida *</label>
+                                    <div class="date-picker">
+                                        <input type="date" formControlName="departureDate" id="departureDate"
+                                            placeholder=" "
+                                            [class.invalid]="contentForm.get('departureDate')?.invalid && contentForm.get('departureDate')?.touched">
+                                    </div>
+                                    <div class="error"
+                                        *ngIf="contentForm.get('departureDate')?.touched && contentForm.get('departureDate')?.invalid">
+                                        La fecha de salida es obligatoria.
                                     </div>
                                 </div>
+
                                 <div class="field">
-                                    <input type="number" formControlName="duration" placeholder=" ">
+                                    <input type="number" formControlName="duration" placeholder=" "
+                                        [class.invalid]="contentForm.get('duration')?.invalid && contentForm.get('duration')?.touched">
                                     <span class="fa-solid fa-clock"></span>
-                                    <label>Duración</label>
+                                    <label>Duración *</label>
+                                    <div class="error"
+                                        *ngIf="contentForm.get('duration')?.touched && contentForm.get('duration')?.invalid">
+                                        La duración es obligatoria.
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -154,48 +253,96 @@
                         </div>
                         <div class="service-grid-content">
                             <div class="service-inputs-container">
+                                <!-- Latitud -->
                                 <div class="field">
-                                    <input type="text" formControlName="latitude" placeholder=" ">
+                                    <input type="text" formControlName="latitude" placeholder=" "
+                                        [class.invalid]="contentForm.get('latitude')?.invalid && contentForm.get('latitude')?.touched">
                                     <span class="fa-solid fa-ruler-horizontal"></span>
-                                    <label>Latitud</label>
+                                    <label>Latitud *</label>
+                                    <div class="error"
+                                        *ngIf="contentForm.get('latitude')?.touched && contentForm.get('latitude')?.invalid">
+                                        La latitud es obligatoria.
+                                    </div>
                                 </div>
+
+                                <!-- Latitud de Llegada -->
                                 <div class="field">
-                                    <input type="text" formControlName="arrivalLatitude" placeholder=" ">
+                                    <input type="text" formControlName="arrivalLatitude" placeholder=" "
+                                        [class.invalid]="contentForm.get('arrivalLatitude')?.invalid && contentForm.get('arrivalLatitude')?.touched">
                                     <span class="fa-solid fa-ruler-horizontal"></span>
-                                    <label>Latitud de Llegada</label>
+                                    <label>Latitud de Llegada *</label>
+                                    <div class="error"
+                                        *ngIf="contentForm.get('arrivalLatitude')?.touched && contentForm.get('arrivalLatitude')?.invalid">
+                                        La latitud de llegada es obligatoria.
+                                    </div>
                                 </div>
+
+                                <!-- Fecha de Salida -->
                                 <div class="fecha-salida" (click)="triggerDatePicker('departureDate')">
                                     <span class="fa-solid fa-calendar-days"></span>
-                                    <label for="departureDate">Fecha de Salida</label>
-                                    <div class=" date-picker">
-                                        <input type="date" formControlName="departureDate" id="departureDate" placeholder=" ">
+                                    <label for="departureDate">Fecha de Salida *</label>
+                                    <div class="date-picker">
+                                        <input type="date" formControlName="departureDate" id="departureDate"
+                                            placeholder=" "
+                                            [class.invalid]="contentForm.get('departureDate')?.invalid && contentForm.get('departureDate')?.touched">
+                                    </div>
+                                    <div class="error"
+                                        *ngIf="contentForm.get('departureDate')?.touched && contentForm.get('departureDate')?.invalid">
+                                        La fecha de salida es obligatoria.
                                     </div>
                                 </div>
                             </div>
                             <div class="service-variable-container">
+                                <!-- Longitud -->
                                 <div class="field">
-                                    <input type="text" formControlName="longitude" placeholder=" ">
+                                    <input type="text" formControlName="longitude" placeholder=" "
+                                        [class.invalid]="contentForm.get('longitude')?.invalid && contentForm.get('longitude')?.touched">
                                     <span class="fa-solid fa-ruler-vertical"></span>
-                                    <label>Longitud</label>
+                                    <label>Longitud *</label>
+                                    <div class="error"
+                                        *ngIf="contentForm.get('longitude')?.touched && contentForm.get('longitude')?.invalid">
+                                        La longitud es obligatoria.
+                                    </div>
                                 </div>
+
+                                <!-- Longitud de Llegada -->
                                 <div class="field">
-                                    <input type="text" formControlName="arrivalLongitude" placeholder=" ">
+                                    <input type="text" formControlName="arrivalLongitude" placeholder=" "
+                                        [class.invalid]="contentForm.get('arrivalLongitude')?.invalid && contentForm.get('arrivalLongitude')?.touched">
                                     <span class="fa-solid fa-ruler-vertical"></span>
-                                    <label>Longitud de Llegada</label>
+                                    <label>Longitud de Llegada *</label>
+                                    <div class="error"
+                                        *ngIf="contentForm.get('arrivalLongitude')?.touched && contentForm.get('arrivalLongitude')?.invalid">
+                                        La longitud de llegada es obligatoria.
+                                    </div>
                                 </div>
+
+                                <!-- Duración -->
                                 <div class="field">
-                                    <input type="number" formControlName="duration" placeholder=" ">
+                                    <input type="number" formControlName="duration" placeholder=" "
+                                        [class.invalid]="contentForm.get('duration')?.invalid && contentForm.get('duration')?.touched">
                                     <span class="fa-solid fa-clock"></span>
-                                    <label>Duración</label>
+                                    <label>Duración *</label>
+                                    <div class="error"
+                                        *ngIf="contentForm.get('duration')?.touched && contentForm.get('duration')?.invalid">
+                                        La duración es obligatoria.
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- Tipo de Transporte -->
                         <div class="field">
-                            <input type="text" formControlName="transportType" placeholder=" ">
+                            <input type="text" formControlName="transportType" placeholder=" "
+                                [class.invalid]="contentForm.get('transportType')?.invalid && contentForm.get('transportType')?.touched">
                             <span class="fa-solid fa-car"></span>
-                            <label>Tipo de Transporte</label>
+                            <label>Tipo de Transporte *</label>
+                            <div class="error"
+                                *ngIf="contentForm.get('transportType')?.touched && contentForm.get('transportType')?.invalid">
+                                El tipo de transporte es obligatorio.
+                            </div>
                         </div>
                     </div>
+
 
                     <!-- ECO_WALK -->
                     <div *ngIf="selectedService === 'ECO_WALK'" class="service-variable-container">
@@ -204,54 +351,96 @@
                         </div>
                         <div class="service-grid-content">
                             <div class="service-inputs-container">
+                                <!-- Latitud -->
                                 <div class="field">
-                                    <input type="text" formControlName="latitude" placeholder=" ">
+                                    <input type="text" formControlName="latitude" placeholder=" "
+                                        [class.invalid]="contentForm.get('latitude')?.invalid && contentForm.get('latitude')?.touched">
                                     <span class="fa-solid fa-ruler-horizontal"></span>
-                                    <label>Latitud</label>
-                                </div>
-                                <div class="field">
-                                    <input type="text" formControlName="arrivalLatitude" placeholder=" ">
-                                    <span class="fa-solid fa-ruler-horizontal"></span>
-                                    <label>Latitud de Llegada</label>
-                                </div>
-                                
-                                <div class="fecha-salida" (click)="triggerDatePicker('departureDate')">
-                                    <span class="fa-solid fa-calendar-days"></span>
-                                    <label for="departureDate">Fecha de Salida</label>
-                                    <div class=" date-picker">
-                                        <input type="date" formControlName="departureDate" id="departureDate" placeholder=" ">
+                                    <label>Latitud *</label>
+                                    <div class="error"
+                                        *ngIf="contentForm.get('latitude')?.touched && contentForm.get('latitude')?.invalid">
+                                        La latitud es obligatoria.
                                     </div>
                                 </div>
-                                
-                                
-                                
+
+                                <!-- Latitud de Llegada -->
+                                <div class="field">
+                                    <input type="text" formControlName="arrivalLatitude" placeholder=" "
+                                        [class.invalid]="contentForm.get('arrivalLatitude')?.invalid && contentForm.get('arrivalLatitude')?.touched">
+                                    <span class="fa-solid fa-ruler-horizontal"></span>
+                                    <label>Latitud de Llegada *</label>
+                                    <div class="error"
+                                        *ngIf="contentForm.get('arrivalLatitude')?.touched && contentForm.get('arrivalLatitude')?.invalid">
+                                        La latitud de llegada es obligatoria.
+                                    </div>
+                                </div>
+
+                                <!-- Fecha de Salida -->
+                                <div class="fecha-salida" (click)="triggerDatePicker('departureDate')">
+                                    <span class="fa-solid fa-calendar-days"></span>
+                                    <label for="departureDate">Fecha de Salida *</label>
+                                    <div class="date-picker">
+                                        <input type="date" formControlName="departureDate" id="departureDate"
+                                            placeholder=" "
+                                            [class.invalid]="contentForm.get('departureDate')?.invalid && contentForm.get('departureDate')?.touched">
+                                    </div>
+                                    <div class="error"
+                                        *ngIf="contentForm.get('departureDate')?.touched && contentForm.get('departureDate')?.invalid">
+                                        La fecha de salida es obligatoria.
+                                    </div>
+                                </div>
                             </div>
                             <div class="service-variable-container">
+                                <!-- Longitud -->
                                 <div class="field">
-                                    <input type="text" formControlName="longitude" placeholder=" ">
+                                    <input type="text" formControlName="longitude" placeholder=" "
+                                        [class.invalid]="contentForm.get('longitude')?.invalid && contentForm.get('longitude')?.touched">
                                     <span class="fa-solid fa-ruler-vertical"></span>
-                                    <label>Longitud</label>
+                                    <label>Longitud *</label>
+                                    <div class="error"
+                                        *ngIf="contentForm.get('longitude')?.touched && contentForm.get('longitude')?.invalid">
+                                        La longitud es obligatoria.
+                                    </div>
                                 </div>
+
+                                <!-- Longitud de Llegada -->
                                 <div class="field">
-                                    <input type="text" formControlName="arrivalLongitude" placeholder=" ">
+                                    <input type="text" formControlName="arrivalLongitude" placeholder=" "
+                                        [class.invalid]="contentForm.get('arrivalLongitude')?.invalid && contentForm.get('arrivalLongitude')?.touched">
                                     <span class="fa-solid fa-ruler-vertical"></span>
-                                    <label>Longitud de Llegada</label>
+                                    <label>Longitud de Llegada *</label>
+                                    <div class="error"
+                                        *ngIf="contentForm.get('arrivalLongitude')?.touched && contentForm.get('arrivalLongitude')?.invalid">
+                                        La longitud de llegada es obligatoria.
+                                    </div>
                                 </div>
+
+                                <!-- Duración -->
                                 <div class="field">
-                                    <input type="number" formControlName="duration" placeholder=" ">
+                                    <input type="number" formControlName="duration" placeholder=" "
+                                        [class.invalid]="contentForm.get('duration')?.invalid && contentForm.get('duration')?.touched">
                                     <span class="fa-solid fa-clock"></span>
-                                    <label>Duración</label>
+                                    <label>Duración *</label>
+                                    <div class="error"
+                                        *ngIf="contentForm.get('duration')?.touched && contentForm.get('duration')?.invalid">
+                                        La duración es obligatoria.
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+
                 </div>
             </div>
 
 
             <!-- Botones -->
             <div class="navigation">
-                <button type="submit" class="submit-button">Guardar Contenido</button>
+                <button type="submit" [disabled]="!isFormValid()" (click)="isFormValid() && onDisabledButtonClick()"
+                    class="submit-button">
+                    Guardar Contenido
+                </button>
+
             </div>
         </form>
     </div>

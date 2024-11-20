@@ -52,7 +52,7 @@
   display: flex;
   flex-direction: column;
 
-  gap: 16px;
+  gap: 18px;
 }
 
 .drag-container {
@@ -84,7 +84,7 @@
   padding: 0px 0px 0px 45px;
   outline: none;
   border: none;
-  font-size: 16px;
+  font-size: 18px;
   background: #e2e2e2;
   color: #595959;
   border-radius: 25px;
@@ -113,7 +113,7 @@
   left: 15px;
   top: 50%;
   transform: translateY(-50%);
-  font-size: 16px;
+  font-size: 18px;
   pointer-events: none;
 }
 
@@ -160,7 +160,7 @@
 .service-grid-content {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 16px;
+  gap: 18px;
   align-items: start;
 }
 
@@ -168,14 +168,14 @@
 .service-inputs-container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 }
 
 /* Lado derecho: Campos variables */
 .service-variable-container {
   display: flex;
   flex-direction: column;
-  gap: 16px;
+  gap: 18px;
 
 }
 
@@ -187,7 +187,7 @@
   appearance: none;
   /* Oculta el ícono predeterminado */
   background-color: transparent;
-  left: 175px;
+  left: 185px;
 }
 
 .date-picker input::-webkit-calendar-picker-indicator {
@@ -216,7 +216,7 @@
   align-items: center;
   width: 20%;
   border-radius: 25px;
-  font-size: 18px;
+  font-size: 16px;
   font-weight: 600;
   color: #ffffff;
   background: #3498db;
@@ -238,10 +238,17 @@
 }
 
 /* Estilo para los mensajes de error */
-.error {
+.error,.error-decription {
   color: red;
   font-size: 0.8em;
-  margin-top: 4px;
+  position: absolute;
+  top: 50%;
+  transform: translateY(110%);
+  left: 15px;
+}
+.error-decription
+{
+  transform: translateY(650%);
 }
 
 /* Opcional: Resaltar los campos con errores */
