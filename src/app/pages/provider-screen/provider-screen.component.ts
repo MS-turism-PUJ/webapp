@@ -28,8 +28,8 @@ export class ProviderScreenComponent implements OnInit {
   file?: File;
   isPopupVisible: boolean = false;
 
-  contents: Content[] = []; 
-  user:User = {
+  contents: Content[] = [];
+  user: User = {
     userId: 0,
     name: '',
     email: '',
@@ -39,7 +39,7 @@ export class ProviderScreenComponent implements OnInit {
     webpage: '',
     description: '',
     socialmedia: ''
-  } 
+  }
 
   photo: string = '';
   constructor(
@@ -56,15 +56,20 @@ export class ProviderScreenComponent implements OnInit {
     });
 
     // Sincronizar contenidos
-
-
     this.userService.getMyInfo().then((user) => {
       this.user = user;
-    } );
+      console.log('user', user);
+
+    });
+
+    this.contentService.getMyContents().then((contents) => {
+      this.contents = contents;
+      console.log('contenidos:', contents);
+    })
 
     this.userService.getMyphoto().then((photo) => {
       this.photo = photo;
-    } );
+    });
 
   }
 
@@ -92,5 +97,5 @@ export class ProviderScreenComponent implements OnInit {
     }
   }
 
-  
+
 }

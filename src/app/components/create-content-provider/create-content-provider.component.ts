@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angula
 import { CommonModule } from '@angular/common';
 import { GoogleMapsComponent } from '../google-maps/google-maps.component';
 import { DragAndDropFilesComponent } from '../drag-and-drop-files/drag-and-drop-files.component';
+import { ContentService } from '../../services/content.service';
 
 @Component({
   selector: 'app-create-content-provider',
@@ -20,7 +21,7 @@ export class CreateContentProviderComponent {
   hasService: boolean = false; // Controla si el contenido tiene un servicio
   areCoordinatesManagedByMap: boolean = true;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private contentService: ContentService) {
     this.contentForm = this.fb.group({
       // Campos generales del contenido
       name: ['', Validators.required],
@@ -137,14 +138,94 @@ export class CreateContentProviderComponent {
   }
 
   onSubmit(): void {
-    if (!this.isFormValid()) {
-      console.error('Formulario inválido:', this.contentForm.value);
-      return;
-    }
+    // if (!this.isFormValid()) {
+    //   console.error('Formulario inválido:', this.contentForm.value);
+    //   return;
+    // }
+
+    const contentData = this.buildContentData();
+
+    this.contentService.createContentWithService(contentData)
+      .then((content) => {
+        console.log('Contenido creado exitosamente:', content);
+        this.closePopup();
+      })
+      .catch((error) => {
+        console.error('Error al crear el contenido:', error);
+      });
 
     console.log('Formulario enviado:', this.contentForm.value);
     this.closePopup();
   }
+
+  private buildContentData(): any {
+    const formValues = this.contentForm.value;
+    if (this.selectedService == "TRANSPORT" || this.selectedService == "ECO_WALK" || this.selectedService == "ALIMENTATION") {
+      const content = {
+        name: formValues.name,
+        description: formValues.description || '',
+        photo: formValues.photo,
+        service: this.hasService
+          ? {
+            name: formValues.nameService,
+            description: formValues.descriptionService,
+            price: formValues.price,
+            city: formValues.city,
+            country: formValues.country,
+            departure: {
+              latitude: formValues.latitude || null,
+              longitude: formValues.longitude || null,
+            },
+            arrival: {
+              latitude: formValues.arrivalLatitude || null,
+              longitude: formValues.arrivalLongitude || null
+            },
+            departureDate: formValues.departureDate || null,
+            duration: formValues.duration || null,
+            transportType: formValues.transportType || null,
+            drink: formValues.drink || null,
+            lunch: formValues.lunch || null,
+            dessert: formValues.dessert || null,
+            category: formValues.serviceType
+          }
+          : null
+      };
+      console.log('contenido antes de enviar', content);
+      return content;
+    }
+    else {
+      const content = {
+        name: formValues.name,
+        description: formValues.description || '',
+        photo: formValues.photo,
+        service: this.hasService
+          ? {
+            name: formValues.nameService,
+            description: formValues.descriptionService,
+            price: formValues.price,
+            city: formValues.city,
+            country: formValues.country,
+            place: {
+              latitude: formValues.latitude || null,
+              longitude: formValues.longitude || null,
+            },
+            date: formValues.departureDate || null,
+            duration: formValues.duration || null,
+            transportType: formValues.transportType || null,
+            drink: formValues.drink || null,
+            lunch: formValues.lunch || null,
+            dessert: formValues.dessert || null,
+            category: formValues.serviceType
+          }
+          : null
+      };
+      console.log('contenido antes de enviar (housing)', content);
+      return content;
+    }
+
+  }
+
+
 
   closePopup(): void {
     this.close.emit();
