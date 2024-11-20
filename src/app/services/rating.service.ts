@@ -63,5 +63,7 @@ export class RatingService {
   async rateService(serviceId: string, rating: Rating): Promise<void> {
     await this.axiosInstance.post(`/rate/${serviceId}`, rating);
     this.syncAverageRating(serviceId);
+    this.syncQuantityRating(serviceId);
+    this.syncRatings(serviceId);
   }
 }

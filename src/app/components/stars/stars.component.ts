@@ -8,5 +8,5 @@ import { Component, Input } from '@angular/core';
   styleUrl: './stars.component.css'
 })
 export class StarsComponent {
-  @Input() rating: number = 3;
+  @Input() rating: number = 0;
 }
