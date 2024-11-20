@@ -15,6 +15,7 @@ import { ContentService } from '../../services/content.service';
 export class CreateContentProviderComponent {
   @Input() isVisible: boolean = false;
   @Output() close = new EventEmitter<void>();
+  file?: File;
 
   contentForm: FormGroup;
   selectedService: string = ''; // Controla el tipo de servicio seleccionado
@@ -161,11 +162,12 @@ export class CreateContentProviderComponent {
   private buildContentData(): any {
     const formValues = this.contentForm.value;
     if (this.selectedService == "TRANSPORT") {
+      console.log('FILE ANTES DE ENVIAR', this.file)
       console.log("LATITUD Y LONGITUD", formValues.latitude, formValues.longitude);
       const content = {
         name: formValues.name,
         description: formValues.description || '',
-        photo: formValues.photo,
+        photo: this.file,
         service: this.hasService
           ? {
             name: formValues.nameService,
@@ -187,7 +189,7 @@ export class CreateContentProviderComponent {
             drink: formValues.drink || null,
             lunch: formValues.lunch || null,
             dessert: formValues.dessert || null,
-            category: formValues.serviceType
+            category: formValues.serviceType,
           }
           : null
       };
@@ -199,7 +201,7 @@ export class CreateContentProviderComponent {
       const content = {
         name: formValues.name,
         description: formValues.description || '',
-        photo: formValues.photo,
+        photo: this.file,
         service: this.hasService
           ? {
             name: formValues.nameService,
@@ -232,7 +234,7 @@ export class CreateContentProviderComponent {
       const content = {
         name: formValues.name,
         description: formValues.description || '',
-        photo: formValues.photo,
+        photo: this.file,
         service: this.hasService
           ? {
             name: formValues.nameService,
@@ -265,7 +267,7 @@ export class CreateContentProviderComponent {
       const content = {
         name: formValues.name,
         description: formValues.description || '',
-        photo: formValues.photo,
+        photo: this.file,
         service: this.hasService
           ? {
             name: formValues.nameService,
@@ -283,7 +285,7 @@ export class CreateContentProviderComponent {
             drink: formValues.drink || null,
             lunch: formValues.lunch || null,
             dessert: formValues.dessert || null,
-            category: formValues.serviceType
+            category: formValues.serviceType,
           }
           : null
       };
@@ -293,7 +295,10 @@ export class CreateContentProviderComponent {
 
   }
 
-
+  setFile(file?: File): void {
+    console.log("FILE", file)
+    this.file = file;
+  }
 
   closePopup(): void {
     this.close.emit();

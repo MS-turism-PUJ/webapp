@@ -42,7 +42,7 @@
 
                 <!-- Drag and Drop a la derecha -->
                 <div class="drag-container">
-                    <app-drag-and-drop-files></app-drag-and-drop-files>
+                    <app-drag-and-drop-files (getFile)="setFile($event)"></app-drag-and-drop-files>
                 </div>
             </div>
 
