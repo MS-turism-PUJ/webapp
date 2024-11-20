@@ -1,224 +1,316 @@
 <div class="fondo">
+
+  <div *ngIf="showRatingsPopup" class="fixed h-screen w-screen bg-black/20 top-0 left-0 z-20">
     <app-go-to-dashboard></app-go-to-dashboard>
     <div class="rentalapplication">
-        <div class="topcontainer">
-            <div class="tittle">{{ content.service?.name }}</div>
-            <div class="optioncontainer">
-                <i class="fa-solid fa-share-nodes"></i>
-                <h3>Compartir</h3>
-            </div>
-            <div class="optioncontainer">
-                <i class="fa-solid fa-bookmark"></i>
-                <h3>Guardar</h3>
-            </div>
+      <div class="topcontainer">
+        <div class="tittle">{{ content.service?.name }}</div>
+        <div class="optioncontainer">
+          <i class="fa-solid fa-share-nodes"></i>
+          <h3>Compartir</h3>
         </div>
-        <div class="imagescontainer">
-            <div class="leftimage">
-                <img [src]="photo || 'assets/no-content.jpg'" alt="placeholder" class="imgplace h-96 object-cover" />
-            </div>
-            <div class="rightimage">
-                <app-google-maps [isEditable]="false">
-                </app-google-maps>
-            </div>
+        <div class="optioncontainer">
+          <i class="fa-solid fa-bookmark"></i>
+          <h3>Guardar</h3>
         </div>
-        <div class="details">
-            <div class="placedetails">
-    
-                <div class="card">
-                    <div class="card-header">
-                        <h2>{{ content.service?.country }} - {{ content.service?.capital }} ({{ content.service?.city
-                            }})</h2>
-                        <h3>{{ content.service?.officialName }}</h3>
-                    </div>
-                    <div class="card-body">
-                        <div class="card-info">
-                            <div class="info-item">
-                                <strong>Idioma:</strong>
-                                <span>{{ content.service?.language }}</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Región:</strong>
-                                <span>{{ content.service?.region }}</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Moneda:</strong>
-                                <span>{{ content.service?.currency }}</span>
-                            </div>
-                            <div class="info-item">
-                                <strong>Población:</strong>
-                                <span>{{ content.service?.population | number }}</span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-    
-                <div class="reviews mb-2">
-                    <div class="group relative w-min">
-                        <button>
-                            <i class="fa-regular fa-star"></i>
-                        </button>
-                        <span
-                            class="flex flex-col gap-2 items-center absolute -translate-y-[calc(125%)] left-1/2 z-20 origin-bottom -translate-x-1/2 scale-0 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-black shadow-md transition-all duration-300 ease-in-out group-hover:scale-100">
-                            <div class="rating">
-                                <input type="radio" id="star-1" name="star-radio" value="star-1" (click)="setChecked(5)"
-                                    [checked]="myRating.rating === 5">
-                                <label for="star-1">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path pathLength="360"
-                                            d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
-                                        </path>
-                                    </svg>
-                                </label>
-                                <input type="radio" id="star-2" name="star-radio" value="star-1" (click)="setChecked(4)"
-                                    [checked]="myRating.rating === 4">
-                                <label for="star-2">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path pathLength="360"
-                                            d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
-                                        </path>
-                                    </svg>
-                                </label>
-                                <input type="radio" id="star-3" name="star-radio" value="star-1" (click)="setChecked(3)"
-                                    [checked]="myRating.rating === 3">
-                                <label for="star-3">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path pathLength="360"
-                                            d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
-                                        </path>
-                                    </svg>
-                                </label>
-                                <input type="radio" id="star-4" name="star-radio" value="star-1" (click)="setChecked(2)"
-                                    [checked]="myRating.rating === 2">
-                                <label for="star-4">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path pathLength="360"
-                                            d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
-                                        </path>
-                                    </svg>
-                                </label>
-                                <input type="radio" id="star-5" name="star-radio" value="star-1" (click)="setChecked(1)"
-                                    [checked]="myRating.rating === 1">
-                                <label for="star-5">
-                                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-                                        <path pathLength="360"
-                                            d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z">
-                                        </path>
-                                    </svg>
-                                </label>
-                            </div>
-                            <textarea name="" id="comment" [value]="myRating.comment"
-                                class="h-16 w-full resize-none outline-none rounded-lg border border-neutral-400 px-2 py-1"></textarea>
-                            <button (click)="onChangeComment()"
-                                class="px-2 py-1 rounded-full bg-blue-200 border border-neutral-400">Guardar</button>
-                        </span>
-                    </div>
-                    <h3>{{ averageRatingReceived | number : "1.1-1" }}</h3>
-                    <h3>{{ reviewsCountReceived }} Reseñas</h3>
-                </div>
-    
-                <div class="ownerinfo">
-                    <i class="fa-solid fa-user"></i>
-                    <div>
-                        <h2>Proveedor: {{ content.user.username }}</h2>
-                        <h3>{{ content.user.email }}</h3>
-                    </div>
-                </div>
-                <div class="descriptioninfo">
-                    <h3>Descripción</h3>
-                    <p>
-                        {{ content.service?.description }}
-                    </p>
-                    <div class="moreinfodescription">
-                        <h4>Mostrar más</h4>
-                        <i class="fa-solid fa-chevron-right"></i>
-                    </div>
-    
-                    <h3>Categoría</h3>
-                    <p>
-                        {{ content.service?.category }}
-                    </p>
-                </div>
-                <div class="contenidoSecciones">
-                    <div class="dates">
-                        <div class="wrapper-calendar">
-                            <h2>Fecha Entrada</h2>
-                            <div class="header-calendar">
-                                <div>
-                                    <button (click)="changeMonth(-1)" class="btn-prev">
-                                        <i class="fa-solid fa-chevron-left"></i>
-                                    </button>
-                                </div>
-                                <h1>{{ dateSelect | date : "MMMM, yyyy" }}</h1>
-                                <div>
-                                    <button (click)="changeMonth(1)" class="btn-next">
-                                        <i class="fa-solid fa-chevron-right"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <ol>
-                                <li *ngFor="let day of week" class="day-name">
-                                    {{ day | slice : 0 : 3 }}
-                                </li>
-                                <li (click)="clickDay(day)" [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"
-                                    [ngClass]="{ 'selected-day': selectedDay === day }"
-                                    *ngFor="let day of monthSelect; let first = first">
-                                    <span>{{ day?.value }}</span>
-                                </li>
-                            </ol>
-                        </div>
-                        <div class="wrapper-calendar">
-                            <h2>Fecha Salida</h2>
-                            <div class="header-calendar">
-                                <div>
-                                    <button (click)="changeMonthExit(-1)" class="btn-prev">
-                                        <i class="fa-solid fa-chevron-left"></i>
-                                    </button>
-                                </div>
-                                <h1>{{ dateSelectExit | date : "MMMM, yyyy" }}</h1>
-                                <div>
-                                    <button (click)="changeMonthExit(1)" class="btn-next">
-                                        <i class="fa-solid fa-chevron-right"></i>
-                                    </button>
-                                </div>
-                            </div>
-                            <ol>
-                                <li *ngFor="let day of week" class="day-name">
-                                    {{ day | slice : 0 : 3 }}
-                                </li>
-                                <li (click)="clickDayExit(day)" [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"
-                                    [ngClass]="{ 'selected-day': selectedDayExit === day }"
-                                    *ngFor="let day of monthSelectExit; let first = first">
-                                    <span>{{ day?.value }}</span>
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                    <app-weather [cityName]="cityName"></app-weather>
-                </div>
-            </div>
-            <div class="summary">
-                <h2>Precio </h2>
-                <h4>$ {{ content.service?.price }} pesos</h4>
-                <div class="itemsdetails">
-                    <div class="eachitem">
-                        <h4>Salida</h4>
-                        <h5>{{ content.service?.departureDate }}</h5>
-                    </div>
-                    <div class="eachitem">
-                        <h4>Duración</h4>
-                        <h5>{{ content.service?.duration }} horas </h5>
-                    </div>
-                    <div class="eachitem">
-                        <h4>serviceId</h4>
-                        <h5>{{ content.service?.serviceId }} </h5>
-                    </div>
-                </div>
-                <h1>Total: $ {{ content.service?.price }} pesos </h1>
-                <div class="reserve">
-                    <app-add-to-cart [serviceId]="content.service?.serviceId || ''"></app-add-to-cart>
-                </div>
-    
-            </div>
+      </div>
+      <div class="imagescontainer">
+        <div class="leftimage">
+          <img
+            [src]="photo || 'assets/no-content.jpg'"
+            alt="placeholder"
+            class="imgplace h-96 object-cover"
+          />
         </div>
+        <div class="rightimage">
+          <!-- <app-weather></app-weather> -->
+          <app-google-maps [isEditable]="false"></app-google-maps>
+        </div>
+      </div>
+      <div class="details">
+        <div class="placedetails">
+          <div class="card">
+            <div class="card-header">
+              <h2>
+                {{ content.service?.country }} - {{ content.service?.capital }} ({{
+                  content.service?.city
+                }})
+              </h2>
+              <h3>{{ content.service?.officialName }}</h3>
+            </div>
+            <div class="card-body">
+              <div class="card-info">
+                <div class="info-item">
+                  <strong>Idioma:</strong>
+                  <span>{{ content.service?.language }}</span>
+                </div>
+                <div class="info-item">
+                  <strong>Región:</strong>
+                  <span>{{ content.service?.region }}</span>
+                </div>
+                <div class="info-item">
+                  <strong>Moneda:</strong>
+                  <span>{{ content.service?.currency }}</span>
+                </div>
+                <div class="info-item">
+                  <strong>Población:</strong>
+                  <span>{{ content.service?.population | number }}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+          <div class="reviews mb-2">
+            <div class="group relative w-min">
+              <button>
+                <i class="fa-regular fa-star"></i>
+              </button>
+              <span
+                class="absolute left-1/2 z-20 flex origin-bottom -translate-x-1/2 -translate-y-[calc(125%)] scale-0 flex-col items-center gap-2 rounded-lg border border-gray-300 bg-white px-3 py-2 text-sm text-black shadow-md transition-all duration-300 ease-in-out group-hover:scale-100"
+              >
+                <div class="rating">
+                  <input
+                    type="radio"
+                    id="star-1"
+                    name="star-radio"
+                    value="star-1"
+                    (click)="setChecked(5)"
+                    [checked]="myRating.rating === 5"
+                  />
+                  <label for="star-1">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <path
+                        pathLength="360"
+                        d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
+                      ></path>
+                    </svg>
+                  </label>
+                  <input
+                    type="radio"
+                    id="star-2"
+                    name="star-radio"
+                    value="star-1"
+                    (click)="setChecked(4)"
+                    [checked]="myRating.rating === 4"
+                  />
+                  <label for="star-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <path
+                        pathLength="360"
+                        d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
+                      ></path>
+                    </svg>
+                  </label>
+                  <input
+                    type="radio"
+                    id="star-3"
+                    name="star-radio"
+                    value="star-1"
+                    (click)="setChecked(3)"
+                    [checked]="myRating.rating === 3"
+                  />
+                  <label for="star-3">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <path
+                        pathLength="360"
+                        d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
+                      ></path>
+                    </svg>
+                  </label>
+                  <input
+                    type="radio"
+                    id="star-4"
+                    name="star-radio"
+                    value="star-1"
+                    (click)="setChecked(2)"
+                    [checked]="myRating.rating === 2"
+                  />
+                  <label for="star-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <path
+                        pathLength="360"
+                        d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
+                      ></path>
+                    </svg>
+                  </label>
+                  <input
+                    type="radio"
+                    id="star-5"
+                    name="star-radio"
+                    value="star-1"
+                    (click)="setChecked(1)"
+                    [checked]="myRating.rating === 1"
+                  />
+                  <label for="star-5">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                      <path
+                        pathLength="360"
+                        d="M12,17.27L18.18,21L16.54,13.97L22,9.24L14.81,8.62L12,2L9.19,8.62L2,9.24L7.45,13.97L5.82,21L12,17.27Z"
+                      ></path>
+                    </svg>
+                  </label>
+                </div>
+                <textarea
+                  name=""
+                  id="comment"
+                  [value]="myRating.comment"
+                  class="h-16 w-full resize-none rounded-lg border border-neutral-400 px-2 py-1 outline-none"
+                ></textarea>
+                <button
+                  (click)="onChangeComment()"
+                  class="rounded-full border border-neutral-400 bg-blue-200 px-2 py-1"
+                >
+                  Guardar
+                </button>
+              </span>
+            </div>
+            <h3>{{ averageRatingReceived | number: '1.1-1' }}</h3>
+            <h3>{{ reviewsCountReceived }} Reseñas</h3>
+          </div>
+    
+          <div class="ownerinfo">
+            <i class="fa-solid fa-user"></i>
+            <div>
+              <h2>Proveedor: {{ content.user.username }}</h2>
+              <h3>{{ content.user.email }}</h3>
+            </div>
+          </div>
+          <div class="descriptioninfo">
+            <h3>Descripción</h3>
+            <p>
+              {{ content.service?.description }}
+            </p>
+            <div class="moreinfodescription">
+              <h4>Mostrar más</h4>
+              <i class="fa-solid fa-chevron-right"></i>
+            </div>
+    
+            <h3>Categoría</h3>
+            <p>
+              {{ content.service?.category }}
+            </p>
+          </div>
+          <div class="contenidoSecciones">
+            <div class="dates">
+              <div class="wrapper-calendar">
+                <h2>Fecha Entrada</h2>
+                <div class="header-calendar">
+                  <div>
+                    <button (click)="changeMonth(-1)" class="btn-prev">
+                      <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                  </div>
+                  <h1>{{ dateSelect | date: 'MMMM, yyyy' }}</h1>
+                  <div>
+                    <button (click)="changeMonth(1)" class="btn-next">
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                  </div>
+                </div>
+                <ol>
+                  <li *ngFor="let day of week" class="day-name">
+                    {{ day | slice: 0 : 3 }}
+                  </li>
+                  <li
+                    (click)="clickDay(day)"
+                    [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"
+                    [ngClass]="{ 'selected-day': selectedDay === day }"
+                    *ngFor="let day of monthSelect; let first = first"
+                  >
+                    <span>{{ day?.value }}</span>
+                  </li>
+                </ol>
+              </div>
+              <div class="wrapper-calendar">
+                <h2>Fecha Salida</h2>
+                <div class="header-calendar">
+                  <div>
+                    <button (click)="changeMonthExit(-1)" class="btn-prev">
+                      <i class="fa-solid fa-chevron-left"></i>
+                    </button>
+                  </div>
+                  <h1>{{ dateSelectExit | date: 'MMMM, yyyy' }}</h1>
+                  <div>
+                    <button (click)="changeMonthExit(1)" class="btn-next">
+                      <i class="fa-solid fa-chevron-right"></i>
+                    </button>
+                  </div>
+                </div>
+                <ol>
+                  <li *ngFor="let day of week" class="day-name">
+                    {{ day | slice: 0 : 3 }}
+                  </li>
+                  <li
+                    (click)="clickDayExit(day)"
+                    [style.gridColumnStart]="first ? day?.indexWeek : 'auto'"
+                    [ngClass]="{ 'selected-day': selectedDayExit === day }"
+                    *ngFor="let day of monthSelectExit; let first = first"
+                  >
+                    <span>{{ day?.value }}</span>
+                  </li>
+                </ol>
+              </div>
+            </div>
+            <app-weather [cityName]="cityName"></app-weather>
+          </div>
+        </div>
+        <div class="flex flex-col gap-2">
+          <div class="summary">
+            <h2>Precio</h2>
+            <h4>$ {{ content.service?.price }} pesos</h4>
+            <div class="itemsdetails">
+              <div class="eachitem">
+                <h4>Salida</h4>
+                <h5>{{ content.service?.departureDate }}</h5>
+              </div>
+              <div class="eachitem">
+                <h4>Duración</h4>
+                <h5>{{ content.service?.duration }} horas</h5>
+              </div>
+              <div class="eachitem"></div>
+            </div>
+            <h1>Total: $ {{ content.service?.price }} pesos</h1>
+            <div class="reserve">
+              <app-add-to-cart [serviceId]="content.service?.serviceId || ''"></app-add-to-cart>
+            </div>
+          </div>
+          <div class="flex flex-col items-center gap-8">
+            <h1>Preguntas</h1>
+            <ul class="flex flex-col">
+              <li *ngIf="questions.length === 0" class="italic">No hay preguntas</li>
+              <li *ngFor="let question of questions"> - {{ question.question }}</li>
+            </ul>
+            <div class="flex w-1/2 flex-col items-center gap-1">
+              <label for="question">¡Haz una pregunta!</label>
+              <textarea
+                name=""
+                id="question"
+                class="resize-none rounded-lg border border-neutral-400 px-2 py-1"
+              ></textarea>
+              <button
+                class="rounded-full border border-neutral-400 bg-blue-200 px-2 py-1"
+                (click)="publishQuestion()"
+              >
+                Enviar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
+</div>
+  <div class="absolute h-3/4 w-1/2 bg-white top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 rounded-2xl px-8 py-4 flex flex-col gap-4">
+    <div class="flex justify-between">
+      <h1>Todas las reseñas: {{ averageRatingReceived | number: '1.1-1' }} <i class="fa-regular fa-star text-yellow-400"></i></h1>
+      <button (click)="showRatingsPopup = false">
+        <i class="fa-solid fa-times"></i>
+      </button>
+    </div>
+    <ul class="gap-4 grid grid-cols-3">
+      <li *ngFor="let rating of ratings">
+        <app-stars [rating]="rating.rating"></app-stars>
+        <p class="px-2 py-1 border border-neutral-300 rounded-xl mt-2">{{ rating.comment }}</p>
+      </li>
+    </ul>
+  </div>
 </div>

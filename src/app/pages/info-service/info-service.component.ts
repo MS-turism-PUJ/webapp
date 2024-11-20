@@ -12,13 +12,14 @@ import { RatingService } from '../../services/rating.service';
 import { Rating } from '../../models/rating';
 import { QuestionService } from '../../services/question.service';
 import { Question } from '../../models/question';
+import { StarsComponent } from '../../components/stars/stars.component';
 
 
 
 @Component({
   selector: 'app-info-service',
   standalone: true,
-  imports: [CommonModule, WeatherComponent, AddToCartComponent, GoogleMapsComponent, GoToDashboardComponent],
+  imports: [CommonModule, WeatherComponent, AddToCartComponent, GoogleMapsComponent, GoToDashboardComponent, StarsComponent],
   templateUrl: './info-service.component.html',
   styleUrl: './info-service.component.css'
 })
@@ -46,7 +47,11 @@ export class InfoServiceComponent {
 
   questions: Question[] = [];
 
+  ratings: Rating[] = [];
+
   cityName: string = '';
+
+  showRatingsPopup: boolean = false;
 
   week: any = [
     "Lunes",
@@ -99,6 +104,9 @@ export class InfoServiceComponent {
       });
       this.questionService.getQuestions(this.contentId || '').then((questions) => {
         this.questions = questions;
+      });
+      this.ratingService.getRatings(this.content.service?.serviceId || '').then((ratings) => {
+        this.ratings = ratings;
       });
 
     } else {
@@ -239,6 +247,10 @@ export class InfoServiceComponent {
     this.questionService.createQuestion(this.contentId, question).then(() => {
       this.questions.push(question);
     });
+  }
+
+  showRatings() {
+    this.showRatingsPopup = true;
   }
 
 }
