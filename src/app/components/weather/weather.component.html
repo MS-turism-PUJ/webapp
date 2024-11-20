@@ -1,12 +1,12 @@
 <body>
     <main>
         <!-- Formulario para buscar clima por ciudad -->
-        <form (submit)="onSearch(); $event.preventDefault()">
+        <!-- <form (submit)="onSearch(); $event.preventDefault()">
             <input type="text" id="name" [(ngModel)]="cityName" placeholder="Ingrese una ciudad" autocomplete="off">
             <button type="submit">
                 <i class="fa-solid fa-magnifying-glass"></i>
             </button>
-        </form>
+        </form> -->
 
         <section class="result" *ngIf="weatherData">
             <!-- Información de la ciudad y bandera -->

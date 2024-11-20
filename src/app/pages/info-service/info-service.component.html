@@ -272,21 +272,21 @@
             <app-add-to-cart [serviceId]="content.service?.serviceId || ''"></app-add-to-cart>
           </div>
         </div>
-        <div class="flex flex-col items-center gap-8">
+
+        <div class="flex flex-col items-center gap-8 questions">
           <h1>Preguntas</h1>
           <ul class="flex flex-col">
             <li *ngIf="questions.length === 0" class="italic">No hay preguntas</li>
             <li *ngFor="let question of questions">- {{ question.question }}</li>
           </ul>
           <div class="flex w-1/2 flex-col items-center gap-1">
-            <label for="question">¡Haz una pregunta!</label>
-            <textarea
-              name=""
-              id="question"
-              class="resize-none rounded-lg border border-neutral-400 px-2 py-1"
-            ></textarea>
+            <h4>¡Haz una pregunta!</h4>
+
+            <div class="field">
+              <textarea formControlName="description" maxlength="300" placeholder=""></textarea>
+          </div>
             <button
-              class="rounded-full border border-neutral-400 bg-blue-200 px-2 py-1"
+              class="enviar"
               (click)="publishQuestion()"
             >
               Enviar

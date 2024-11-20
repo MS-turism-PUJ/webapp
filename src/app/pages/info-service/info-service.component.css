@@ -1,7 +1,6 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins");
 
-.fondo
-{
+.fondo {
     background-color: #e2e2e2;
     padding: 2rem;
 
@@ -42,13 +41,13 @@ h1,
 .opciones {
     font-size: 1.5rem;
     font-weight: bold;
-    
+
 }
 
 .tittle {
     font-size: 2.5rem;
     font-weight: bold;
-    
+
 }
 
 .rentalapplication {
@@ -58,7 +57,7 @@ h1,
     padding-left: 4rem;
     padding-right: 4rem;
     width: 100%;
-    
+
 
 }
 
@@ -117,11 +116,11 @@ h1,
 .details {
     display: flex;
     justify-content: space-between;
-    padding: 2.5rem 0rem 2.5rem 0rem;
+    padding: 2rem 0rem 2rem 0rem;
 }
 
 .details>.placedetails {
-    width: 40%;
+    width: 60%;
 }
 
 
@@ -377,7 +376,7 @@ padding: 0;
 
 /* card del pais */
 .card {
-    
+
     border-radius: 10px;
     padding: 16px;
     background: #e2e2e2;
@@ -490,7 +489,7 @@ padding: 0;
     stroke: var(--fill);
 }
 
-.rating input:checked ~ label svg {
+.rating input:checked~label svg {
     transition: 0s;
     animation: idle 4s linear infinite, yippee 0.75s backwards;
     fill: var(--fill);
@@ -536,4 +535,59 @@ padding: 0;
         fill: var(--fill);
     }
 }
-  
+
+.questions {
+    margin-top: 2rem;
+    background: #e2e2e2;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: -3px -3px 7px #ffffff73,
+        2px 2px 5px rgba(94, 104, 121, 0.288);
+}
+
+.enviar {
+    width: 65%;
+    border-radius: 10px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #ffffff;
+    background: #3498db;
+    transition: 0.3s ease;
+    box-shadow: 2px 2px 5px #BABECC,
+        -5px -5px 10px #ffffff73;
+    border: none;
+    height: 30px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 1rem
+}
+
+.enviar:hover {
+    background: #2980b9;
+    color: #ffffff;
+}
+
+.field textarea {
+    width: 100%;
+    height: 15vh;
+    padding: 0px 0px 0px 45px;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    background: #e2e2e2;
+    color: #595959;
+    border-radius: 25px;
+    box-shadow: inset 2px 2px 5px #BABECC,
+        inset -5px -5px 10px #ffffff73;
+    transition: box-shadow 0.3s ease;
+}
+
+.field textarea:focus {
+    box-shadow: inset 1px 1px 2px #BABECC,
+        inset -1px -1px 2px #ffffff73;
+}
+
+
+
