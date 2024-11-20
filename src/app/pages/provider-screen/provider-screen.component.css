@@ -195,28 +195,6 @@
     border-radius: 50%;
 }
 
-/* Icono de + para subir imagen */
-.upload-icon {
-    position: absolute;
-    background: #a2a2a2;
-    color: white;
-    padding: 0.5rem;
-    border-radius: 100%;
-    cursor: pointer;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 16px;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background 0.3s ease;
-    bottom: 0;
-    right: 15px;
-}
-
-.upload-icon:hover {
-    background: #3498db;
-}
-
 .menu-item {
     color: #31344b;
     text-decoration: none;

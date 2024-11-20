@@ -190,7 +190,13 @@
                     <!-- HOUSING -->
                     <div *ngIf="selectedService === 'HOUSING'" class="service-variable-container">
                         <div class="map-container">
-                            <app-google-maps></app-google-maps>
+                            <div class="map-container">
+                                <app-google-maps [isEditable]="true" [selectedService]="selectedService"
+                                    (coordinatesSelected)="onCoordinatesSelected($event)">
+                                </app-google-maps>
+                            </div>
+
+
                         </div>
                         <div class="service-grid-content">
                             <div class="service-inputs-container">
@@ -205,19 +211,7 @@
                                     </div>
                                 </div>
 
-                                <div class="field">
-                                    <input type="text" formControlName="longitude" placeholder=" "
-                                        [class.invalid]="contentForm.get('longitude')?.invalid && contentForm.get('longitude')?.touched">
-                                    <span class="fa-solid fa-ruler-vertical"></span>
-                                    <label>Longitud *</label>
-                                    <div class="error"
-                                        *ngIf="contentForm.get('longitude')?.touched && contentForm.get('longitude')?.invalid">
-                                        La longitud es obligatoria.
-                                    </div>
-                                </div>
 
-                            </div>
-                            <div class="service-variable-container">
                                 <div class="fecha-salida" (click)="triggerDatePicker('departureDate')">
                                     <span class="fa-solid fa-calendar-days"></span>
                                     <label for="departureDate">Fecha de Salida *</label>
@@ -229,6 +223,19 @@
                                     <div class="error"
                                         *ngIf="contentForm.get('departureDate')?.touched && contentForm.get('departureDate')?.invalid">
                                         La fecha de salida es obligatoria.
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="service-variable-container">
+                                <div class="field">
+                                    <input type="text" formControlName="longitude" placeholder=" "
+                                        [class.invalid]="contentForm.get('longitude')?.invalid && contentForm.get('longitude')?.touched">
+                                    <span class="fa-solid fa-ruler-vertical"></span>
+                                    <label>Longitud *</label>
+                                    <div class="error"
+                                        *ngIf="contentForm.get('longitude')?.touched && contentForm.get('longitude')?.invalid">
+                                        La longitud es obligatoria.
                                     </div>
                                 </div>
 
@@ -249,7 +256,12 @@
                     <!-- TRANSPORT -->
                     <div *ngIf="selectedService === 'TRANSPORT'" class="service-variable-container">
                         <div class="map-container">
-                            <app-google-maps></app-google-maps>
+                            <div class="map-container">
+                                <app-google-maps [isEditable]="true" [selectedService]="selectedService"
+                                    (coordinatesSelected)="onCoordinatesSelected($event)">
+                                </app-google-maps>
+                            </div>
+
                         </div>
                         <div class="service-grid-content">
                             <div class="service-inputs-container">
@@ -347,7 +359,12 @@
                     <!-- ECO_WALK -->
                     <div *ngIf="selectedService === 'ECO_WALK'" class="service-variable-container">
                         <div class="map-container">
-                            <app-google-maps></app-google-maps>
+                            <div class="map-container">
+                                <app-google-maps [isEditable]="true" [selectedService]="selectedService"
+                                    (coordinatesSelected)="onCoordinatesSelected($event)">
+                                </app-google-maps>
+                            </div>
+
                         </div>
                         <div class="service-grid-content">
                             <div class="service-inputs-container">

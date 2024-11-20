@@ -1,5 +1,11 @@
 @import url("https://fonts.googleapis.com/css?family=Poppins");
 
+.fondo
+{
+    background-color: #e2e2e2;
+
+}
+
 * {
     scrollbar-width: inherit;
     scrollbar-color: black transparent;
@@ -9,11 +15,6 @@
     background: transparent;
 }
 
-
-body {
-    background: #f4f4f4;
-    padding: 2rem;
-}
 
 h1,
 h2,
@@ -40,11 +41,13 @@ h1,
 .opciones {
     font-size: 1.5rem;
     font-weight: bold;
+    
 }
 
 .tittle {
     font-size: 2.5rem;
     font-weight: bold;
+    
 }
 
 .rentalapplication {
@@ -54,6 +57,7 @@ h1,
     padding-left: 4rem;
     padding-right: 4rem;
     width: 100%;
+    
 
 }
 
@@ -375,11 +379,13 @@ padding: 0;
 
 /* card del pais */
 .card {
-    border: 1px solid #ddd;
+    
     border-radius: 10px;
     padding: 16px;
-    background-color: #ffffff;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background: #e2e2e2;
+    border-radius: 10px;
+    box-shadow: -3px -3px 7px #ffffff73,
+        2px 2px 5px rgba(94, 104, 121, 0.288);
     max-width: 800px;
     margin: auto;
     margin-bottom: 24px;
@@ -421,12 +427,12 @@ padding: 0;
 }
 
 .info-item strong {
-    font-size: 0.9rem;
+    font-size: 1em;
     color: #555;
 }
 
 .info-item span {
-    font-size: 1rem;
+    font-size: 1.2em;
     color: #333;
 }
 

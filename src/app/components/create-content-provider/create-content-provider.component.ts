@@ -18,6 +18,7 @@ export class CreateContentProviderComponent {
   contentForm: FormGroup;
   selectedService: string = ''; // Controla el tipo de servicio seleccionado
   hasService: boolean = false; // Controla si el contenido tiene un servicio
+  areCoordinatesManagedByMap: boolean = true;
 
   constructor(private fb: FormBuilder) {
     this.contentForm = this.fb.group({
@@ -38,10 +39,10 @@ export class CreateContentProviderComponent {
       country: ['', Validators.required],
 
       // Campos específicos según el tipo de servicio
-      latitude: [''], // Opcional
-      longitude: [''], // Opcional
-      arrivalLatitude: [''], // Opcional
-      arrivalLongitude: [''], // Opcional
+      latitude: [{ value: '', disabled: this.areCoordinatesManagedByMap }], // Inicialmente deshabilitado
+      longitude: [{ value: '', disabled: this.areCoordinatesManagedByMap }], 
+      arrivalLatitude: [{ value: '', disabled: this.areCoordinatesManagedByMap }], 
+      arrivalLongitude: [{ value: '', disabled: this.areCoordinatesManagedByMap }],
       departureDate: [''], // Opcional
       duration: [''], // Opcional
       transportType: [''], // Opcional
@@ -80,6 +81,24 @@ export class CreateContentProviderComponent {
       }
 
       this.updateServiceFieldsValidity();
+    }
+  }
+
+  // Método para manejar las coordenadas desde Google Maps
+  onCoordinatesSelected(coordinates: { lat: number; lng: number }[]): void {
+    if (coordinates.length > 0) {
+      // Asignar coordenadas al primer punto
+      this.contentForm.patchValue({
+        latitude: coordinates[0].lat,
+        longitude: coordinates[0].lng
+      });
+    }
+    if (coordinates.length > 1) {
+      // Asignar coordenadas al segundo punto
+      this.contentForm.patchValue({
+        arrivalLatitude: coordinates[1].lat,
+        arrivalLongitude: coordinates[1].lng
+      });
     }
   }
 

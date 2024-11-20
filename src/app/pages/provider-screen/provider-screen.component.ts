@@ -8,6 +8,7 @@ import { CardComponent } from '../../components/card/card.component';
 import { CreateContentProviderComponent } from '../../components/create-content-provider/create-content-provider.component';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
+import { MenuComponent } from '../../components/menu/menu.component';
 
 @Component({
   selector: 'app-provider-screen',
@@ -16,6 +17,7 @@ import { User } from '../../models/user';
     CommonModule,
     CardComponent,
     CreateContentProviderComponent,
+    MenuComponent
   ],
   templateUrl: './provider-screen.component.html',
   styleUrls: ['./provider-screen.component.css'],
@@ -89,4 +91,6 @@ export class ProviderScreenComponent implements OnInit {
       reader.readAsDataURL(this.file);
     }
   }
+
+  
 }

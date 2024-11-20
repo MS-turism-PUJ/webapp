@@ -1,4 +1,4 @@
-import { Component, ViewChild, OnInit } from '@angular/core';
+import { Component, ViewChild, OnInit, EventEmitter, Output, Input } from '@angular/core';
 import { GoogleMap } from '@angular/google-maps';
 import { ActivatedRoute } from '@angular/router';
 import { ContentService } from '../../services/content.service';
@@ -11,7 +11,7 @@ import { Content } from '../../models/content';
   standalone: true,
   imports: [GoogleMap],
 })
-export class GoogleMapsComponent {
+export class GoogleMapsComponent implements OnInit {
   content: Content = {
     contentId: '',
     name: '',
@@ -20,10 +20,16 @@ export class GoogleMapsComponent {
       userId: 0,
       name: '',
       email: '',
-      username: ''
+      username: '',
     },
-    photo: ''
+    photo: '',
   };
+
+  @Input() isEditable: boolean = true; // Determina si se pueden añadir o mover pines
+  @Input() selectedService: string = '';
+
+  @Output() coordinatesSelected = new EventEmitter<{ lat: number; lng: number }[]>();
+
   @ViewChild(GoogleMap) map!: GoogleMap;
 
   center: google.maps.LatLngLiteral = { lat: 4.6556, lng: -74.06 };
@@ -38,52 +44,63 @@ export class GoogleMapsComponent {
   markers: google.maps.Marker[] = [];
   directionsService = new google.maps.DirectionsService();
   directionsRenderer = new google.maps.DirectionsRenderer();
+  infoWindow = new google.maps.InfoWindow();
 
   constructor(
     private contentService: ContentService,
     private route: ActivatedRoute
-  ) { }
+  ) {}
 
   async ngOnInit(): Promise<void> {
     const contentId = this.route.snapshot.paramMap.get('contentId');
     if (contentId) {
-      // Obtener contenido por ID
-      this.content = await this.contentService.getContentById(contentId) || this.content;
+      this.content = (await this.contentService.getContentById(contentId)) || this.content;
 
       console.log('Contenido recibido:', this.content);
 
-      // Añadir marcador inicial (coordenadas del servicio)
       if (this.content?.service?.latitude && this.content?.service?.longitude) {
-        this.addMarker(
-          this.content.service.latitude,
-          this.content.service.longitude
-        );
-      } else {
-        console.error('No se encontraron coordenadas iniciales para este contenido.');
-      }
-
-      // Añadir marcador de llegada (arrivalLatitude y arrivalLongitude)
-      if (this.content?.service?.arrivalLatitude && this.content?.service?.arrivalLongitude) {
-        this.addMarker(
-          this.content.service.arrivalLatitude,
-          this.content.service.arrivalLongitude
-        );
-      } else {
-        console.warn('No se encontraron coordenadas de llegada para este contenido.');
+        this.addMarker(this.content.service.latitude, this.content.service.longitude);
       }
     }
   }
 
   ngAfterViewInit(): void {
     this.directionsRenderer.setMap(this.map.googleMap!);
+
+    if (this.isEditable) {
+      this.map.googleMap!.addListener('click', (event: google.maps.MapMouseEvent) => {
+        if (event.latLng) {
+          this.handleMapClick(event.latLng.lat(), event.latLng.lng());
+        }
+      });
+    }
   }
 
-  addMarker(lat: number, lng: number): void {
-    if (isNaN(lat) || isNaN(lng)) {
-      alert('Por favor, ingresa coordenadas válidas.');
-      return;
+  handleMapClick(lat: number, lng: number): void {
+    if (!this.isEditable) return;
+
+    if (this.selectedService === 'HOUSING') {
+      this.clearAllMarkers(); // Permitir solo un marcador para HOUSING
+      this.addMarker(lat, lng);
+    } else {
+      if (this.markers.length >= 2) {
+        this.removeOldestMarker();
+      }
+      this.addMarker(lat, lng);
     }
 
+    // Emitir las coordenadas actuales
+    const coordinates = this.markers.map((marker) => marker.getPosition()!.toJSON());
+    this.coordinatesSelected.emit(coordinates);
+  }
+
+  clearAllMarkers(): void {
+    this.markers.forEach((marker) => marker.setMap(null));
+    this.markers = [];
+  }
+  
+
+  addMarker(lat: number, lng: number): void {
     const position = { lat, lng };
 
     console.log(`Marcador añadido en: Latitud: ${lat}, Longitud: ${lng}`);
@@ -94,14 +111,36 @@ export class GoogleMapsComponent {
       animation: google.maps.Animation.DROP,
     });
 
+    marker.addListener('click', () => this.removeMarker(marker));
+
     this.markers.push(marker);
 
-    this.center = position;
-    this.zoom = 16;
-
-    // Intentar calcular la ruta si hay al menos dos marcadores
     if (this.markers.length === 2) {
       this.calculateAndDisplayRoute();
+    }
+  }
+
+  removeMarker(marker: google.maps.Marker): void {
+    const index = this.markers.indexOf(marker);
+    if (index !== -1) {
+      console.log(`Eliminando marcador en la posición: ${index}`);
+      marker.setMap(null);
+      this.markers.splice(index, 1);
+    }
+
+    if (this.markers.length < 2) {
+      this.directionsRenderer.setDirections(null);
+      this.infoWindow.close();
+    }
+  }
+
+  removeOldestMarker(): void {
+    if (this.markers.length > 0) {
+      const oldestMarker = this.markers.shift();
+      if (oldestMarker) {
+        console.log('Eliminando marcador más antiguo');
+        oldestMarker.setMap(null);
+      }
     }
   }
 
@@ -123,7 +162,7 @@ export class GoogleMapsComponent {
       {
         origin: origin,
         destination: destination,
-        travelMode: google.maps.TravelMode.DRIVING, // Se puede cambiar a WALKING, BICYCLING, TRANSIT
+        travelMode: google.maps.TravelMode.DRIVING,
       },
       (response, status) => {
         if (status === google.maps.DirectionsStatus.OK && response) {
@@ -134,8 +173,18 @@ export class GoogleMapsComponent {
             const leg = route.legs[0];
             const distance = leg.distance ? leg.distance.text : 'Desconocida';
             const duration = leg.duration ? leg.duration.text : 'Desconocida';
+
             console.log(`Distancia: ${distance}, Duración: ${duration}`);
-            alert(`Distancia: ${distance}, Duración: ${duration}`);
+
+            this.infoWindow.setContent(
+              `<div>
+                <strong>Medio de transporte:</strong> DRIVING<br>
+                <strong>Distancia:</strong> ${distance}<br>
+                <strong>Duración:</strong> ${duration}
+              </div>`
+            );
+            this.infoWindow.setPosition(destination);
+            this.infoWindow.open(this.map.googleMap!);
           }
         } else {
           console.error('Error en la ruta: ' + status);
