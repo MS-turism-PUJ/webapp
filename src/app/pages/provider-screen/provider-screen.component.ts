@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
-import { AuthService } from '../../services/auth.service';
 import { ContentService } from '../../services/content.service';
 import { Content } from '../../models/content';
 import { CardComponent } from '../../components/card/card.component';
 import { CreateContentProviderComponent } from '../../components/create-content-provider/create-content-provider.component';
 import { UserService } from '../../services/user.service';
 import { User } from '../../models/user';
-import { MenuComponent } from '../../components/menu/menu.component';
 
 @Component({
   selector: 'app-provider-screen',
@@ -16,8 +14,7 @@ import { MenuComponent } from '../../components/menu/menu.component';
   imports: [
     CommonModule,
     CardComponent,
-    CreateContentProviderComponent,
-    MenuComponent
+    CreateContentProviderComponent
   ],
   templateUrl: './provider-screen.component.html',
   styleUrls: ['./provider-screen.component.css'],
@@ -44,7 +41,6 @@ export class ProviderScreenComponent implements OnInit {
   photo: string = '';
   constructor(
     private router: Router,
-    private authService: AuthService,
     private contentService: ContentService,
     private userService: UserService
   ) { }

@@ -272,16 +272,17 @@ export class ContentService {
   async createContent(contentData: any): Promise<Content> {
     const formData = new FormData();
 
-    formData.append('name', contentData.name);
-    formData.append('description', contentData.description || '');
-    formData.append('serviceId', contentData.serviceId || '');
+    // formData.append('name', contentData.name);
+    // formData.append('description', contentData.description || '');
+    // formData.append('serviceId', contentData.serviceId || '');
 
-    if (contentData.photo) {
-      formData.append('photo', contentData.photo);
-    }
+    // if (contentData.photo) {
+    //   formData.append('photo', contentData.photo);
+    // }
 
     try {
-      const response = await this.axiosInstance.post(``, formData);
+      const response = await this.axiosInstance.postForm(``, { name: contentData.name, description: contentData.description, serviceId: contentData.serviceId, photo: contentData.photo }
+      );
       return response.data;
     } catch (error) {
       console.error('Error creating content:', error);

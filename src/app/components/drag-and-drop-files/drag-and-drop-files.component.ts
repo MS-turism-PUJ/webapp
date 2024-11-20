@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component, ElementRef, EventEmitter, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -13,10 +13,11 @@ export class DragAndDropFilesComponent {
   @ViewChild('dropArea') dropArea!: ElementRef<HTMLDivElement>;
 
   dragText = 'Drag & Drop to Upload File';
-  file?: File;
+  @Output() file?: File;
   previewUrl?: string;
+  @Output() getFile = new EventEmitter<File>();
 
-  constructor() {}
+  constructor() { }
 
   // Cuando se hace clic en el botón "Browse File"
   onButtonClick() {
@@ -28,6 +29,7 @@ export class DragAndDropFilesComponent {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
       this.file = input.files[0];
+      this.getFile.emit(this.file)
       this.showFile();
       this.dropArea.nativeElement.classList.add('active');
     }
