@@ -87,7 +87,11 @@
             "styles": [
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+            {
+              "input": "./process-env.js",
+              "bundleName": "env"
+            }]
           }
         }
       }

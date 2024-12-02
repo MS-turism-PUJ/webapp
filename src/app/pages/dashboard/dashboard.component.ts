@@ -30,5 +30,6 @@ export class DashboardComponent implements OnInit {
       this.contents = contents;
     });
     await this.contentService.syncAllContents();
+    console.log(this.contents);
   }
 }

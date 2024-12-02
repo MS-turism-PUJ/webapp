@@ -10,6 +10,7 @@ import { GoogleMapsComponent } from './components/google-maps/google-maps.compon
 import { DragAndDropFilesComponent } from './components/drag-and-drop-files/drag-and-drop-files.component';
 import { WeatherComponent } from './components/weather/weather.component';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,

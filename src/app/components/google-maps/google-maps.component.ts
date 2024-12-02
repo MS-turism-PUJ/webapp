@@ -46,6 +46,9 @@ export class GoogleMapsComponent implements OnInit {
   directionsRenderer = new google.maps.DirectionsRenderer();
   infoWindow = new google.maps.InfoWindow();
 
+  // Variable para almacenar la polilínea
+  polyline: google.maps.Polyline | null = null;
+
   constructor(
     private contentService: ContentService,
     private route: ActivatedRoute
@@ -60,6 +63,10 @@ export class GoogleMapsComponent implements OnInit {
 
       if (this.content?.service?.latitude && this.content?.service?.longitude) {
         this.addMarker(this.content.service.latitude, this.content.service.longitude);
+      }
+      // Marcador para la posición de llegada, si está definida
+      if (this.content?.service?.arrivalLatitude && this.content?.service?.arrivalLongitude) {
+        this.addMarker(this.content.service.arrivalLatitude, this.content.service.arrivalLongitude);
       }
     }
   }
@@ -97,8 +104,9 @@ export class GoogleMapsComponent implements OnInit {
   clearAllMarkers(): void {
     this.markers.forEach((marker) => marker.setMap(null));
     this.markers = [];
+    // Ajustar la vista del mapa
+    this.fitMapToMarkers();
   }
-  
 
   addMarker(lat: number, lng: number): void {
     const position = { lat, lng };
@@ -115,6 +123,9 @@ export class GoogleMapsComponent implements OnInit {
 
     this.markers.push(marker);
 
+    // Ajustar la vista del mapa para incluir todos los marcadores
+    this.fitMapToMarkers();
+
     if (this.markers.length === 2) {
       this.calculateAndDisplayRoute();
     }
@@ -128,9 +139,18 @@ export class GoogleMapsComponent implements OnInit {
       this.markers.splice(index, 1);
     }
 
+    // Ajustar la vista del mapa
+    this.fitMapToMarkers();
+
     if (this.markers.length < 2) {
       this.directionsRenderer.setDirections(null);
       this.infoWindow.close();
+
+      // Eliminar la polilínea si existe
+      if (this.polyline) {
+        this.polyline.setMap(null);
+        this.polyline = null;
+      }
     }
   }
 
@@ -142,6 +162,21 @@ export class GoogleMapsComponent implements OnInit {
         oldestMarker.setMap(null);
       }
     }
+
+    // Ajustar la vista del mapa
+    this.fitMapToMarkers();
+  }
+
+  // Método para ajustar la vista del mapa a todos los marcadores
+  fitMapToMarkers(): void {
+    if (this.markers.length === 0) return;
+
+    const bounds = new google.maps.LatLngBounds();
+    this.markers.forEach((marker) => {
+      bounds.extend(marker.getPosition()!);
+    });
+
+    this.map.googleMap!.fitBounds(bounds);
   }
 
   calculateAndDisplayRoute(): void {
@@ -168,6 +203,12 @@ export class GoogleMapsComponent implements OnInit {
         if (status === google.maps.DirectionsStatus.OK && response) {
           this.directionsRenderer.setDirections(response);
 
+          // Eliminar la polilínea si existe
+          if (this.polyline) {
+            this.polyline.setMap(null);
+            this.polyline = null;
+          }
+
           const route = response.routes[0];
           if (route.legs && route.legs.length > 0) {
             const leg = route.legs[0];
@@ -188,6 +229,30 @@ export class GoogleMapsComponent implements OnInit {
           }
         } else {
           console.error('Error en la ruta: ' + status);
+
+          // Eliminar cualquier ruta existente
+          this.directionsRenderer.setDirections(null);
+
+          // Dibujar una línea recta entre los dos marcadores
+          const path = [origin, destination];
+
+          // Eliminar la polilínea si ya existe
+          if (this.polyline) {
+            this.polyline.setMap(null);
+          }
+
+          this.polyline = new google.maps.Polyline({
+            path: path,
+            geodesic: true,
+            strokeColor: '#FF0000',
+            strokeOpacity: 1.0,
+            strokeWeight: 2,
+          });
+
+          this.polyline.setMap(this.map.googleMap!);
+
+          // Cerrar cualquier infoWindow abierta
+          this.infoWindow.close();
         }
       }
     );
