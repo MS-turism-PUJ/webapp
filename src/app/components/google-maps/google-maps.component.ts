@@ -52,7 +52,7 @@ export class GoogleMapsComponent implements OnInit {
   constructor(
     private contentService: ContentService,
     private route: ActivatedRoute
-  ) {}
+  ) { }
 
   async ngOnInit(): Promise<void> {
     const contentId = this.route.snapshot.paramMap.get('contentId');
@@ -64,6 +64,11 @@ export class GoogleMapsComponent implements OnInit {
       if (this.content?.service?.latitude && this.content?.service?.longitude) {
         this.addMarker(this.content.service.latitude, this.content.service.longitude);
       }
+      // Marcador para la posición de llegada, si está definida
+      if (this.content?.service?.arrivalLatitude && this.content?.service?.arrivalLongitude) {
+        this.addMarker(this.content.service.arrivalLatitude, this.content.service.arrivalLongitude);
+      }
+
       // Marcador para la posición de llegada, si está definida
       if (this.content?.service?.arrivalLatitude && this.content?.service?.arrivalLongitude) {
         this.addMarker(this.content.service.arrivalLatitude, this.content.service.arrivalLongitude);
