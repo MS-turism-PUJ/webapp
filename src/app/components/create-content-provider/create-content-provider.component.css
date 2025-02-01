@@ -15,12 +15,15 @@
   transform: translate(-50%, -50%);
   width: 80%;
   height: 90%;
-  background: #e2e2e2;
-  padding: 20px;
-  border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
   z-index: 1001;
   overflow-y: auto;
+}
+
+.popup-inner {
+  background: #e2e2e2;
+  padding: 20px;
+  border-radius: 8px;
 }
 
 .popup-container header {
